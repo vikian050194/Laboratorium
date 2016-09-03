@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoriumLib", "Laborato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium", "Laboratorium\Laboratorium.csproj", "{8C696132-70B4-4A2B-B0CA-3ADF52FC5302}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoriumTypeLib", "LaboratoriumTypeLib\LaboratoriumTypeLib.csproj", "{049CCF24-0ABF-4778-8D02-D21F8C885F7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoriumConverter", "LaboratoriumConverter\LaboratoriumConverter.csproj", "{A668F767-C78C-477D-84F6-FA22336836EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{8C696132-70B4-4A2B-B0CA-3ADF52FC5302}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C696132-70B4-4A2B-B0CA-3ADF52FC5302}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C696132-70B4-4A2B-B0CA-3ADF52FC5302}.Release|Any CPU.Build.0 = Release|Any CPU
+		{049CCF24-0ABF-4778-8D02-D21F8C885F7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{049CCF24-0ABF-4778-8D02-D21F8C885F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{049CCF24-0ABF-4778-8D02-D21F8C885F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{049CCF24-0ABF-4778-8D02-D21F8C885F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A668F767-C78C-477D-84F6-FA22336836EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A668F767-C78C-477D-84F6-FA22336836EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A668F767-C78C-477D-84F6-FA22336836EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A668F767-C78C-477D-84F6-FA22336836EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
