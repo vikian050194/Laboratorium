@@ -10,7 +10,7 @@ namespace Laboratorium.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-           return View(new Query());
+            return View(new Query());
         }
 
         [HttpPost]
@@ -33,10 +33,13 @@ namespace Laboratorium.Controllers
                 var writer = process.StandardInput;
                 var reader = process.StandardOutput;
 
+                writer.WriteLine(@"#I ""D:\Code\MVC\Laboratorium\LaboratoriumLib\bin\Debug"";;");
+                writer.WriteLine(@"#r ""LaboratoriumLib.dll"";;");
+                writer.WriteLine(@"open LaboratoriumLib.Factorization;;");
                 writer.WriteLine(@"{0}", query.Question);
 
                 var line = "";
-                for (int i = 0; i < 7; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     line = reader.ReadLine();
                 }

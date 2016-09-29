@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium", "Laboratoriu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoriumTypeLib", "LaboratoriumTypeLib\LaboratoriumTypeLib.csproj", "{049CCF24-0ABF-4778-8D02-D21F8C885F7A}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FSharpSandbox", "FSharpSandbox\FSharpSandbox.fsproj", "{2DD33238-82CB-4912-96D7-0CD4097CA0A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{049CCF24-0ABF-4778-8D02-D21F8C885F7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{049CCF24-0ABF-4778-8D02-D21F8C885F7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{049CCF24-0ABF-4778-8D02-D21F8C885F7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DD33238-82CB-4912-96D7-0CD4097CA0A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD33238-82CB-4912-96D7-0CD4097CA0A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DD33238-82CB-4912-96D7-0CD4097CA0A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD33238-82CB-4912-96D7-0CD4097CA0A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
