@@ -44,6 +44,7 @@
     <Compile Include="Algebra\BinaryMatrix.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="MathObject.cs" />
     <Compile Include="Algebra\Matrix.cs" />
     <Compile Include="Algebra\Polynomial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
