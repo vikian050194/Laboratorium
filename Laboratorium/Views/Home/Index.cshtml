@@ -3,15 +3,30 @@
 @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Prototype</h4>
-    <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
 
-    <input id="Question" name="Question" value="@Model.Question" />
-
-    <div id="Answer" name="Answer">
-        @Model.Answer
-    </div>
-
-    <input type="submit" value="Ask" class="btn btn-default" />
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Вопрос</th>
+                <th>Ответ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <textarea id="Question" name="Question">@Model.Question</textarea>
+                </td>
+                <td>
+                    <div>
+                        @for (var i = 0; i < Model.Answer.Count; i++)
+                        {
+                            <p name="Answer[@i]">@Model.Answer[i]</p>
+                        }
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="submit" value="Выполнить" class="btn btn-default" />
 }

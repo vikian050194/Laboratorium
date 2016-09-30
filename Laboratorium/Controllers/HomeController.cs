@@ -1,7 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using LaboratoriumCore;
 
 namespace Laboratorium.Controllers
 {
@@ -16,52 +15,9 @@ namespace Laboratorium.Controllers
         [HttpPost]
         public ActionResult Index(Query query)
         {
-            try
-            {
-                var processInfo = new ProcessStartInfo
-                {
-                    FileName = @"cmd.exe",
-                    CreateNoWindow = true,
-                    UseShellExecute = false,
-                    RedirectStandardInput = true,
-                    RedirectStandardOutput = true,
-                    Arguments = @"/c ""C:\Program Files (x86)\Microsoft SDKs\F#\4.0\Framework\v4.0\Fsi.exe"""
-                };
+            var executor = new Executor();
 
-                var process = Process.Start(processInfo);
-
-                var writer = process.StandardInput;
-                var reader = process.StandardOutput;
-
-                writer.WriteLine(@"#I ""D:\Code\MVC\Laboratorium\LaboratoriumLib\bin\Debug"";;");
-                writer.WriteLine(@"#r ""LaboratoriumLib.dll"";;");
-                writer.WriteLine(@"open LaboratoriumLib.Factorization;;");
-                writer.WriteLine(@"{0}", query.Question);
-
-                var line = "";
-                for (int i = 0; i < 10; i++)
-                {
-                    line = reader.ReadLine();
-                }
-
-                //while ((line = reader.ReadLine()) != null)
-                //{
-                //    answer.AppendLine(line);
-                //}
-
-                writer.Close();
-                reader.Close();
-
-                //process.WaitForExit();
-                process.Close();
-
-                query.Answer = line;
-            }
-            catch (Exception e)
-            {
-                query.Answer = e.Message;
-                throw;
-            }
+            query.Answer = executor.Execute(query.Question);
 
             return View("Index", query);
         }
@@ -83,7 +39,11 @@ namespace Laboratorium.Controllers
 
     public class Query
     {
+        public Query()
+        {
+            Answer = new List<string>();
+        }
         public string Question { get; set; }
-        public string Answer { get; set; }
+        public List<string> Answer { get; set; }
     }
 }
