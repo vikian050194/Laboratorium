@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 
 namespace LaboratoriumCore
@@ -53,6 +54,12 @@ namespace LaboratoriumCore
             }
 
             return resultLog;
+        }
+
+        public List<string> Foo()
+        {
+            var files = Directory.GetFiles(Environment.CurrentDirectory).ToList();
+            return files;
         }
     }
 }

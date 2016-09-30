@@ -16,9 +16,8 @@ namespace Laboratorium.Controllers
         public ActionResult Index(Query query)
         {
             var executor = new Executor();
-
             query.Answer = executor.Execute(query.Question);
-
+            query.Answer = executor.Foo();
             return View("Index", query);
         }
 
