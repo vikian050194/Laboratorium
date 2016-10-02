@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.IO;
+using System.Linq;
 using System.Web.Mvc;
+using Laboratorium.Models.ViewModels;
 using LaboratoriumCore;
 
 namespace Laboratorium.Controllers
@@ -9,16 +11,15 @@ namespace Laboratorium.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(new Query());
+            return View(new Item());
         }
 
         [HttpPost]
-        public ActionResult Index(Query query)
+        public ActionResult Index(Item item)
         {
             var executor = new Executor();
-            query.Answer = executor.Execute(query.Question);
-            query.Answer = executor.Foo();
-            return View("Index", query);
+            item.Result = executor.Execute(item.Query);
+            return View("Index", item);
         }
 
         public ActionResult About()
@@ -34,15 +35,5 @@ namespace Laboratorium.Controllers
 
             return View();
         }
-    }
-
-    public class Query
-    {
-        public Query()
-        {
-            Answer = new List<string>();
-        }
-        public string Question { get; set; }
-        public List<string> Answer { get; set; }
     }
 }

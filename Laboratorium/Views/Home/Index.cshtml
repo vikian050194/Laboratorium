@@ -1,4 +1,4 @@
-﻿@model Laboratorium.Controllers.Query
+﻿@model Laboratorium.Models.ViewModels.Item
 
 @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -15,13 +15,13 @@
         <tbody>
             <tr>
                 <td>
-                    <textarea id="Question" name="Question">@Model.Question</textarea>
+                    <textarea id="Query" name="Query">@Model.Query</textarea>
                 </td>
                 <td>
                     <div>
-                        @for (var i = 0; i < Model.Answer.Count; i++)
+                        @for (var i = 0; i < Model.Result.Count; i++)
                         {
-                            <p name="Answer[@i]">@Model.Answer[i]</p>
+                            <p name="Result[@i]">@Model.Result[i]</p>
                         }
                     </div>
                 </td>

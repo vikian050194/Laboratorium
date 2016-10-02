@@ -176,6 +176,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\HomeViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -251,6 +252,10 @@
     <ProjectReference Include="..\LaboratoriumCore\LaboratoriumCore.csproj">
       <Project>{4e3298de-7f7e-4754-8fdb-54119b0abc25}</Project>
       <Name>LaboratoriumCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LaboratoriumLib\LaboratoriumLib.csproj">
+      <Project>{21456229-9644-44bd-8c8e-2eea1d714b07}</Project>
+      <Name>LaboratoriumLib</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
