@@ -42,7 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factorization\GreatestCommonDivisor.cs" />
+    <Compile Include="Factorization\MultipleGCD.cs" />
+    <Compile Include="Factorization\SingleGCD.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

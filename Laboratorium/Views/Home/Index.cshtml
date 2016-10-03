@@ -1,19 +1,24 @@
-﻿@model Laboratorium.Models.ViewModels.Item
+﻿@model Laboratorium.Models.ViewModels.PacketViewModel
 
-<div id = "interactionForm">
+<div id="interactionForm">
     @using (Ajax.BeginForm("Index", "Home", null, new AjaxOptions
     {
         InsertionMode = InsertionMode.Replace,
         HttpMethod = "POST",
-        UpdateTargetId = "interactionForm"
+        UpdateTargetId = "interactionForm",
+        LoadingElementId = "progressbar"
     }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary("", new { @class = "text-danger" })
-
+        <div id="progressbar" class="progress" style="display:none;">
+            <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                ожидайте...
+            </div>
+        </div>
         <table class="table table-bordered">
             <thead>
-                <tr>
+                <tr class="active">
                     <th>Вопрос</th>
                     <th>Ответ</th>
                 </tr>
@@ -25,15 +30,29 @@
                     </td>
                     <td>
                         <div>
-                            @for (var i = 0; i < Model.Result.Count; i++)
+                            @for (var i = 0; i < Model.Results.Count; i++)
                             {
-                                <p name="Result[@i]">@Model.Result[i]</p>
+                                <div name="Results[@i]">@Model.Results[i]</div>
                             }
                         </div>
                     </td>
                 </tr>
+                <tr class="active">
+                    <th colspan="2">Ошибки</th>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div>
+                            @for (var i = 0; i < Model.Errors.Count; i++)
+                            {
+                                <div name="Errors[@i]">@Model.Errors[i]</div>
+                            }
+                        </div>
+                    </td>
+
+                </tr>
             </tbody>
         </table>
-        <input type="submit" value="Выполнить" class="btn btn-default" />
+        <input type="submit" value="Выполнить" class="btn btn-warning" />
     }
 </div>

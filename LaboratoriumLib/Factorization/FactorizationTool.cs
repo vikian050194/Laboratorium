@@ -99,19 +99,19 @@ namespace LaboratoriumLib
         //    }
         //}
 
-        private BigInteger GreatestCommonDivisor(params int[] args)
-        {
-            var result = BigInteger.Parse(args[0]);
+        //private BigInteger GreatestCommonDivisor(params int[] args)
+        //{
+        //    var result = BigInteger.Parse(args[0]);
 
-            for (var i = 1; i < args.Count && result != 1; i++)
-            {
-                var item = BigInteger.Parse(args[i]);
+        //    for (var i = 1; i < args.Count && result != 1; i++)
+        //    {
+        //        var item = BigInteger.Parse(args[i]);
 
-                result = BigInteger.GreatestCommonDivisor(result, item);
-            }
+        //        result = BigInteger.GreatestCommonDivisor(result, item);
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
         private BigInteger LeastCommonMultiple(List<string> args)
         {

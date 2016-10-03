@@ -2,13 +2,15 @@
 
 namespace Laboratorium.Models.ViewModels
 {
-    public class Item
+    public class PacketViewModel
     {
-        public Item()
+        public PacketViewModel()
         {
-            Result = new List<string>();
+            Results = new List<string>();
+            Errors = new List<string>();
         }
         public string Query { get; set; }
-        public List<string> Result { get; set; }
+        public List<string> Results { get; set; }
+        public List<string> Errors { get; set; }
     }
 }

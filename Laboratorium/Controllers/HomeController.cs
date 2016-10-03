@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Web.Mvc;
 using Laboratorium.Models.ViewModels;
-using LaboratoriumCore;
 
 namespace Laboratorium.Controllers
 {
@@ -11,15 +10,15 @@ namespace Laboratorium.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(new Item());
+            return View(new PacketViewModel());
         }
 
         [HttpPost]
-        public ActionResult Index(Item item)
+        public ActionResult Index(PacketViewModel packetViewModel)
         {
             var executor = new Executor();
-            item.Result = executor.Execute(item.Query);
-            return View("Index", item);
+            packetViewModel = executor.Execute(packetViewModel);
+            return View("Index", packetViewModel);
         }
 
         public ActionResult About()
