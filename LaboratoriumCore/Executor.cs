@@ -44,7 +44,7 @@ namespace LaboratoriumCore
 
             writer.WriteLine($"#r \"{pathToLib}\";;");
             writer.WriteLine(@"open LaboratoriumLib;;");
-            writer.WriteLine(@"{0};;", query);
+            writer.WriteLine(@"{0}", query);
             writer.WriteLine("#quit;;");
 
             var resultLog = new List<string>();

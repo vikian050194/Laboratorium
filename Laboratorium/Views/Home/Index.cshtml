@@ -1,32 +1,39 @@
 ﻿@model Laboratorium.Models.ViewModels.Item
 
-@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+<div id = "interactionForm">
+    @using (Ajax.BeginForm("Index", "Home", null, new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "POST",
+        UpdateTargetId = "interactionForm"
+    }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary("", new { @class = "text-danger" })
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Вопрос</th>
-                <th>Ответ</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <textarea id="Query" name="Query">@Model.Query</textarea>
-                </td>
-                <td>
-                    <div>
-                        @for (var i = 0; i < Model.Result.Count; i++)
-                        {
-                            <p name="Result[@i]">@Model.Result[i]</p>
-                        }
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <input type="submit" value="Выполнить" class="btn btn-default" />
-}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Вопрос</th>
+                    <th>Ответ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <textarea id="Query" name="Query">@Model.Query</textarea>
+                    </td>
+                    <td>
+                        <div>
+                            @for (var i = 0; i < Model.Result.Count; i++)
+                            {
+                                <p name="Result[@i]">@Model.Result[i]</p>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="Выполнить" class="btn btn-default" />
+    }
+</div>
