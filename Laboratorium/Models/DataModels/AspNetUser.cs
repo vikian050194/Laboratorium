@@ -1,9 +1,9 @@
-namespace Laboratorium
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
+namespace Laboratorium.Models.DataModels
+{
     public class AspNetUser
     {
         public AspNetUser()

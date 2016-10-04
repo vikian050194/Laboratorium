@@ -169,6 +169,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Data\GenericRepository.cs" />
+    <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Data\IUnitOfWork.cs" />
+    <Compile Include="Data\UnitOfWork.cs" />
     <Compile Include="Models\DataModels\AspNetRole.cs" />
     <Compile Include="Models\DataModels\AspNetUser.cs" />
     <Compile Include="Models\DataModels\AspNetUserClaim.cs" />
@@ -181,7 +185,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model1.cs" />
+    <Compile Include="Data\Context\LaboratoriumContext.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Data\Context\IdentityModels.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />
@@ -261,6 +265,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\Providers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

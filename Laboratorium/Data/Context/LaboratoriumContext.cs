@@ -1,6 +1,7 @@
 using System.Data.Entity;
+using Laboratorium.Models.DataModels;
 
-namespace Laboratorium
+namespace Laboratorium.Data.Context
 {
     public class LaboratoriumContext : DbContext
     {
