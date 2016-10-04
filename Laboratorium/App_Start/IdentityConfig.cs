@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Laboratorium.Data.Context;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using Laboratorium.Models;
 
 namespace Laboratorium
 {
@@ -49,11 +49,11 @@ namespace Laboratorium
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequiredLength = 4,
+                RequireNonLetterOrDigit = false,
+                RequireDigit = false,
+                RequireLowercase = false,
+                RequireUppercase =false,
             };
 
             // Configure user lockout defaults

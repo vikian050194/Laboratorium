@@ -113,51 +113,51 @@ namespace LaboratoriumLib
         //    return result;
         //}
 
-        private BigInteger LeastCommonMultiple(List<string> args)
-        {
-            CheckArgs(args, 2, Condition.MoreOrEqual);
+        //private BigInteger LeastCommonMultiple(List<string> args)
+        //{
+        //    CheckArgs(args, 2, Condition.MoreOrEqual);
 
-            var result = BigInteger.Parse(args[0]);
+        //    var result = BigInteger.Parse(args[0]);
 
-            for (var i = 1; i < args.Count; i++)
-            {
-                var item = BigInteger.Parse(args[i]);
+        //    for (var i = 1; i < args.Count; i++)
+        //    {
+        //        var item = BigInteger.Parse(args[i]);
 
-                result = result * item / BigInteger.GreatestCommonDivisor(result, item);
-            }
+        //        result = result * item / BigInteger.GreatestCommonDivisor(result, item);
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
-        private string ContinuedFraction(List<string> args)
-        {
-            CheckArgs(args, 2, Condition.Equal);
+        //private string ContinuedFraction(List<string> args)
+        //{
+        //    CheckArgs(args, 2, Condition.Equal);
 
-            var result = new StringBuilder("[");
+        //    var result = new StringBuilder("[");
 
-            var a = BigInteger.Parse(args[0]);
-            var b = BigInteger.Parse(args[1]);
+        //    var a = BigInteger.Parse(args[0]);
+        //    var b = BigInteger.Parse(args[1]);
 
-            var r = BigInteger.MinusOne;
-            var q = BigInteger.MinusOne;
+        //    var r = BigInteger.MinusOne;
+        //    var q = BigInteger.MinusOne;
 
-            while (r != BigInteger.Zero)
-            {
-                q = a / b;
-                r = a - q * b;
+        //    while (r != BigInteger.Zero)
+        //    {
+        //        q = a / b;
+        //        r = a - q * b;
 
-                result.AppendFormat("{0},", q);
+        //        result.AppendFormat("{0},", q);
 
-                a = b;
-                b = r;
-            }
+        //        a = b;
+        //        b = r;
+        //    }
 
-            result = result.Remove(result.Length - 1, 1);
+        //    result = result.Remove(result.Length - 1, 1);
 
-            result.Append("]");
+        //    result.Append("]");
 
-            return result.ToString();
-        }
+        //    return result.ToString();
+        //}
 
         private string AdvancedEuclid(List<string> args)
         {

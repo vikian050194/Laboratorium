@@ -42,7 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factorization\MultipleLCM.cs" />
     <Compile Include="Factorization\MultipleGCD.cs" />
+    <Compile Include="Factorization\ContinuedFraction.cs" />
+    <Compile Include="Factorization\SingleLCM.cs" />
     <Compile Include="Factorization\SingleGCD.cs" />
     <Compile Include="IAlgorithm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
