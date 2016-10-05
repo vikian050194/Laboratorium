@@ -20,7 +20,8 @@ namespace Laboratorium
         public PacketViewModel Execute(PacketViewModel packet)
         {
             var path = GetAssemblyDirectory();
-            var pathToFsi = path + @"\..\..\FSharp\Fsi.exe";
+            //var pathToFsi = path + @"\..\..\FSharp\Fsi.exe";
+            var pathToFsi = path + @"\..\..\packages\FSharp.Compiler.Tools.4.0.1.10\tools\fsi.exe";
             var pathToLib = path + @"\LaboratoriumLib.dll";
 
             var processInfo = new ProcessStartInfo
