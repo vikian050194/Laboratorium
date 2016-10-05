@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -21,11 +20,8 @@ namespace Laboratorium
         public PacketViewModel Execute(PacketViewModel packet)
         {
             var path = GetAssemblyDirectory();
-            var pathToFsi = path+ @"\..\..\packages\FSharp.Compiler.Tools.4.0.1.10\tools\fsi.exe";
-            //var pathToFsi = path+ @"\v4.0\Fsi.exe";
-            //var pathToFsi = @"C:\Program Files (x86)\Microsoft SDKs\F#\4.0\Framework\v4.0\Fsi.exe";
-            var pathToLib = path+ @"\LaboratoriumLib.dll";
-            //var pathToLib = @"D:\Code\MVC\Laboratorium\LaboratoriumLib\bin\Debug\LaboratoriumLib.dll";
+            var pathToFsi = path + @"\..\..\FSharp\Fsi.exe";
+            var pathToLib = path + @"\LaboratoriumLib.dll";
 
             var processInfo = new ProcessStartInfo
             {

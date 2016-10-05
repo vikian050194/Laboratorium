@@ -173,6 +173,7 @@
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Data\UnitOfWork.cs" />
+    <Compile Include="Executor.cs" />
     <Compile Include="Models\DataModels\AspNetRole.cs" />
     <Compile Include="Models\DataModels\AspNetUser.cs" />
     <Compile Include="Models\DataModels\AspNetUserClaim.cs" />
@@ -180,7 +181,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Executor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
