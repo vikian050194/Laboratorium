@@ -1,0 +1,43 @@
+﻿@model Laboratorium.Models.ViewModels.PacketViewModel
+
+@using (Ajax.BeginForm("HandlePackage", "Home", null, new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "POST",
+    UpdateTargetId = "interactionForm",
+    LoadingElementId = "progressbar"
+}, new { id = "interactionForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div id="progressbar" class="progress" style="display: none;">
+        <div class="progress-bar progress-bar-warning progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+            ожидайте
+        </div>
+    </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Запрос</div>
+            <div class="panel-body">
+                <textarea id="Query" name="Query">@Model.Query</textarea>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Ответ</div>
+            <div class="panel-body">
+                @for (var i = 0; i < Model.Results.Count; i++)
+                {
+                    <div name="Results[@i]">@Model.Results[i]</div>
+                }
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Ошибки</div>
+            <div class="panel-body">
+                @for (var i = 0; i < Model.Errors.Count; i++)
+                {
+                    <div name="Errors[@i]">@Model.Errors[i]</div>
+                }
+            </div>
+        </div>
+        <input type="submit" value="Выполнить" class="btn btn-warning" />
+}

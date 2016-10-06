@@ -10,15 +10,21 @@ namespace Laboratorium.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(new PacketViewModel());
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult HandlePackage()
+        {
+            return PartialView(new PacketViewModel());
         }
 
         [HttpPost]
-        public ActionResult Index(PacketViewModel packetViewModel)
+        public ActionResult HandlePackage(PacketViewModel packetViewModel)
         {
             var executor = new Executor();
             packetViewModel = executor.Execute(packetViewModel);
-            return View("Index", packetViewModel);
+            return PartialView(packetViewModel);
         }
 
         public ActionResult About()
