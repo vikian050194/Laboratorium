@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LaboratoriumLib.Factorization
 {
-    public class ContinuedFraction : IListAlgorithm
+    public class ContinuedFraction : IAlgorithm<int[]>
     {
         private int _a;
         private int _b;

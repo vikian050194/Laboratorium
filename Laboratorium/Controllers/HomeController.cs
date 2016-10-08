@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Laboratorium.Models.ViewModels;
+using LaboratoriumCore;
 
 namespace Laboratorium.Controllers
 {
@@ -23,7 +24,19 @@ namespace Laboratorium.Controllers
         public ActionResult HandlePackage(PacketViewModel packetViewModel)
         {
             var executor = new Executor();
-            packetViewModel = executor.Execute(packetViewModel);
+
+            var packet = new Packet
+            {
+                Errors = packetViewModel.Errors,
+                Results = packetViewModel.Results,
+                Query = packetViewModel.Query
+            };
+            packet = executor.Execute(packet);
+
+            packetViewModel.Query = packet.Query;
+            packetViewModel.Errors = packet.Errors;
+            packetViewModel.Results = packet.Results;
+
             return PartialView(packetViewModel);
         }
 

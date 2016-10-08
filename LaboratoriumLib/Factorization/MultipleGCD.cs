@@ -2,7 +2,7 @@
 
 namespace LaboratoriumLib.Factorization
 {
-    public class MultipleGCD : IAlgorithm
+    public class MultipleGCD : IAlgorithm<int>
     {
         private int[] _args;
         public MultipleGCD(params int[] args)

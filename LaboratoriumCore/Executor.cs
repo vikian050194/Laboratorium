@@ -3,9 +3,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Laboratorium.Models.ViewModels;
 
-namespace Laboratorium
+namespace LaboratoriumCore
 {
     public class Executor
     {
@@ -17,7 +16,7 @@ namespace Laboratorium
             return Path.GetDirectoryName(path);
         }
 
-        public PacketViewModel Execute(PacketViewModel packet)
+        public Packet Execute(Packet packet)
         {
             var path = GetAssemblyDirectory();
             var pathToFsi = path + @"\..\..\packages\FSharp.Compiler.Tools.4.0.1.10\tools\fsi.exe";

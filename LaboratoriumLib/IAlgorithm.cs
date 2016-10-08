@@ -2,13 +2,8 @@
 
 namespace LaboratoriumLib
 {
-    public interface IAlgorithm
+    public interface IAlgorithm<out T>
     {
-        int Execute();
-    }
-
-    public interface IListAlgorithm
-    {
-        int[] Execute();
+        T Execute();
     }
 }

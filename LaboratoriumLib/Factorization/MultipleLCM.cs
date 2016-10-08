@@ -2,7 +2,7 @@
 
 namespace LaboratoriumLib.Factorization
 {
-    public class MultipleLCM : IAlgorithm
+    public class MultipleLCM : IAlgorithm<int>
     {
         private int[] _args;
         public MultipleLCM(params int[] args)

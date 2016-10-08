@@ -1,6 +1,6 @@
 ﻿namespace LaboratoriumLib.Factorization
 {
-    public class SingleLCM : IAlgorithm
+    public class SingleLCM : IAlgorithm<int>
     {
         private int _a;
         private int _b;

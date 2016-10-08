@@ -1,6 +1,6 @@
 ﻿namespace LaboratoriumLib.Factorization
 {
-    public class SingleGCD : IAlgorithm
+    public class SingleGCD : IAlgorithm<int>
     {
         private int _a;
         private int _b;
