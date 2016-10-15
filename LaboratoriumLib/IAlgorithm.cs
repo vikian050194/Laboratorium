@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace LaboratoriumLib
+﻿namespace LaboratoriumLib
 {
-    public interface IAlgorithm<out T>
+    public interface IAlgorithm<T>
     {
-        T Execute();
+        T Execute(T a, T b);
     }
 }

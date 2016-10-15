@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Laboratorium.Models.ViewModels;
 using LaboratoriumCore;
 
@@ -15,13 +13,13 @@ namespace Laboratorium.Controllers
         }
 
         [HttpGet]
-        public ActionResult HandlePackage()
+        public ActionResult PackageForm()
         {
             return PartialView(new PacketViewModel());
         }
 
         [HttpPost]
-        public ActionResult HandlePackage(PacketViewModel packetViewModel)
+        public ActionResult PackageForm(PacketViewModel packetViewModel)
         {
             var executor = new Executor();
 

@@ -37,7 +37,9 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
+        <div class="container navbar navbar-fixed-bottom" id="commoncontainer">
+            @RenderBody()
+        </div>
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryajax")

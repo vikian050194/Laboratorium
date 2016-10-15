@@ -1,4 +1,4 @@
-﻿namespace FSharpSandbox.AssemblyInfo
+﻿namespace SandboxFSharp.AssemblyInfo
 
 open System.Reflection
 open System.Runtime.CompilerServices
@@ -7,11 +7,11 @@ open System.Runtime.InteropServices
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[<assembly: AssemblyTitle("FSharpSandbox")>]
+[<assembly: AssemblyTitle("SandboxFSharp")>]
 [<assembly: AssemblyDescription("")>]
 [<assembly: AssemblyConfiguration("")>]
 [<assembly: AssemblyCompany("")>]
-[<assembly: AssemblyProduct("FSharpSandbox")>]
+[<assembly: AssemblyProduct("SandboxFSharp")>]
 [<assembly: AssemblyCopyright("Copyright ©  2016")>]
 [<assembly: AssemblyTrademark("")>]
 [<assembly: AssemblyCulture("")>]
@@ -22,7 +22,7 @@ open System.Runtime.InteropServices
 [<assembly: ComVisible(false)>]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[<assembly: Guid("2dd33238-82cb-4912-96d7-0cd4097ca0a2")>]
+[<assembly: Guid("14bc47d1-30c6-4602-ad74-6a8e5428971d")>]
 
 // Version information for an assembly consists of the following four values:
 // 

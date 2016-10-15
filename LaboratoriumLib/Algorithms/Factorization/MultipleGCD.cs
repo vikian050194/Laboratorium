@@ -9,7 +9,7 @@ namespace LaboratoriumLib.Factorization
         {
             _args = args;
         }
-        public int Execute()
+        public int Execute(params int[] args)
         {
             var result = _args.First();
 
