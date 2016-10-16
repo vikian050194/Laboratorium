@@ -6,11 +6,11 @@ namespace LaboratoriumCore
 {
     public class Executor
     {
-        private readonly ExecutorHelper _executorHelper;
+        private readonly IExecutorHelper _executorHelper;
 
-        public Executor()
+        public Executor(IExecutorHelper executorHelper)
         {
-            _executorHelper = new ExecutorHelper();
+            _executorHelper = executorHelper;
         }
 
         public Packet Execute(Packet packet)

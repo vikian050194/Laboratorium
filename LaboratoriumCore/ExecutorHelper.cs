@@ -7,7 +7,7 @@ using System.Text;
 
 namespace LaboratoriumCore
 {
-    public class ExecutorHelper
+    public class ExecutorHelper : IExecutorHelper
     {
         public ExecutorHelper()
         {
@@ -36,7 +36,7 @@ namespace LaboratoriumCore
             foreach (var type in types)
             {
                 var levels = type.Namespace.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
-                if (levels.Count() == 3)
+                if (levels.Count() == 3 && levels[1] == "Algorithms")
                 {
                     result[levels[2]] = type.Namespace;
                 }

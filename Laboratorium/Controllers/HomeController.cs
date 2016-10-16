@@ -21,7 +21,7 @@ namespace Laboratorium.Controllers
         [HttpPost]
         public ActionResult PackageForm(PacketViewModel packetViewModel)
         {
-            var executor = new Executor();
+            var executor = new Executor(new ExecutorHelper());
 
             var packet = new Packet
             {

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExecutorHelper.cs" />
+    <Compile Include="IExecutorHelper.cs" />
     <Compile Include="NameManager.cs" />
     <Compile Include="Executor.cs" />
     <Compile Include="Packet.cs" />

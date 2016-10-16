@@ -30,16 +30,16 @@ th {
     width: 50%;
 }
 
-#commoncontainer {
-    top: 53px;
+.flexbox {
+    top: 65px;
     bottom: 15px;
     display: flex;
 }
 
-#interactionForm {
-    width: 100%;
+.formpanel {
+    height: 100%;
 }
 
-.myrow {
-    width: 50%;
+#interactionForm {
+    width: 100%;
 }
