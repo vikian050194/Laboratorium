@@ -56,6 +56,7 @@ namespace LaboratoriumCore
             var nameManager = new NameManager();
             var result = new List<string>();
             var function = new StringBuilder();
+
             foreach (var algorithmFamily in algorithmFamilies)
             {
                 foreach (var type in assembly.GetTypes())
@@ -70,11 +71,13 @@ namespace LaboratoriumCore
                         var args = method.GetParameters();
                         nameManager.Reset();
                         var arguments = new List<string>();
+
                         foreach (var parameterInfo in args)
                         {
                             var argumentName = nameManager.GetNextName();
                             arguments.Add(argumentName);
                         }
+
                         foreach (var argument in arguments)
                         {
                             function.AppendFormat("{0} ", argument);
@@ -83,6 +86,7 @@ namespace LaboratoriumCore
                         function.Append("= ");
                         function.AppendFormat("{0}().{1}", type.Name, method.Name);
                         function.Append("(");
+
                         for (int i = 0; i < arguments.Count; i++)
                         {
                             function.Append(arguments[i]);
@@ -91,6 +95,7 @@ namespace LaboratoriumCore
                                 function.Append(",");
                             }
                         }
+
                         function.Append(")");
                         function.Append(";;");
 
