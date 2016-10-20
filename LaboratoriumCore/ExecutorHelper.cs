@@ -53,7 +53,6 @@ namespace LaboratoriumCore
         public List<string> GetFunctions(List<string> algorithmFamilies)
         {
             var assembly = Assembly.ReflectionOnlyLoadFrom(PathToLib);
-            var nameManager = new NameManager();
             var result = new List<string>();
             var function = new StringBuilder();
 
@@ -68,15 +67,8 @@ namespace LaboratoriumCore
                         function.AppendFormat("let {0} ", alias);
                         var ial = type.GetInterfaces().First();
                         var method = ial.GetMethods().First();
-                        var args = method.GetParameters();
-                        nameManager.Reset();
-                        var arguments = new List<string>();
-
-                        foreach (var parameterInfo in args)
-                        {
-                            var argumentName = nameManager.GetNextName();
-                            arguments.Add(argumentName);
-                        }
+                        var args = type.GetConstructors().First().GetParameters();
+                        var arguments = args.Select(parameterInfo => parameterInfo.Name).ToList();
 
                         foreach (var argument in arguments)
                         {
@@ -84,8 +76,7 @@ namespace LaboratoriumCore
                         }
 
                         function.Append("= ");
-                        function.AppendFormat("{0}().{1}", type.Name, method.Name);
-                        function.Append("(");
+                        function.AppendFormat("= {0}(", type.Name);
 
                         for (int i = 0; i < arguments.Count; i++)
                         {
@@ -96,8 +87,8 @@ namespace LaboratoriumCore
                             }
                         }
 
-                        function.Append(")");
-                        function.Append(";;");
+                        function.AppendFormat(").{0}();;", method.Name);
+
 
                         result.Add(function.ToString());
                     }

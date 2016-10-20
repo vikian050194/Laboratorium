@@ -5,10 +5,19 @@ namespace LaboratoriumLib.Algorithms.Factorization
     [Function("lcm")]
     public class SingleLCM : IAlgorithm<int>
     {
-        public int Execute(int a, int b)
+        private int _a;
+        private int _b;
+
+        public SingleLCM(int a, int b)
         {
-            var d = new SingleGCD().Execute(a, b);
-            var result = a * b / d;
+            _a = a;
+            _b = b;
+        }
+
+        public int Execute()
+        {
+            var d = new SingleGCD(_a, _b).Execute();
+            var result = _a * _b / d;
             return result;
         }
     }

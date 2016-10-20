@@ -69,6 +69,10 @@
       <Project>{4e3298de-7f7e-4754-8fdb-54119b0abc25}</Project>
       <Name>LaboratoriumCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LaboratoriumTestLib\LaboratoriumTestLib.csproj">
+      <Project>{5adf3917-cb5d-40e4-ab29-661ada2ee5e2}</Project>
+      <Name>LaboratoriumTestLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

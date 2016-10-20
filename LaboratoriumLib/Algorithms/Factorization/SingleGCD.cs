@@ -5,21 +5,30 @@ namespace LaboratoriumLib.Algorithms.Factorization
     [Function("gcd")]
     public class SingleGCD : IAlgorithm<int>
     {
-        public int Execute(int a, int b)
+        private int _a;
+        private int _b;
+
+        public SingleGCD(int a, int b)
         {
-            while (a != b)
+            _a = a;
+            _b = b;
+        }
+
+        public int Execute()
+        {
+            while (_a != _b)
             {
-                if (a > b)
+                if (_a > _b)
                 {
-                    a -= b;
+                    _a -= _b;
                 }
                 else
                 {
-                    b -= a;
+                    _b -= _a;
                 }
             }
 
-            return a;
+            return _a;
         }
     }
 }
