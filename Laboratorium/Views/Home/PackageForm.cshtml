@@ -6,7 +6,7 @@
     HttpMethod = "POST",
     UpdateTargetId = "interactionForm",
     LoadingElementId = "progressbar"
-}, new { id = "interactionForm" }))
+}, new { id = "interactionForm", @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -19,11 +19,28 @@
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding-left: 0px; padding-right: 7.5px;">
             <div class="panel panel-default formpanel">
                 <div class="panel-heading">
-                    Запрос
+                    Скрипт
                 </div>
                 <div class="panel-body">
-                    <textarea id="Query" name="Query">@Model.Query</textarea>
-                    <input type="submit" value="Выполнить" class="btn btn-warning" />
+                    <div>
+                        <textarea id="Script" name="Script">@Model.Script</textarea>
+                    </div>
+                    <div class="btn-group btn-group-justified" role="group">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-warning" disabled>
+                                <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-warning" disabled>
+                                <span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <input type="submit" value="Выполнить" class="btn btn-warning"/>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -31,14 +48,9 @@
             <div class="panel panel-default formpanel">
                 <div class="panel-heading">Результат</div>
                 <div class="panel-body">
-                    @for (var i = 0; i < Model.Results.Count; i++)
+                    @for (var i = 0; i < Model.Result.Count; i++)
                     {
-                        <div name="Results[@i]">@Model.Results[i]</div>
-                    }
-                    <hr/>
-                    @for (var i = 0; i < Model.Errors.Count; i++)
-                    {
-                        <div name="Errors[@i]">@Model.Errors[i]</div>
+                        <div name="Result[@i]">@Model.Result[i]</div>
                     }
                 </div>
             </div>

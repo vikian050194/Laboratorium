@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.FSharp.Compiler.Interactive;
 namespace Laboratorium.Core
 {
     public class Executor

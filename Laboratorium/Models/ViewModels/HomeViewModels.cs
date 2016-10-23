@@ -6,11 +6,11 @@ namespace Laboratorium.Models.ViewModels
     {
         public PacketViewModel()
         {
-            Results = new List<string>();
+            Result = new List<string>();
             Errors = new List<string>();
         }
-        public string Query { get; set; }
-        public List<string> Results { get; set; }
+        public string Script { get; set; }
+        public List<string> Result { get; set; }
         public List<string> Errors { get; set; }
     }
 }

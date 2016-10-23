@@ -26,14 +26,14 @@ namespace Laboratorium.Controllers
             var packet = new Packet
             {
                 Errors = packetViewModel.Errors,
-                Results = packetViewModel.Results,
-                Query = packetViewModel.Query
+                Results = packetViewModel.Result,
+                Query = packetViewModel.Script
             };
             packet = executor.Execute(packet);
 
-            packetViewModel.Query = packet.Query;
+            packetViewModel.Script = packet.Query;
             packetViewModel.Errors = packet.Errors;
-            packetViewModel.Results = packet.Results;
+            packetViewModel.Result = packet.Results;
 
             return PartialView(packetViewModel);
         }
