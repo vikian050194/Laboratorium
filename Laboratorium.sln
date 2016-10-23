@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoriumLib", "LaboratoriumLib\LaboratoriumLib.csproj", "{21456229-9644-44BD-8C8E-2EEA1D714B07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium.Lib", "Laboratorium.Lib\Laboratorium.Lib.csproj", "{21456229-9644-44BD-8C8E-2EEA1D714B07}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium", "Laboratorium\Laboratorium.csproj", "{8C696132-70B4-4A2B-B0CA-3ADF52FC5302}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoriumTypeLib", "LaboratoriumTypeLib\LaboratoriumTypeLib.csproj", "{049CCF24-0ABF-4778-8D02-D21F8C885F7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium.TypeLib", "Laboratorium.TypeLib\Laboratorium.TypeLib.csproj", "{049CCF24-0ABF-4778-8D02-D21F8C885F7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoriumCore", "LaboratoriumCore\LaboratoriumCore.csproj", "{4E3298DE-7F7E-4754-8FDB-54119B0ABC25}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium.Core", "Laboratorium.Core\Laboratorium.Core.csproj", "{4E3298DE-7F7E-4754-8FDB-54119B0ABC25}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SandboxFSharp", "SandboxFSharp\SandboxFSharp.fsproj", "{14BC47D1-30C6-4602-AD74-6A8E5428971D}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Sandbox.FSharp", "Sandbox.FSharp\Sandbox.FSharp.fsproj", "{14BC47D1-30C6-4602-AD74-6A8E5428971D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoriumTests", "LaboratoriumTests\LaboratoriumTests.csproj", "{81B85C44-3555-44D4-8128-343FFBDCA386}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium.Tests", "Laboratorium.Tests\Laboratorium.Tests.csproj", "{81B85C44-3555-44D4-8128-343FFBDCA386}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SandboxCSharp", "SandboxCSharp\SandboxCSharp.csproj", "{D522E227-2F09-4490-9D30-68C3D1BEBCF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.CSharp", "Sandbox.CSharp\Sandbox.CSharp.csproj", "{D522E227-2F09-4490-9D30-68C3D1BEBCF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaboratoriumTestLib", "LaboratoriumTestLib\LaboratoriumTestLib.csproj", "{5ADF3917-CB5D-40E4-AB29-661ADA2EE5E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium.TestLib", "Laboratorium.TestLib\Laboratorium.TestLib.csproj", "{5ADF3917-CB5D-40E4-AB29-661ADA2EE5E2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{7EFA4693-6C40-4AD1-BEE2-2C998E51FA8C}"
 EndProject

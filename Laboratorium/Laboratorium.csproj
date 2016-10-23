@@ -288,13 +288,13 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LaboratoriumCore\LaboratoriumCore.csproj">
+    <ProjectReference Include="..\Laboratorium.Core\Laboratorium.Core.csproj">
       <Project>{4e3298de-7f7e-4754-8fdb-54119b0abc25}</Project>
-      <Name>LaboratoriumCore</Name>
+      <Name>Laboratorium.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LaboratoriumLib\LaboratoriumLib.csproj">
+    <ProjectReference Include="..\Laboratorium.Lib\Laboratorium.Lib.csproj">
       <Project>{21456229-9644-44bd-8c8e-2eea1d714b07}</Project>
-      <Name>LaboratoriumLib</Name>
+      <Name>Laboratorium.Lib</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

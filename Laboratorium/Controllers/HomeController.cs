@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 using Laboratorium.Models.ViewModels;
-using LaboratoriumCore;
+using Laboratorium.Core;
 
 namespace Laboratorium.Controllers
 {
