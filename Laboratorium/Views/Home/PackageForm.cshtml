@@ -32,8 +32,13 @@
                 <div class="panel-heading">Результат</div>
                 <div class="panel-body">
                     @for (var i = 0; i < Model.Results.Count; i++)
-                {
+                    {
                         <div name="Results[@i]">@Model.Results[i]</div>
+                    }
+                    <hr/>
+                    @for (var i = 0; i < Model.Errors.Count; i++)
+                    {
+                        <div name="Errors[@i]">@Model.Errors[i]</div>
                     }
                 </div>
             </div>

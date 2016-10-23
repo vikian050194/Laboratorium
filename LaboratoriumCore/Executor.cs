@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
@@ -15,6 +16,8 @@ namespace LaboratoriumCore
 
         public Packet Execute(Packet packet)
         {
+            var inputLines = new List<string>();
+
             var processInfo = GetProcessInfo();
 
             var process = Process.Start(processInfo);
@@ -23,50 +26,54 @@ namespace LaboratoriumCore
             var reader = process.StandardOutput;
             var error = process.StandardError;
 
-            writer.WriteLine("#r @\"{0}\";;", _executorHelper.PathToLib);
+            var line = $"#r @\"{_executorHelper.PathToLib}\";;";
+            writer.WriteLine(line);
+            inputLines.Add(line);
 
             var algorithmFamilies = _executorHelper.GetAlgorithmTypes();
             var foo = _executorHelper.GetNamespaces();
             foreach (var algorithmFamily in foo.Values)
             {
-                writer.WriteLine("open {0};;", algorithmFamily);
+                line = $"open {algorithmFamily};;";
+
+                writer.WriteLine(line);
+                inputLines.Add(line);
             }
+
             var functions = _executorHelper.GetFunctions(algorithmFamilies);
 
             foreach (var function in functions)
             {
                 writer.WriteLine(function);
+                inputLines.Add(function);
             }
 
-            writer.WriteLine("{0}", packet.Query);
-            writer.WriteLine("#quit;;");
+            line = packet.Query;
+            writer.WriteLine(line);
+            inputLines.Add(line);
+            line = "#quit;;";
+            writer.WriteLine(line);
+            inputLines.Add(line);
 
-            try
-            {
-                packet.Results =
-                    reader
-                    .ReadToEnd()
-                    .Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
-                    .ToList();
-                packet.Errors =
-                    error
-                    .ReadToEnd()
-                    .Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
-                    .ToList();
-            }
-            catch (Exception e)
-            {
-                packet.Errors.Add(e.Message);
-            }
-            finally
-            {
-                writer.Close();
-                reader.Close();
-                process.WaitForExit();
-                process.Close();
-            }
+            packet.Results =
+                reader
+                .ReadToEnd()
+                .Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
+                .ToList();
+            packet.Errors =
+                error
+                .ReadToEnd()
+                .Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
+                .ToList();
+
+            writer.Close();
+            reader.Close();
+            process.WaitForExit();
+            process.Close();
 
             //TODO: Add filter for result  
+
+            packet.Errors = inputLines;
 
             return packet;
         }
