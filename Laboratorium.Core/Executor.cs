@@ -72,7 +72,7 @@ namespace Laboratorium.Core
 
             //TODO: Add filter for result  
 
-            packet.Errors = inputLines;
+            packet.Input = inputLines;
 
             return packet;
         }

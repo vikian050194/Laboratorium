@@ -34,6 +34,7 @@ namespace Laboratorium.Controllers
             packetViewModel.Script = packet.Query;
             packetViewModel.Errors = packet.Errors;
             packetViewModel.Result = packet.Results;
+            packetViewModel.Input = packet.Input;
 
             return PartialView(packetViewModel);
         }

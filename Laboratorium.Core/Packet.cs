@@ -8,9 +8,11 @@ namespace Laboratorium.Core
         {
             Results = new List<string>();
             Errors = new List<string>();
+            Input = new List<string>();
         }
         public string Query { get; set; }
         public List<string> Results { get; set; }
         public List<string> Errors { get; set; }
+        public List<string> Input { get; set; }
     }
 }
