@@ -42,6 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\Number theoretic algorithms\GfMath.cs" />
+    <Compile Include="Algorithms\Number theoretic algorithms\JacobiSymbol.cs" />
+    <Compile Include="Algorithms\Number theoretic algorithms\ModularInverse.cs" />
+    <Compile Include="Algorithms\Number theoretic algorithms\Primes.cs" />
+    <Compile Include="Algorithms\Number theoretic algorithms\SqrtGf.cs" />
     <Compile Include="Attributes\FunctionAttribute.cs" />
     <Compile Include="Algorithms\Factorization\ContinuedFraction.cs" />
     <Compile Include="Algorithms\Factorization\SingleLCM.cs" />
@@ -55,6 +60,7 @@
       <Name>Laboratorium.TypeLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
