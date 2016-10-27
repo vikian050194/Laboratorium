@@ -18,12 +18,13 @@ namespace Laboratorium.Core
             var inputLines = new List<string>();
 
             var processInfo = GetProcessInfo();
-            var arguments = new List<string>
-            {
-                "--nologo",
-                "--exec",
-                "--load:\"C:\\Users\\KirillV\\Documents\\Git\\Laboratorium\\Sandbox.FSharp\\Script.fsx\""
-            };
+            var arguments = new List<string>();
+            arguments.Add("--nologo");
+            arguments.Add("--exec");
+            //arguments.Add("--debug+");
+            //arguments.Add("--debug:full");
+            arguments.Add("--use:\"D:\\Code\\MVC\\Laboratorium\\Sandbox.FSharp\\Script.fsx\"");
+
             foreach (var argument in arguments)
             {
                 processInfo.Arguments += (argument + " ");
