@@ -18,6 +18,16 @@ namespace Laboratorium.Core
             var inputLines = new List<string>();
 
             var processInfo = GetProcessInfo();
+            var arguments = new List<string>
+            {
+                "--nologo",
+                "--exec",
+                "--load:\"C:\\Users\\KirillV\\Documents\\Git\\Laboratorium\\Sandbox.FSharp\\Script.fsx\""
+            };
+            foreach (var argument in arguments)
+            {
+                processInfo.Arguments += (argument + " ");
+            }
 
             var process = Process.Start(processInfo);
 
@@ -25,34 +35,34 @@ namespace Laboratorium.Core
             var reader = process.StandardOutput;
             var error = process.StandardError;
 
-            var line = $"#r @\"{_executorHelper.PathToLib}\";;";
-            writer.WriteLine(line);
-            inputLines.Add(line);
+            //var line = $"#r @\"{_executorHelper.PathToLib}\";;";
+            //writer.WriteLine(line);
+            //inputLines.Add(line);
 
-            var algorithmFamilies = _executorHelper.GetAlgorithmTypes();
-            var foo = _executorHelper.GetNamespaces();
-            foreach (var algorithmFamily in foo.Values)
-            {
-                line = $"open {algorithmFamily};;";
+            //var algorithmFamilies = _executorHelper.GetAlgorithmTypes();
+            //var foo = _executorHelper.GetNamespaces();
+            //foreach (var algorithmFamily in foo.Values)
+            //{
+            //    line = $"open {algorithmFamily};;";
 
-                writer.WriteLine(line);
-                inputLines.Add(line);
-            }
+            //    writer.WriteLine(line);
+            //    inputLines.Add(line);
+            //}
 
-            var functions = _executorHelper.GetFunctions(algorithmFamilies);
+            //var functions = _executorHelper.GetFunctions(algorithmFamilies);
 
-            foreach (var function in functions)
-            {
-                writer.WriteLine(function);
-                inputLines.Add(function);
-            }
+            //foreach (var function in functions)
+            //{
+            //    writer.WriteLine(function);
+            //    inputLines.Add(function);
+            //}
 
-            line = packet.Query;
-            writer.WriteLine(line);
-            inputLines.Add(line);
-            line = "#quit;;";
-            writer.WriteLine(line);
-            inputLines.Add(line);
+            //line = packet.Query;
+            //writer.WriteLine(line);
+            //inputLines.Add(line);
+            //line = "#quit;;";
+            //writer.WriteLine(line);
+            //inputLines.Add(line);
 
             packet.Results =
                 reader

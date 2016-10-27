@@ -29,6 +29,7 @@ namespace Laboratorium.Controllers
                 Results = packetViewModel.Result,
                 Query = packetViewModel.Script
             };
+
             packet = executor.Execute(packet);
 
             packetViewModel.Script = packet.Query;
