@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using AutoMapper;
 using Laboratorium.Models.ViewModels;
 using Laboratorium.Core;
 
@@ -25,11 +26,11 @@ namespace Laboratorium.Controllers
         {
             var executor = new Executor(new ExecutorHelper());
 
-            var packet = _mapper.GetWrapper<PacketViewModel, Packet>(packetViewModel);
+            var packet = _mapper.Map<PacketViewModel, Packet>(packetViewModel);
 
             packet = executor.Execute(packet);
 
-            packetViewModel = _mapper.GetWrapper<Packet, PacketViewModel>(packet);
+            packetViewModel = _mapper.Map<Packet, PacketViewModel>(packet);
 
             return PartialView(packetViewModel);
         }
