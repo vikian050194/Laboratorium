@@ -1,21 +1,28 @@
 ﻿using Laboratorium.Models.ViewModels;
-using LaboratoriumCore;
 using AutoMapper;
+using AutoMapper.Configuration;
+using Laboratorium.Core;
 
 namespace Laboratorium
 {
     public class DataMapper
     {
+        private Mapper _mapper; 
         public DataMapper()
         {
-            CreatePacketMap();
+
+            //var item = new MapperConfigurationExpression();
+            //item.CreateMap();
+            //MapperConfiguration config = new MapperConfiguration();
+
+            //CreatePacketMap();
+
+            //_mapper = Mapper.Instance();
         }
 
         private void CreatePacketMap()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Packet, PacketViewModel>());
-            .CreateMap<Packet, PacketViewModel>();
-            Mapper.CreateMap<PacketViewModel, Packet>();
+
         }
 
         public TDestination GetWrapper<TSource, TDestination>(TSource source)

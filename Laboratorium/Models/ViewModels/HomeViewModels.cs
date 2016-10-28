@@ -11,6 +11,7 @@ namespace Laboratorium.Models.ViewModels
             Input = new List<string>();
         }
         public string Script { get; set; }
+        public string Title { get; set; }
         public List<string> Result { get; set; }
         public List<string> Errors { get; set; }
         public List<string> Input { get; set; }

@@ -6,6 +6,8 @@ namespace Laboratorium.Controllers
 {
     public class HomeController : Controller
     {
+        DataMapper _mapper = new DataMapper();
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -23,19 +25,11 @@ namespace Laboratorium.Controllers
         {
             var executor = new Executor(new ExecutorHelper());
 
-            var packet = new Packet
-            {
-                Errors = packetViewModel.Errors,
-                Results = packetViewModel.Result,
-                Query = packetViewModel.Script
-            };
+            var packet = _mapper.GetWrapper<PacketViewModel, Packet>(packetViewModel);
 
             packet = executor.Execute(packet);
 
-            packetViewModel.Script = packet.Query;
-            packetViewModel.Errors = packet.Errors;
-            packetViewModel.Result = packet.Results;
-            packetViewModel.Input = packet.Input;
+            packetViewModel = _mapper.GetWrapper<Packet, PacketViewModel>(packet);
 
             return PartialView(packetViewModel);
         }
