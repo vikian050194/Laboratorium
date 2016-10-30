@@ -31,7 +31,17 @@ namespace Laboratorium.Core
         {
             var assembly = Assembly.ReflectionOnlyLoadFrom(PathToLib);
             var result = new Dictionary<string, string>();
-            var types = assembly.GetExportedTypes();
+
+            var types = new Type[0];
+
+            try
+            {
+                types = assembly.GetExportedTypes();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
 
             foreach (var type in types)
             {
@@ -60,7 +70,7 @@ namespace Laboratorium.Core
             {
                 foreach (var type in assembly.GetTypes())
                 {
-                    if (type.Namespace.Contains(algorithmFamily))
+                    if (type.Namespace.Contains(algorithmFamily) && CheckType(type))
                     {
                         function.Clear();
                         var alias = type.GetCustomAttributesData().First().ConstructorArguments.First().Value.ToString();
@@ -92,6 +102,15 @@ namespace Laboratorium.Core
                     }
                 }
             }
+
+            return result;
+        }
+
+        private bool CheckType(Type type)
+        {
+            var result = !type.IsAbstract;
+
+            result = result && type.IsClass;
 
             return result;
         }

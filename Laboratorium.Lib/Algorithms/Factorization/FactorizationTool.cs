@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using Laboratorium.Lib.Algorithms.Factorization;
 
 namespace LaboratoriumLib
 {
@@ -377,12 +378,5 @@ namespace LaboratoriumLib
 
             return count % 2 == 0 ? 1 : -1;
         }
-    }
-
-    internal enum Status
-    {
-        Prime,
-        Unknown,
-        Composite
     }
 }

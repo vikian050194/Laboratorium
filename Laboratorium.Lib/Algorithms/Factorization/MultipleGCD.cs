@@ -1,15 +1,19 @@
 ﻿using System.Linq;
+using Laboratorium.Lib.Attributes;
 
-namespace LaboratoriumLib.Factorization
+namespace Laboratorium.Lib.Algorithms.Factorization
 {
+    [Function("gcd'")]
     public class MultipleGCD : IAlgorithm<int>
     {
-        private int[] _args;
+        private readonly int[] _args;
+
         public MultipleGCD(params int[] args)
         {
             _args = args;
         }
-        public int Execute(params int[] args)
+
+        public int Execute()
         {
             var result = _args.First();
 

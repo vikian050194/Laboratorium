@@ -1,26 +1,42 @@
-﻿namespace Laboratorium.Lib.Algorithms.Factorization
+﻿using System.Collections.Generic;
+using Laboratorium.Lib.Attributes;
+
+namespace Laboratorium.Lib.Algorithms.Factorization
 {
-    //public class ContinuedFraction : IAlgorithm<int[]>
-    //{
-    //    public int[] Execute(int a, int b)
-    //    {
-    //        var result = new List<int>();
+    [Function("continuedfraction")]
+    public class ContinuedFraction : IAlgorithm<int[]>
+    {
+        private readonly int _a;
+        private readonly int _b;
 
-    //        int r = -1;
-    //        int q = -1;
+        public ContinuedFraction(int a, int b)
+        {
+            _a = a;
+            _b = b;
+        }
 
-    //        while (r != 0)
-    //        {
-    //            q = a / b;
-    //            r = a - q * b;
+        public int[] Execute()
+        {
+            var result = new List<int>();
 
-    //            result.Add(q);
+            var a = _a;
+            var b = _b;
 
-    //            a = b;
-    //            b = r;
-    //        }
+            int r = -1;
+            int q = -1;
 
-    //        return result.ToArray();
-    //    }
-    //}
+            while (r != 0)
+            {
+                q = a / b;
+                r = a - q * b;
+
+                result.Add(q);
+
+                a = b;
+                b = r;
+            }
+
+            return result.ToArray();
+        }
+    }
 }

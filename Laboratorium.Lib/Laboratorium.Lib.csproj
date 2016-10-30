@@ -42,6 +42,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\Factorization\ProbabilisticTestOfSimplicity.cs" />
+    <Compile Include="Algorithms\Factorization\GaussCriterion.cs" />
+    <Compile Include="Algorithms\Factorization\MultipleGCD.cs" />
+    <Compile Include="Algorithms\Factorization\MultipleLCM.cs" />
+    <Compile Include="Algorithms\Factorization\Status.cs" />
     <Compile Include="Attributes\FunctionAttribute.cs" />
     <Compile Include="Algorithms\Factorization\ContinuedFraction.cs" />
     <Compile Include="Algorithms\Factorization\SingleLCM.cs" />

@@ -1,14 +1,18 @@
 ﻿using System.Linq;
+using Laboratorium.Lib.Attributes;
 
-namespace LaboratoriumLib.Factorization
+namespace Laboratorium.Lib.Algorithms.Factorization
 {
+    [Function("lcm'")]
     public class MultipleLCM : IAlgorithm<int>
     {
-        private int[] _args;
+        private readonly int[] _args;
+
         public MultipleLCM(params int[] args)
         {
             _args = args;
         }
+
         public int Execute()
         {
             var result = _args.First();
