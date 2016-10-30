@@ -1,13 +1,21 @@
 ﻿using System.Web.Mvc;
-using AutoMapper;
 using Laboratorium.Models.ViewModels;
 using Laboratorium.Core;
+using Laboratorium.Data;
 
 namespace Laboratorium.Controllers
 {
     public class HomeController : Controller
     {
-        DataMapper _mapper = new DataMapper();
+        private readonly DataMapper _mapper;
+        private readonly IUnitOfWork _uow;
+
+        public HomeController(IUnitOfWork uow)
+        {
+            _uow = uow;
+
+            _mapper = new DataMapper();
+        }
 
         [HttpGet]
         public ActionResult Index()
@@ -27,12 +35,15 @@ namespace Laboratorium.Controllers
             var executor = new Executor(new ExecutorHelper());
 
             var packet = _mapper.Map<PacketViewModel, Packet>(packetViewModel);
+            packet.User = "foo@bar.com";
+            //packet.User = User.Identity.Name;
 
             packet = executor.Execute(packet);
 
-            packetViewModel = _mapper.Map<Packet, PacketViewModel>(packet);
+            var newPacketViewModel = _mapper.Map<Packet, PacketViewModel>(packet);
+            newPacketViewModel.ShowEntireScript = packetViewModel.ShowEntireScript;
 
-            return PartialView(packetViewModel);
+            return PartialView(newPacketViewModel);
         }
 
         public ActionResult About()

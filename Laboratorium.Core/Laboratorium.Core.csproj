@@ -42,14 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExecutorHelper.cs" />
+    <Compile Include="FileManager.cs" />
     <Compile Include="IExecutorHelper.cs" />
     <Compile Include="NameManager.cs" />
     <Compile Include="Executor.cs" />
     <Compile Include="Packet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

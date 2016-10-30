@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
+
 namespace Laboratorium.Core
 {
     public class Executor
@@ -10,20 +12,46 @@ namespace Laboratorium.Core
 
         public Executor(IExecutorHelper executorHelper)
         {
-            _executorHelper = executorHelper;
+            _executorHelper = executorHelper; ;
         }
 
         public Packet Execute(Packet packet)
         {
-            var inputLines = new List<string>();
+            var fileManager = new FileManager();
+
+            var script = new StringBuilder();
+
+            var line = $"#r @\"{_executorHelper.PathToLib}\"";
+            script.AppendLine(line);
+
+            var algorithmFamilies = _executorHelper.GetAlgorithmTypes();
+            var foo = _executorHelper.GetNamespaces();
+            foreach (var algorithmFamily in foo.Values)
+            {
+                line = $"open {algorithmFamily}";
+                script.AppendLine(line);
+            }
+
+            var functions = _executorHelper.GetFunctions(algorithmFamilies);
+
+            foreach (var function in functions)
+            {
+                script.AppendLine(function);
+            }
+
+            script.Append(packet.Script);
+
+            var path = fileManager.SaveScript(script.ToString(), packet.User, _executorHelper.GetAssemblyDirectory());
 
             var processInfo = GetProcessInfo();
-            var arguments = new List<string>();
-            arguments.Add("--nologo");
-            arguments.Add("--exec");
-            //arguments.Add("--debug+");
-            //arguments.Add("--debug:full");
-            arguments.Add("--use:\"D:\\Code\\MVC\\Laboratorium\\Sandbox.FSharp\\Script.fsx\"");
+            var arguments = new List<string>
+            {
+                "--nologo",
+                "--exec",
+                $"--use:\"{path}\"",
+                //"--debug+",
+                //"--debug:full"
+            };
 
             foreach (var argument in arguments)
             {
@@ -36,54 +64,27 @@ namespace Laboratorium.Core
             var reader = process.StandardOutput;
             var error = process.StandardError;
 
-            //var line = $"#r @\"{_executorHelper.PathToLib}\";;";
-            //writer.WriteLine(line);
-            //inputLines.Add(line);
+            packet.Result = reader
+                    .ReadToEnd()
+                    .Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries)
+                    .ToList();
 
-            //var algorithmFamilies = _executorHelper.GetAlgorithmTypes();
-            //var foo = _executorHelper.GetNamespaces();
-            //foreach (var algorithmFamily in foo.Values)
-            //{
-            //    line = $"open {algorithmFamily};;";
-
-            //    writer.WriteLine(line);
-            //    inputLines.Add(line);
-            //}
-
-            //var functions = _executorHelper.GetFunctions(algorithmFamilies);
-
-            //foreach (var function in functions)
-            //{
-            //    writer.WriteLine(function);
-            //    inputLines.Add(function);
-            //}
-
-            //line = packet.Query;
-            //writer.WriteLine(line);
-            //inputLines.Add(line);
-            //line = "#quit;;";
-            //writer.WriteLine(line);
-            //inputLines.Add(line);
-
-            packet.Results =
-                reader
+            packet.Errors = error
                 .ReadToEnd()
                 .Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
                 .ToList();
-            packet.Errors =
-                error
-                .ReadToEnd()
-                .Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
-                .ToList();
+
+            if (packet.Errors.Count == 0)
+            {
+                packet.Result = packet.Result.GetRange(2, packet.Result.Count - 3);
+            }
 
             writer.Close();
             reader.Close();
             process.WaitForExit();
             process.Close();
 
-            //TODO: Add filter for result  
-
-            packet.Input = inputLines;
+            packet.Input = script.ToString().Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
             return packet;
         }

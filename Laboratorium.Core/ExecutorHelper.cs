@@ -12,11 +12,11 @@ namespace Laboratorium.Core
         public ExecutorHelper()
         {
             var path = GetAssemblyDirectory();
-            PathToFsi = path + @"\..\..\packages\FSharp.Compiler.Tools.4.0.1.10\tools\fsi.exe";
+            PathToFsi = path + @"\..\..\FSharp\Fsi.exe";
             PathToLib = path + @"\Laboratorium.Lib.dll";
         }
 
-        private string GetAssemblyDirectory()
+        public string GetAssemblyDirectory()
         {
             var codeBase = Assembly.GetExecutingAssembly().CodeBase;
             var uri = new UriBuilder(codeBase);
@@ -86,9 +86,8 @@ namespace Laboratorium.Core
                             }
                         }
 
-                        function.AppendFormat(").{0}();;", method.Name);
-
-
+                        function.AppendFormat(").{0}()", method.Name);
+                        
                         result.Add(function.ToString());
                     }
                 }

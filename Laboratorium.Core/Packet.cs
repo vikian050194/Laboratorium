@@ -6,13 +6,14 @@ namespace Laboratorium.Core
     {
         public Packet()
         {
-            Results = new List<string>();
+            Result = new List<string>();
             Errors = new List<string>();
             Input = new List<string>();
         }
-        public string Query { get; set; }
-        public string Title { get; set; }
-        public List<string> Results { get; set; }
+        public string Script { get; set; }
+        public string ScriptName { get; set; }
+        public string User { get; set; }
+        public List<string> Result { get; set; }
         public List<string> Errors { get; set; }
         public List<string> Input { get; set; }
     }

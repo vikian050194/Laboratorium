@@ -10,5 +10,6 @@ namespace Laboratorium.Core
         Dictionary<string, string> GetNamespaces();
         List<string> GetAlgorithmTypes();
         List<string> GetFunctions(List<string> algorithmFamilies);
+        string GetAssemblyDirectory();
     }
 }
