@@ -1,4 +1,4 @@
-namespace Laboratorium.Lib.Algorithms.Factorization
+namespace Laboratorium.Algorithms.Factorization
 {
     internal enum Status
     {

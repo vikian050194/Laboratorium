@@ -13,7 +13,7 @@ namespace Laboratorium.Core
         {
             var path = GetAssemblyDirectory();
             PathToFsi = path + @"\..\..\FSharp\Fsi.exe";
-            PathToLib = path + @"\Laboratorium.Lib.dll";
+            PathToLib = path + @"\Laboratorium.Algorithms.dll";
         }
 
         public string GetAssemblyDirectory()
@@ -34,21 +34,15 @@ namespace Laboratorium.Core
 
             var types = new Type[0];
 
-            try
-            {
-                types = assembly.GetExportedTypes();
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            types = assembly.GetExportedTypes();
 
             foreach (var type in types)
             {
                 var levels = type.Namespace.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
-                if (levels.Count() == 4 && levels[2] == "Algorithms")
+
+                if (levels.Count() == 3)
                 {
-                    result[levels[3]] = type.Namespace;
+                    result[levels[2]] = type.Namespace;
                 }
             }
 
@@ -97,7 +91,7 @@ namespace Laboratorium.Core
                         }
 
                         function.AppendFormat(").{0}()", method.Name);
-                        
+
                         result.Add(function.ToString());
                     }
                 }

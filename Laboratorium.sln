@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium.Lib", "Laboratorium.Lib\Laboratorium.Lib.csproj", "{21456229-9644-44BD-8C8E-2EEA1D714B07}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium.Algorithms", "Laboratorium.Algorithms\Laboratorium.Algorithms.csproj", "{21456229-9644-44BD-8C8E-2EEA1D714B07}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium", "Laboratorium\Laboratorium.csproj", "{8C696132-70B4-4A2B-B0CA-3ADF52FC5302}"
 EndProject

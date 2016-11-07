@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Laboratorium.Lib.Attributes
+namespace Laboratorium.Algorithms
 {
     public class FunctionAttribute : Attribute
     {

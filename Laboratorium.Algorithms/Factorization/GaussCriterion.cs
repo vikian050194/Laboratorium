@@ -1,6 +1,4 @@
-﻿using Laboratorium.Lib.Attributes;
-
-namespace Laboratorium.Lib.Algorithms.Factorization
+﻿namespace Laboratorium.Algorithms.Factorization
 {
     [Function("gausscriterion")]
     public class GaussCriterion : IAlgorithm<int>

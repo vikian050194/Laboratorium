@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Laboratorium.Lib.Attributes;
 
-namespace Laboratorium.Lib.Algorithms.Factorization
+namespace Laboratorium.Algorithms.Factorization
 {
     [Function("continuedfraction")]
     public class ContinuedFraction : IAlgorithm<int[]>

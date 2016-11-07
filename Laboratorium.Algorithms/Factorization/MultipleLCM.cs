@@ -1,7 +1,6 @@
 ﻿using System.Linq;
-using Laboratorium.Lib.Attributes;
 
-namespace Laboratorium.Lib.Algorithms.Factorization
+namespace Laboratorium.Algorithms.Factorization
 {
     [Function("lcm'")]
     public class MultipleLCM : IAlgorithm<int>

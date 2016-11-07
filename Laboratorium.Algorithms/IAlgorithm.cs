@@ -1,4 +1,4 @@
-﻿namespace Laboratorium.Lib
+﻿namespace Laboratorium.Algorithms
 {
     public interface IAlgorithm<out T>
     {

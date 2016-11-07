@@ -1,6 +1,4 @@
-﻿using Laboratorium.Lib.Attributes;
-
-namespace Laboratorium.Lib.Algorithms.Factorization
+﻿namespace Laboratorium.Algorithms.Factorization
 {
     [Function("gcd")]
     public class SingleGCD : IAlgorithm<int>

@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Laboratorium.Lib.Algorithms.Factorization
+namespace Laboratorium.Algorithms.Factorization
 {
     public abstract class ProbabilisticTestOfSimplicity
     {
