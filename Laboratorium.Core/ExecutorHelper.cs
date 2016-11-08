@@ -71,7 +71,7 @@ namespace Laboratorium.Core
                         function.AppendFormat("let {0} ", alias);
                         var ial = type.GetInterfaces().First();
                         var method = ial.GetMethods().First();
-                        var args = type.GetConstructors().First().GetParameters();
+                        var args = method.GetParameters();
                         var arguments = args.Select(parameterInfo => parameterInfo.Name).ToList();
 
                         foreach (var argument in arguments)
@@ -79,7 +79,7 @@ namespace Laboratorium.Core
                             function.AppendFormat("{0} ", argument);
                         }
 
-                        function.AppendFormat("= {0}(", type.Name);
+                        function.AppendFormat("= {0}().{1}(", type.Name, method.Name);
 
                         for (int i = 0; i < arguments.Count; i++)
                         {
@@ -90,7 +90,7 @@ namespace Laboratorium.Core
                             }
                         }
 
-                        function.AppendFormat(").{0}()", method.Name);
+                        function.Append(")");
 
                         result.Add(function.ToString());
                     }

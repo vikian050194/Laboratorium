@@ -1,21 +1,12 @@
 ﻿namespace Laboratorium.Algorithms.Factorization
 {
     [Function("lcm")]
-    public class SingleLCM : IAlgorithm<int>
+    public class SingleLCM : IAlgorithm2<int>
     {
-        private readonly int _a;
-        private readonly int _b;
-
-        public SingleLCM(int a, int b)
+        public int Execute(int a, int b, IAlgorithmS<int> subAlgorithm)
         {
-            _a = a;
-            _b = b;
-        }
-
-        public int Execute()
-        {
-            var d = new SingleGCD(_a, _b).Execute();
-            var result = _a * _b / d;
+            var d = subAlgorithm.Execute(a, b);
+            var result = a * b / d;
             return result;
         }
     }

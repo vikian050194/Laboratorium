@@ -1,32 +1,23 @@
 ﻿namespace Laboratorium.Algorithms.Factorization
 {
     [Function("gcd")]
-    public class SingleGCD : IAlgorithm<int>
+    public class SingleGCD : IAlgorithmS<int>
     {
-        private int _a;
-        private int _b;
-
-        public SingleGCD(int a, int b)
+        public int Execute(int a, int b)
         {
-            _a = a;
-            _b = b;
-        }
-
-        public int Execute()
-        {
-            while (_a != _b)
+            while (a != b)
             {
-                if (_a > _b)
+                if (a > b)
                 {
-                    _a -= _b;
+                    a -= b;
                 }
                 else
                 {
-                    _b -= _a;
+                    b -= a;
                 }
             }
 
-            return _a;
+            return a;
         }
     }
 }

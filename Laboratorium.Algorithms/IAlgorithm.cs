@@ -1,7 +1,12 @@
 ﻿namespace Laboratorium.Algorithms
 {
-    public interface IAlgorithm<out T>
+    public interface IAlgorithmS<T>
     {
-        T Execute();
+        T Execute(T a, T b);
+    }
+
+    public interface IAlgorithm2<T>
+    {
+        T Execute(T a, T b, IAlgorithmS<T> subAlgorithm);
     }
 }
