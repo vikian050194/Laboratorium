@@ -10,6 +10,7 @@ namespace Laboratorium.Core
             Errors = new List<string>();
             Input = new List<string>();
         }
+
         public string Script { get; set; }
         public string ScriptName { get; set; }
         public string User { get; set; }

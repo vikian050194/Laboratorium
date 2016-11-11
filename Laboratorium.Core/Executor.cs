@@ -12,51 +12,26 @@ namespace Laboratorium.Core
 
         public Executor(IExecutorHelper executorHelper)
         {
-            _executorHelper = executorHelper; ;
+            _executorHelper = executorHelper;
         }
 
         public Packet Execute(Packet packet)
         {
             var fileManager = new FileManager();
-
             var script = new StringBuilder();
 
-            var line = $"#r @\"{_executorHelper.PathToLib}\"";
-            script.AppendLine(line);
+            AddReference(script);
 
-            var algorithmFamilies = _executorHelper.GetAlgorithmTypes();
-            var foo = _executorHelper.GetNamespaces();
-            foreach (var algorithmFamily in foo.Values)
-            {
-                line = $"open {algorithmFamily}";
-                script.AppendLine(line);
-            }
+            AddOpen(script);
 
-            var functions = _executorHelper.GetFunctions(algorithmFamilies);
-
-            foreach (var function in functions)
-            {
-                script.AppendLine(function);
-            }
+            AddFunctions(script);
 
             script.Append(packet.Script);
 
-            var path = fileManager.SaveScript(script.ToString(), packet.User, _executorHelper.GetAssemblyDirectory());
+            fileManager.SaveScript(script.ToString(), packet.User, _executorHelper.GetAssemblyDirectory());
+            var path = fileManager.GetPath();
 
-            var processInfo = GetProcessInfo();
-            var arguments = new List<string>
-            {
-                "--nologo",
-                "--exec",
-                $"--use:\"{path}\"",
-                //"--debug+",
-                //"--debug:full"
-            };
-
-            foreach (var argument in arguments)
-            {
-                processInfo.Arguments += (argument + " ");
-            }
+            var processInfo = GetProcessInfo(path);
 
             var process = Process.Start(processInfo);
 
@@ -65,13 +40,13 @@ namespace Laboratorium.Core
             var error = process.StandardError;
 
             packet.Result = reader
-                    .ReadToEnd()
-                    .Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries)
-                    .ToList();
+                .ReadToEnd()
+                .Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries)
+                .ToList();
 
             packet.Errors = error
                 .ReadToEnd()
-                .Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
+                .Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries)
                 .ToList();
 
             if (packet.Errors.Count == 0)
@@ -84,22 +59,74 @@ namespace Laboratorium.Core
             process.WaitForExit();
             process.Close();
 
-            packet.Input = script.ToString().Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            packet.Input = script.ToString().Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries).ToList();
 
             return packet;
         }
 
-        private ProcessStartInfo GetProcessInfo()
+        private List<string> GetArguments(string path)
         {
-            return new ProcessStartInfo
+            return new List<string>
+            {
+                "--nologo",
+                "--exec",
+                $"--use:\"{path}\""
+            };
+        }
+
+        private void AddFunctions(StringBuilder script)
+        {
+            var algorithmFamilies = _executorHelper.GetAlgorithmTypes();
+            var functions = _executorHelper.GetFunctions(algorithmFamilies);
+            foreach (var function in functions)
+            {
+                script.AppendLine(function);
+            }
+        }
+
+        private void AddOpen(StringBuilder script)
+        {
+            var foo = _executorHelper.GetNamespaces();
+
+            foreach (var algorithmFamily in foo.Values)
+            {
+                var line = $"open {algorithmFamily}";
+                script.AppendLine(line);
+            }
+        }
+
+        private void AddReference(StringBuilder script)
+        {
+            var line = $"#r @\"{_executorHelper.PathToLib}\"";
+            script.AppendLine(line);
+        }
+
+        private ProcessStartInfo GetProcessInfo(string path)
+        {
+            var argumentsList = GetArguments(path);
+            var arguments = new StringBuilder();
+
+            for (int i = 0; i < argumentsList.Count; i++)
+            {
+                arguments.Append(argumentsList[i]);
+                if (i != argumentsList.Count)
+                {
+                    arguments.Append(" ");
+                }
+            }
+
+            var result = new ProcessStartInfo
             {
                 FileName = _executorHelper.PathToFsi,
                 CreateNoWindow = true,
                 UseShellExecute = false,
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
-                RedirectStandardError = true
+                RedirectStandardError = true,
+                Arguments = arguments.ToString()
             };
+
+            return result;
         }
     }
 }

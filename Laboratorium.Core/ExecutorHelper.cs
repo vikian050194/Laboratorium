@@ -38,7 +38,7 @@ namespace Laboratorium.Core
 
             foreach (var type in types)
             {
-                var levels = type.Namespace.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+                var levels = type.Namespace.Split(new[] {'.'}, StringSplitOptions.RemoveEmptyEntries);
 
                 if (levels.Count() == 3)
                 {
@@ -81,7 +81,7 @@ namespace Laboratorium.Core
 
                         function.AppendFormat("= {0}().{1}(", type.Name, method.Name);
 
-                        for (int i = 0; i < arguments.Count; i++)
+                        for (var i = 0; i < arguments.Count; i++)
                         {
                             function.Append(arguments[i]);
                             if (i != arguments.Count - 1)

@@ -4,13 +4,18 @@ namespace Laboratorium.Core
 {
     public class FileManager
     {
-        public string SaveScript(string script, string user, string path)
+        private string _path;
+
+        public void SaveScript(string script, string user, string path)
         {
-            var result = Path.Combine(path, user + ".fsx");
+            _path = Path.Combine(path, user + ".fsx");
 
-            File.WriteAllText(result, script);
+            File.WriteAllText(_path, script);
+        }
 
-            return result;
+        public string GetPath()
+        {
+            return _path;
         }
     }
 }

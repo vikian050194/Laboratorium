@@ -1,7 +1,7 @@
-﻿namespace Laboratorium.Algorithms.Factorization
+﻿namespace Laboratorium.Algorithms.Factorization.GreatestCommonDivisor
 {
     [Function("gcd")]
-    public class SingleGCD : IAlgorithmS<int>
+    public class SingleGCD : IGCDAlgorithm<int>
     {
         public int Execute(int a, int b)
         {

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("LaboratoriumCore")]
+[assembly: AssemblyTitle("Laboratorium.Attributes")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Confirmit")]
-[assembly: AssemblyProduct("LaboratoriumCore")]
+[assembly: AssemblyProduct("Laboratorium.Attributes")]
 [assembly: AssemblyCopyright("Copyright © Confirmit 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
-[assembly: Guid("4e3298de-7f7e-4754-8fdb-54119b0abc25")]
+[assembly: Guid("5542fbef-8def-4a0a-92be-1370dfa59312")]
 
 // Version information for an assembly consists of the following four values:
 //
