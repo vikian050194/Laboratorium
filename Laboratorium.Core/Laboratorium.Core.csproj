@@ -49,6 +49,12 @@
     <Compile Include="Packet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Laboratorium.Attributes\Laboratorium.Attributes.csproj">
+      <Project>{5542FBEF-8DEF-4A0A-92BE-1370DFA59312}</Project>
+      <Name>Laboratorium.Attributes</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

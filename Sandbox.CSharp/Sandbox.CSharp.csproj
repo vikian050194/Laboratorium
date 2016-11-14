@@ -49,6 +49,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Laboratorium.Algorithms\Laboratorium.Algorithms.csproj">
+      <Project>{21456229-9644-44bd-8c8e-2eea1d714b07}</Project>
+      <Name>Laboratorium.Algorithms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Laboratorium.Attributes\Laboratorium.Attributes.csproj">
+      <Project>{5542fbef-8def-4a0a-92be-1370dfa59312}</Project>
+      <Name>Laboratorium.Attributes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Laboratorium.Core\Laboratorium.Core.csproj">
+      <Project>{4e3298de-7f7e-4754-8fdb-54119b0abc25}</Project>
+      <Name>Laboratorium.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

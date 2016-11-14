@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Laboratorium.Attributes;
 
 namespace Laboratorium.Core
 {
@@ -38,11 +39,11 @@ namespace Laboratorium.Core
 
             foreach (var type in types)
             {
-                var levels = type.Namespace.Split(new[] {'.'}, StringSplitOptions.RemoveEmptyEntries);
+                var levels = type.Namespace.Split(new[] {'.'}, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-                if (levels.Count() == 3)
+                if (levels.Count() == 4)
                 {
-                    result[levels[2]] = type.Namespace;
+                    result[levels.Last()] = type.Namespace;
                 }
             }
 
@@ -56,7 +57,8 @@ namespace Laboratorium.Core
 
         public List<string> GetFunctions(List<string> algorithmFamilies)
         {
-            var assembly = Assembly.ReflectionOnlyLoadFrom(PathToLib);
+            var appDomain = AppDomain.CreateDomain("qwerty");
+            var assembly = appDomain.Load(File.ReadAllBytes(PathToLib));
             var result = new List<string>();
             var function = new StringBuilder();
 
@@ -67,7 +69,7 @@ namespace Laboratorium.Core
                     if (type.Namespace.Contains(algorithmFamily) && CheckType(type))
                     {
                         function.Clear();
-                        var alias = type.GetCustomAttributesData().First().ConstructorArguments.First().Value.ToString();
+                        var alias = type.GetCustomAttributes<FunctionAliasAttribute>().First().Alias;
                         function.AppendFormat("let {0} ", alias);
                         var ial = type.GetInterfaces().First();
                         var method = ial.GetMethods().First();
@@ -96,6 +98,8 @@ namespace Laboratorium.Core
                     }
                 }
             }
+
+            AppDomain.Unload(appDomain);
 
             return result;
         }

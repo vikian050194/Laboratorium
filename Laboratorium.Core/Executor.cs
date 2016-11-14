@@ -86,9 +86,9 @@ namespace Laboratorium.Core
 
         private void AddOpen(StringBuilder script)
         {
-            var foo = _executorHelper.GetNamespaces();
+            var algorithmFamilies = _executorHelper.GetNamespaces();
 
-            foreach (var algorithmFamily in foo.Values)
+            foreach (var algorithmFamily in algorithmFamilies.Values)
             {
                 var line = $"open {algorithmFamily}";
                 script.AppendLine(line);

@@ -1,8 +1,9 @@
 ﻿using Laboratorium.Algorithms.Factorization.GreatestCommonDivisor;
+using Laboratorium.Attributes;
 
 namespace Laboratorium.Algorithms.Factorization.LeastCommonMultiple
 {
-    [Function("lcm")]
+    [FunctionAlias("lcm")]
     public class SingleLCM : ILCMAlgorithm<int>
     {
         public int Execute(int a, int b, IGCDAlgorithm<int> subAlgorithm)
