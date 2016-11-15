@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Laboratorium.Core
+namespace Laboratorium.Core.Managers
 {
     public class FileManager
     {

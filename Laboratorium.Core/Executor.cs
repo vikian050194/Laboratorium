@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using Laboratorium.Core.Managers;
 
 namespace Laboratorium.Core
 {
     public class Executor
     {
-        private readonly IExecutorHelper _executorHelper;
+        private readonly ICodeGenerator _codeGenerator;
+        private readonly IPathManager _pathManager;
 
-        public Executor(IExecutorHelper executorHelper)
+        public Executor()
         {
-            _executorHelper = executorHelper;
+            _codeGenerator = new CodeGenerator();
+            _pathManager = new PathManager();
         }
 
         public Packet Execute(Packet packet)
         {
             var fileManager = new FileManager();
+            var pathManager = new PathManager();
             var script = new StringBuilder();
 
             AddReference(script);
@@ -28,7 +32,7 @@ namespace Laboratorium.Core
 
             script.Append(packet.Script);
 
-            fileManager.SaveScript(script.ToString(), packet.User, _executorHelper.GetAssemblyDirectory());
+            fileManager.SaveScript(script.ToString(), packet.User, pathManager.AssembliesDirectory);
             var path = fileManager.GetPath();
 
             var processInfo = GetProcessInfo(path);
@@ -76,8 +80,8 @@ namespace Laboratorium.Core
 
         private void AddFunctions(StringBuilder script)
         {
-            var algorithmFamilies = _executorHelper.GetAlgorithmTypes();
-            var functions = _executorHelper.GetFunctions(algorithmFamilies);
+            var algorithmFamilies = _codeGenerator.GetAlgorithmTypes();
+            var functions = _codeGenerator.GetFunctions(algorithmFamilies);
             foreach (var function in functions)
             {
                 script.AppendLine(function);
@@ -86,7 +90,7 @@ namespace Laboratorium.Core
 
         private void AddOpen(StringBuilder script)
         {
-            var algorithmFamilies = _executorHelper.GetNamespaces();
+            var algorithmFamilies = _codeGenerator.GetNamespaces();
 
             foreach (var algorithmFamily in algorithmFamilies.Values)
             {
@@ -97,7 +101,7 @@ namespace Laboratorium.Core
 
         private void AddReference(StringBuilder script)
         {
-            var line = $"#r @\"{_executorHelper.PathToLib}\"";
+            var line = $"#r @\"{_pathManager.PathToLib}\"";
             script.AppendLine(line);
         }
 
@@ -117,7 +121,7 @@ namespace Laboratorium.Core
 
             var result = new ProcessStartInfo
             {
-                FileName = _executorHelper.PathToFsi,
+                FileName = _pathManager.PathToFsi,
                 CreateNoWindow = true,
                 UseShellExecute = false,
                 RedirectStandardInput = true,

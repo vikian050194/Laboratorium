@@ -1,36 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using Laboratorium.Attributes;
+using Laboratorium.Core.Managers;
 
 namespace Laboratorium.Core
 {
-    public class ExecutorHelper : IExecutorHelper
+    public class CodeGenerator : ICodeGenerator
     {
-        public ExecutorHelper()
-        {
-            var path = GetAssemblyDirectory();
-            PathToFsi = path + @"\..\..\FSharp\Fsi.exe";
-            PathToLib = path + @"\Laboratorium.Algorithms.dll";
-        }
+        private readonly IAssemblyManager _assemblyManager;
 
-        public string GetAssemblyDirectory()
+        public CodeGenerator()
         {
-            var codeBase = Assembly.GetExecutingAssembly().CodeBase;
-            var uri = new UriBuilder(codeBase);
-            var path = Uri.UnescapeDataString(uri.Path);
-            return Path.GetDirectoryName(path);
+            _assemblyManager = new AssemblyManager();
         }
-
-        public string PathToFsi { get; }
-        public string PathToLib { get; }
 
         public Dictionary<string, string> GetNamespaces()
         {
-            var assembly = Assembly.ReflectionOnlyLoadFrom(PathToLib);
+            var assembly = _assemblyManager.GetMainAssembly();
             var result = new Dictionary<string, string>();
 
             var types = new Type[0];
@@ -57,8 +46,7 @@ namespace Laboratorium.Core
 
         public List<string> GetFunctions(List<string> algorithmFamilies)
         {
-            var appDomain = AppDomain.CreateDomain("qwerty");
-            var assembly = appDomain.Load(File.ReadAllBytes(PathToLib));
+            var assembly = _assemblyManager.GetMainAssembly();
             var result = new List<string>();
             var function = new StringBuilder();
 
@@ -98,8 +86,6 @@ namespace Laboratorium.Core
                     }
                 }
             }
-
-            AppDomain.Unload(appDomain);
 
             return result;
         }

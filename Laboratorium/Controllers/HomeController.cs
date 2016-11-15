@@ -32,7 +32,7 @@ namespace Laboratorium.Controllers
         [HttpPost]
         public ActionResult PackageForm(PacketViewModel packetViewModel)
         {
-            var executor = new Executor(new ExecutorHelper());
+            var executor = new Executor();
 
             var packet = _mapper.Map<PacketViewModel, Packet>(packetViewModel);
             packet.User = "foo@bar.com";

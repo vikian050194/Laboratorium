@@ -41,12 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExecutorHelper.cs" />
-    <Compile Include="FileManager.cs" />
-    <Compile Include="IExecutorHelper.cs" />
-    <Compile Include="NameManager.cs" />
+    <Compile Include="Managers\AssemblyManager.cs" />
+    <Compile Include="CodeGenerator.cs" />
+    <Compile Include="Managers\FileManager.cs" />
+    <Compile Include="ICodeGenerator.cs" />
+    <Compile Include="Managers\NameManager.cs" />
     <Compile Include="Executor.cs" />
     <Compile Include="Packet.cs" />
+    <Compile Include="Managers\PathManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

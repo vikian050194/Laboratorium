@@ -1,4 +1,4 @@
-﻿namespace Laboratorium.Core
+﻿namespace Laboratorium.Core.Managers
 {
     public class NameManager
     {

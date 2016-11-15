@@ -7,7 +7,7 @@ namespace Sandbox.CSharp
     {
         static void Main(string[] args)
         {
-            var executor = new Executor(new ExecutorHelper());
+            var executor = new Executor();
 
             var script = "let x = 5";
 

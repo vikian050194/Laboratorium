@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Laboratorium.Core;
+using Laboratorium.Core.Managers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Laboratorium.Tests
