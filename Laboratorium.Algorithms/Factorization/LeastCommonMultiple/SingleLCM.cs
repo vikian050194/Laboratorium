@@ -4,6 +4,7 @@ using Laboratorium.Attributes;
 namespace Laboratorium.Algorithms.Factorization.LeastCommonMultiple
 {
     [FunctionAlias("lcm")]
+    [DefaultImplementation]
     public class SingleLCM : ILCMAlgorithm<int>
     {
         public int Execute(int a, int b, IGCDAlgorithm<int> subAlgorithm)

@@ -3,6 +3,7 @@
 namespace Laboratorium.Algorithms.Factorization.GreatestCommonDivisor
 {
     [FunctionAlias("gcd")]
+    [DefaultImplementation]
     public class SingleGCD : IGCDAlgorithm<int>
     {
         public int Execute(int a, int b)
