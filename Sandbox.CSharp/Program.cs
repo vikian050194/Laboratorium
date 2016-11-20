@@ -1,5 +1,6 @@
 ﻿using System;
 using Laboratorium.Core;
+using Laboratorium.Core.Managers;
 
 namespace Sandbox.CSharp
 {
@@ -7,13 +8,15 @@ namespace Sandbox.CSharp
     {
         static void Main(string[] args)
         {
-            var executor = new Executor();
+            var executor = new Executor(new TestPathManager());
 
             var script = "let x = 5";
 
             var packet = new Packet
             {
-                Script = script
+                Script = script,
+                User = "foobar"
+
             };
 
             packet = executor.Execute(packet);

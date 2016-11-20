@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium.Algorithms", "Laboratorium.Algorithms\Laboratorium.Algorithms.csproj", "{21456229-9644-44BD-8C8E-2EEA1D714B07}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium", "Laboratorium\Laboratorium.csproj", "{8C696132-70B4-4A2B-B0CA-3ADF52FC5302}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium.TypeLib", "Laboratorium.TypeLib\Laboratorium.TypeLib.csproj", "{049CCF24-0ABF-4778-8D02-D21F8C885F7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium.Types", "Laboratorium.Types\Laboratorium.Types.csproj", "{049CCF24-0ABF-4778-8D02-D21F8C885F7A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laboratorium.Core", "Laboratorium.Core\Laboratorium.Core.csproj", "{4E3298DE-7F7E-4754-8FDB-54119B0ABC25}"
 EndProject

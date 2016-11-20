@@ -1,5 +1,5 @@
-﻿//#r @"D:\Code\MVC\Laboratorium\Laboratorium.Algorithms\bin\Debug\Laboratorium.Algorithms.dll"
-#r @"C:\Users\KirillV\Documents\Git\Laboratorium\Laboratorium.Algorithms\bin\Debug\Laboratorium.Algorithms.dll"
+﻿#r @"D:\Code\MVC\Laboratorium\Laboratorium.Algorithms\bin\Debug\Laboratorium.Algorithms.dll"
+//#r @"C:\Users\KirillV\Documents\Git\Laboratorium\Laboratorium.Algorithms\bin\Debug\Laboratorium.Algorithms.dll"
 open Laboratorium.Algorithms.Factorization.GreatestCommonDivisor
 open Laboratorium.Algorithms.Factorization.LeastCommonMultiple
 let gcd a b = SingleGCD().Execute(a,b)

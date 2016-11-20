@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using Laboratorium.Core.AlgorithmsLibrary;
 using Laboratorium.Core.Managers;
 
 namespace Laboratorium.Core
@@ -10,18 +11,17 @@ namespace Laboratorium.Core
     public class Executor
     {
         private readonly ICodeGenerator _codeGenerator;
-        private readonly IPathManager _pathManager;
+        private readonly PathManager _pathManager;
 
-        public Executor()
+        public Executor(PathManager pathManager)
         {
             _codeGenerator = new CodeGenerator();
-            _pathManager = new PathManager();
+            _pathManager = pathManager;
         }
 
         public Packet Execute(Packet packet)
         {
             var fileManager = new FileManager();
-            var pathManager = new PathManager();
             var script = new StringBuilder();
 
             AddReference(script);
@@ -32,8 +32,8 @@ namespace Laboratorium.Core
 
             script.Append(packet.Script);
 
-            fileManager.SaveScript(script.ToString(), packet.User, pathManager.AssembliesDirectory);
-            var path = fileManager.GetPath();
+            fileManager.SaveScript(script.ToString(), packet.User, _pathManager.AssembliesDirectory);
+            var path = fileManager.GetLastPath();
 
             var processInfo = GetProcessInfo(path);
 
@@ -80,8 +80,9 @@ namespace Laboratorium.Core
 
         private void AddFunctions(StringBuilder script)
         {
-            var algorithmFamilies = _codeGenerator.GetAlgorithmTypes();
+            var algorithmFamilies = _codeGenerator.GetAlgorithmFamilies();
             var functions = _codeGenerator.GetFunctions(algorithmFamilies);
+
             foreach (var function in functions)
             {
                 script.AppendLine(function);
@@ -90,11 +91,11 @@ namespace Laboratorium.Core
 
         private void AddOpen(StringBuilder script)
         {
-            var algorithmFamilies = _codeGenerator.GetNamespaces();
+            var algorithmFamilies = _codeGenerator.GetAlgorithmFamilies();
+            var opens = _codeGenerator.GetOpens(algorithmFamilies);
 
-            foreach (var algorithmFamily in algorithmFamilies.Values)
+            foreach (var line in opens)
             {
-                var line = $"open {algorithmFamily}";
                 script.AppendLine(line);
             }
         }
@@ -110,7 +111,7 @@ namespace Laboratorium.Core
             var argumentsList = GetArguments(path);
             var arguments = new StringBuilder();
 
-            for (int i = 0; i < argumentsList.Count; i++)
+            for (var i = 0; i < argumentsList.Count; i++)
             {
                 arguments.Append(argumentsList[i]);
                 if (i != argumentsList.Count)

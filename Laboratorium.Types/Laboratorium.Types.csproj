@@ -7,8 +7,8 @@
     <ProjectGuid>{049CCF24-0ABF-4778-8D02-D21F8C885F7A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Laboratorium.TypeLib</RootNamespace>
-    <AssemblyName>Laboratorium.TypeLib</AssemblyName>
+    <RootNamespace>Laboratorium.Types</RootNamespace>
+    <AssemblyName>Laboratorium.Types</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,7 +44,6 @@
     <Compile Include="Algebra\BinaryMatrix.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="MathObject.cs" />
     <Compile Include="Algebra\Matrix.cs" />
     <Compile Include="Algebra\Polynomial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

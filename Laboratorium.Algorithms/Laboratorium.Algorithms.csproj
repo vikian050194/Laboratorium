@@ -42,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factorization\Status.cs" />
     <Compile Include="Factorization\LeastCommonMultiple\SingleLCM.cs" />
     <Compile Include="Factorization\GreatestCommonDivisor\SingleGCD.cs" />
     <Compile Include="Factorization\LeastCommonMultiple\ILCMAlgorithm.cs" />

@@ -13,7 +13,7 @@ namespace Laboratorium.Core.Managers
             File.WriteAllText(_path, script);
         }
 
-        public string GetPath()
+        public string GetLastPath()
         {
             return _path;
         }

@@ -319,7 +319,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Laboratorium.Algorithms\Laboratorium.Algorithms.csproj">
       <Project>{21456229-9644-44bd-8c8e-2eea1d714b07}</Project>
-      <Name>Laboratorium.Lib</Name>
+      <Name>Laboratorium.Algorithms</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

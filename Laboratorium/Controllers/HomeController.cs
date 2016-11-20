@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using Laboratorium.Models.ViewModels;
 using Laboratorium.Core;
+using Laboratorium.Core.Managers;
 using Laboratorium.Data;
 
 namespace Laboratorium.Controllers
@@ -32,7 +33,7 @@ namespace Laboratorium.Controllers
         [HttpPost]
         public ActionResult PackageForm(PacketViewModel packetViewModel)
         {
-            var executor = new Executor();
+            var executor = new Executor(new RealPathManager());
 
             var packet = _mapper.Map<PacketViewModel, Packet>(packetViewModel);
             packet.User = "foo@bar.com";
