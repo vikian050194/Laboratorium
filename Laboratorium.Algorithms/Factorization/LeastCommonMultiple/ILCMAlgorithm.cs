@@ -1,6 +1,6 @@
 ﻿using Laboratorium.Algorithms.Factorization.GreatestCommonDivisor;
 
-namespace Laboratorium.Algorithms
+namespace Laboratorium.Algorithms.Factorization.LeastCommonMultiple
 {
     public interface ILCMAlgorithm<T>
     {

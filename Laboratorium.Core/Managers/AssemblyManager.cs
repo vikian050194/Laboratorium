@@ -12,13 +12,12 @@ namespace Laboratorium.Core.Managers
 
     internal class AssemblyManager : IAssemblyManager
     {
-        private readonly IPathManager _pathManager;
+        private readonly PathManager _pathManager;
 
         public AssemblyManager()
         {
-            _pathManager = new PathManager();
+            _pathManager = new RealPathManager();
         }
-
         public Assembly GetAssembly(string path)
         {
             var appDomain = AppDomain.CreateDomain("domain");
@@ -30,7 +29,7 @@ namespace Laboratorium.Core.Managers
 
         public Assembly GetMainAssembly()
         {
-            return GetAssembly(_pathManager.PathToLib);
+            return GetAssembly(_pathManager.PathToAssembly);
         }
     }
 }

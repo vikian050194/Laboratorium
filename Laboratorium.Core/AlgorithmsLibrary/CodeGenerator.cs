@@ -1,60 +1,163 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using Laboratorium.Attributes;
+using Laboratorium.Core.Managers;
 
 namespace Laboratorium.Core.AlgorithmsLibrary
 {
-    public interface ICodeGenerator
+    internal class CodeGenerator
     {
-        List<string> GetAlgorithmFamilies();
-        List<string> GetFunctions(List<string> algorithmFamilies);
-        List<string> GetAdapters(List<string> algorithmFamilies);
-        List<string> GetOpens(List<string> algorithmFamilies);
-    }
-
-    public class CodeGenerator : ICodeGenerator
-    {
-        private readonly Librarian _librarian;
+        private readonly IAssemblyManager _assemblyManager;
 
         public CodeGenerator()
         {
-            _librarian = new Librarian();
+            _assemblyManager = new AssemblyManager();
         }
 
-        public List<string> GetAlgorithmFamilies()
+        public List<AlgorithmFamily> GetAlgorithmFamilies()
         {
-            return _librarian.GetAlgorithmFamiliesNames();
-        }
+            var algorithmFamilies = new List<AlgorithmFamily>();
 
-        public List<string> GetFunctions(List<string> algorithmFamilies)
-        {
-            var result = new List<string>();
+            var assembly = _assemblyManager.GetMainAssembly();
 
-            foreach (var algorithmFamily in algorithmFamilies)
+            var includedFamilies = new List<Type>();
+            var necessaryFamilies = new List<Type>();
+
+            var types = assembly.GetTypes();
+
+            foreach (var type in types)
             {
-                var functions = _librarian.GetFunctions(algorithmFamily);
+                if (IsInterface(type))
+                {
+                    includedFamilies.Add(type);
 
-                result.AddRange(functions);
+                    AddNewFamily(type, algorithmFamilies);
+
+                    var argumentsTypes = GetArgumentsTypes(type);
+
+                    foreach (var argumentsType in argumentsTypes)
+                    {
+                        if (argumentsType.IsInterface &&
+                            necessaryFamilies.All(f => f.Namespace != argumentsType.Namespace))
+                        {
+                            necessaryFamilies.Add(argumentsType);
+                        }
+                    }
+                }
             }
+
+            foreach (var type in types)
+            {
+                if (!IsInterface(type))
+                {
+                    var family = algorithmFamilies.Find(f => f.Namespace == type.Namespace);
+
+                    AddAlgorithmInFamily(type, family);
+                }
+            }
+
+            return algorithmFamilies;
+        }
+
+        private MethodInfo GetMainMethod(Type type)
+        {
+            var result = type.GetMethods().First();
 
             return result;
         }
 
-        public List<string> GetAdapters(List<string> algorithmFamilies)
+        private List<ParameterInfo> GetArguments(Type type)
         {
-            var result = new List<string>();
+            var method = GetMainMethod(type);
+            var result = method.GetParameters().ToList();
 
             return result;
         }
 
-        public List<string> GetOpens(List<string> algorithmFamilies)
+        private List<string> GetArgumentsNames(Type type)
         {
-            var result = new List<string>();
+            return GetArguments(type).Select(parameterInfo => parameterInfo.Name).ToList();
+        }
 
-            foreach (var algorithmFamily in algorithmFamilies)
+        private List<Type> GetArgumentsTypes(Type type)
+        {
+            return GetArguments(type).Select(parameterInfo => parameterInfo.ParameterType).ToList();
+        }
+
+        private AlgorithmFamily AddNewFamily(Type type, List<AlgorithmFamily> algorithmFamilies)
+        {
+            var familyNamespace = type.Namespace;
+
+            var levels = type.Namespace.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            var familyName = levels.Last();
+
+            var newFamily = new AlgorithmFamily(familyName, familyNamespace);
+
+            algorithmFamilies.Add(newFamily);
+
+            return newFamily;
+        }
+
+        private bool IsInterface(Type type)
+        {
+            var result = type.IsInterface;
+
+            return result;
+        }
+
+        private void AddAdapterInFamily(Type type, AlgorithmFamily family)
+        {
+            //TODO
+        }
+
+        private void AddAlgorithmInFamily(Type type, AlgorithmFamily family)
+        {
+            var function = new StringBuilder();
+
+            var alias = type.GetCustomAttributes<FunctionAliasAttribute>().First().Alias;
+            function.AppendFormat("let {0} ", alias);
+
+            var method = GetMainMethod(type);
+            var arguments = GetArgumentsNames(type);
+
+            foreach (var argument in arguments)
             {
-                var open = _librarian.GetOpen(algorithmFamily);
-
-                result.Add(open);
+                function.AppendFormat("{0} ", argument);
             }
+
+            function.AppendFormat("= {0}().{1}(", type.Name, method.Name);
+
+            for (var i = 0; i < arguments.Count; i++)
+            {
+                function.Append(arguments[i]);
+
+                if (i != arguments.Count - 1)
+                {
+                    function.Append(",");
+                }
+            }
+
+            function.Append(")");
+
+            var newFunction = new AlgorithmFamilyFunction(function.ToString(), "little bit later");
+
+            family.Functions.Add(newFunction);
+        }
+
+        private bool IsNewAlgorithmFamily(Type type, List<AlgorithmFamily> algorithmFamilies)
+        {
+            var result = algorithmFamilies.All(af => af.Namespace != type.Namespace);
+
+            return result;
+        }
+
+        private bool IsAlgorithmImplementation(Type type)
+        {
+            var result = type.IsClass;
 
             return result;
         }

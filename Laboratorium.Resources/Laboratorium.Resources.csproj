@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4E3298DE-7F7E-4754-8FDB-54119B0ABC25}</ProjectGuid>
+    <ProjectGuid>{2290A342-98DA-49D0-BB17-1CE170E96F7A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Laboratorium.Core</RootNamespace>
-    <AssemblyName>Laboratorium.Core</AssemblyName>
+    <RootNamespace>Laboratorium.Resources</RootNamespace>
+    <AssemblyName>Laboratorium.Resources</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,28 +40,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlgorithmsLibrary\AlgorithmFamily.cs" />
-    <Compile Include="AlgorithmsLibrary\AlgorithmFamilyFunction.cs" />
-    <Compile Include="AlgorithmsLibrary\CodeGenerator.cs" />
-    <Compile Include="AlgorithmsLibrary\Librarian.cs" />
-    <Compile Include="Managers\AssemblyManager.cs" />
-    <Compile Include="AlgorithmsLibrary\CodeManager.cs" />
-    <Compile Include="Managers\FileManager.cs" />
-    <Compile Include="Managers\NameManager.cs" />
-    <Compile Include="Executor.cs" />
-    <Compile Include="Packet.cs" />
-    <Compile Include="Managers\PathManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Laboratorium.Attributes\Laboratorium.Attributes.csproj">
-      <Project>{5542FBEF-8DEF-4A0A-92BE-1370DFA59312}</Project>
-      <Name>Laboratorium.Attributes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Laboratorium.Resources\Laboratorium.Resources.csproj">
-      <Project>{2290a342-98da-49d0-bb17-1ce170e96f7a}</Project>
-      <Name>Laboratorium.Resources</Name>
-    </ProjectReference>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

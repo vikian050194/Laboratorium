@@ -10,12 +10,12 @@ namespace Laboratorium.Core
 {
     public class Executor
     {
-        private readonly ICodeGenerator _codeGenerator;
+        private readonly ICodeManager _codeManager;
         private readonly PathManager _pathManager;
 
         public Executor(PathManager pathManager)
         {
-            _codeGenerator = new CodeGenerator();
+            _codeManager = new CodeManager();
             _pathManager = pathManager;
         }
 
@@ -80,8 +80,8 @@ namespace Laboratorium.Core
 
         private void AddFunctions(StringBuilder script)
         {
-            var algorithmFamilies = _codeGenerator.GetAlgorithmFamilies();
-            var functions = _codeGenerator.GetFunctions(algorithmFamilies);
+            var algorithmFamilies = _codeManager.GetAlgorithmFamilies();
+            var functions = _codeManager.GetFunctions(algorithmFamilies);
 
             foreach (var function in functions)
             {
@@ -91,8 +91,8 @@ namespace Laboratorium.Core
 
         private void AddOpen(StringBuilder script)
         {
-            var algorithmFamilies = _codeGenerator.GetAlgorithmFamilies();
-            var opens = _codeGenerator.GetOpens(algorithmFamilies);
+            var algorithmFamilies = _codeManager.GetAlgorithmFamilies();
+            var opens = _codeManager.GetOpens(algorithmFamilies);
 
             foreach (var line in opens)
             {
@@ -102,7 +102,7 @@ namespace Laboratorium.Core
 
         private void AddReference(StringBuilder script)
         {
-            var line = $"#r @\"{_pathManager.PathToLib}\"";
+            var line = $"#r @\"{_pathManager.PathToAssembly}\"";
             script.AppendLine(line);
         }
 

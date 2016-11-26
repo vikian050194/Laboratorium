@@ -1,15 +1,23 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using Laboratorium.Resources.Properties;
 
 namespace Laboratorium.Core.Managers
 {
     public abstract class PathManager
     {
         public string PathToFsi { get; protected set; }
-        public string PathToLib { get; protected set; }
-        public string AssembliesDirectory { get; protected set; }
-        protected string GetAssembliesDirectory()
+        public string PathToAssembly { get; private set; }
+        public string AssembliesDirectory { get; private set; }
+
+        protected PathManager()
+        {
+            AssembliesDirectory = GetAssembliesDirectory();
+            PathToAssembly = Path.Combine(AssembliesDirectory, Settings.Default.MainAssemblyName);
+        }
+
+        private string GetAssembliesDirectory()
         {
             var codeBase = Assembly.GetExecutingAssembly().CodeBase;
             var uri = new UriBuilder(codeBase);
@@ -22,9 +30,7 @@ namespace Laboratorium.Core.Managers
     {
         public RealPathManager()
         {
-            AssembliesDirectory = GetAssembliesDirectory();
             PathToFsi = AssembliesDirectory + @"\..\..\FSharp\Fsi.exe";
-            PathToLib = AssembliesDirectory + @"\Laboratorium.Algorithms.dll";
         }
     }
 
@@ -32,9 +38,7 @@ namespace Laboratorium.Core.Managers
     {
         public TestPathManager()
         {
-            AssembliesDirectory = GetAssembliesDirectory();
             PathToFsi = AssembliesDirectory + @"\..\..\..\FSharp\Fsi.exe";
-            PathToLib = AssembliesDirectory + @"\Laboratorium.Algorithms.dll";
         }
     }
 }

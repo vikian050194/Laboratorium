@@ -12,7 +12,8 @@ namespace Laboratorium.Core
         }
 
         public string Name { get; private set; }
-        public string Namespace { get; set; }
+        public string Namespace { get; private set; }
+        public string Open => "open " + Namespace;
         public string Adapter { get; set; }
 
         public List<AlgorithmFamilyFunction> Functions { get; }
