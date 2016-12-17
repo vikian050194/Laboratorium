@@ -5,12 +5,10 @@ namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
 {
     internal class RandomGenerator<T> : IRandomGenerator<T> where T : IEquatable<T>, IComparable<T>
     {
-        private readonly T _n;
         private readonly INumericRandomGenerator<T> _numericRandomGenerator;
 
-        public RandomGenerator(T n, INumericRandomGenerator<T> numericRandomGenerator)
+        public RandomGenerator(INumericRandomGenerator<T> numericRandomGenerator)
         {
-            _n = n;
             _numericRandomGenerator = numericRandomGenerator;
         }
 

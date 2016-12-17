@@ -13,7 +13,7 @@ namespace Laboratorium.Algorithms.Factorization.GreatestCommonDivisor
             var wrapperA = new NumericWrapper<T>(a);
             var wrapperB = new NumericWrapper<T>(b);
 
-            var zero = new NumericWrapper<T>("0");
+            var zero = new NumericWrapper<T>(0);
 
             while (wrapperA != zero && wrapperB != zero)
             {

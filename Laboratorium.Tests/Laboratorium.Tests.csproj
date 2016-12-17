@@ -61,6 +61,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="NumericWrapperTest.cs" />
     <Compile Include="FactorizationTest.cs" />
     <Compile Include="NameManagerTest.cs" />
     <Compile Include="ExecutorTest.cs" />
@@ -74,6 +75,10 @@
     <ProjectReference Include="..\Laboratorium.Core\Laboratorium.Core.csproj">
       <Project>{4e3298de-7f7e-4754-8fdb-54119b0abc25}</Project>
       <Name>Laboratorium.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Laboratorium.Types\Laboratorium.Types.csproj">
+      <Project>{049ccf24-0abf-4778-8d02-d21f8c885f7a}</Project>
+      <Name>Laboratorium.Types</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

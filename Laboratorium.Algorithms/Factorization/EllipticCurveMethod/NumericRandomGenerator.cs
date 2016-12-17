@@ -6,18 +6,18 @@ namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
     internal class NumericRandomGenerator<T> : INumericRandomGenerator<T> where T : IEquatable<T>, IComparable<T>
     {
         private readonly Random _random;
-        private readonly NumericWrapper<T> _module;
+        private readonly string _module;
 
-        public NumericRandomGenerator(T n)
+        public NumericRandomGenerator(T module)
         {
             _random = new Random();
-            _module = new NumericWrapper<T>(n);
+            _module = module.ToString();
         }
 
         public NumericWrapper<T> Next()
         {
-            var nextValue = _random.Next(int.MaxValue).ToString();
-            var result = new NumericWrapper<T>(nextValue) % _module;
+            var value = _random.Next(1, int.MaxValue).ToString();
+            var result = new NumericWrapper<T>(value, _module);
 
             return result;
         }
