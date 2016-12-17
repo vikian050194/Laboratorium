@@ -7,7 +7,7 @@ namespace Laboratorium.Algorithms.Factorization.LeastCommonMultiple
     [DefaultImplementation]
     public class SingleLCM : ILCMAlgorithm<int>
     {
-        public int Execute(int a, int b, IGCDAlgorithm<int> subAlgorithm)
+        public int Execute(int a, int b, IGreaterCommonDivisorAlgorithm<int> subAlgorithm)
         {
             var d = subAlgorithm.Execute(a, b);
             var result = a*b/d;

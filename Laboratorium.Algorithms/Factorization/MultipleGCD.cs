@@ -2,7 +2,7 @@
 
 namespace Laboratorium.Algorithms.Factorization
 {
-    [Function("gcd'")]
+    [Function("gcd")]
     public class MultipleGCD : IAlgorithm<int>
     {
         private readonly int[] _args;

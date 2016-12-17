@@ -3,7 +3,7 @@
 namespace Laboratorium.Tests
 {
     [TestClass]
-    public class ExecutorTests
+    public class ExecutorTest
     {
         [TestMethod]
         public void TestMethod1()

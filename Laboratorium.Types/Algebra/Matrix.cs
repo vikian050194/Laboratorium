@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Laboratorium.TypeLib.Algebra
+namespace Laboratorium.Types.Algebra
 {
     class Matrix
     {

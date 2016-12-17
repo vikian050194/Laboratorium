@@ -6,20 +6,20 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Laboratorium.Tests
 {
     [TestClass]
-    public class NameManagerTests
+    public class NameManagerTest
     {
-        private NameManager nameManager;
+        private NameManager _nameManager;
 
         [TestInitialize]
         public void Init()
         {
-            nameManager = new NameManager();
+            _nameManager = new NameManager();
         }
 
         [TestMethod]
         public void FirstName()
         {
-            nameManager
+            _nameManager
                 .GetNextName()
                 .Should()
                 .Be("a");
@@ -28,11 +28,11 @@ namespace Laboratorium.Tests
         [TestMethod]
         public void Reset()
         {
-            nameManager.GetNextName();
+            _nameManager.GetNextName();
 
-            nameManager.Reset();
+            _nameManager.Reset();
 
-            nameManager
+            _nameManager
                 .GetNextName()
                 .Should()
                 .Be("a");
@@ -43,10 +43,10 @@ namespace Laboratorium.Tests
         {
             for (int i = 1; i <= 25; i++)
             {
-                nameManager.GetNextName();
+                _nameManager.GetNextName();
             }
 
-            nameManager
+            _nameManager
                 .GetNextName()
                 .Should()
                 .Be("z");
@@ -57,20 +57,20 @@ namespace Laboratorium.Tests
         {
             for (int i = 1; i <= 26; i++)
             {
-                nameManager.GetNextName();
+                _nameManager.GetNextName();
             }
 
-            nameManager
+            _nameManager
                 .GetNextName()
                 .Should()
                 .Be("x1");
 
             for (int i = 1; i <= 9; i++)
             {
-                nameManager.GetNextName();
+                _nameManager.GetNextName();
             }
 
-            nameManager
+            _nameManager
                 .GetNextName()
                 .Should()
                 .Be("x11");
