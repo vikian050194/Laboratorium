@@ -1,40 +1,30 @@
-﻿using System;
-using Laboratorium.Types.Common;
-
-namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
+﻿namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
 {
-    internal class RandomGenerator<T> : IRandomGenerator<T> where T : IEquatable<T>, IComparable<T>
+    internal class RandomGenerator
     {
-        private readonly INumericRandomGenerator<T> _numericRandomGenerator;
+        private readonly NumericRandomGenerator _numericRandomGenerator;
 
-        public RandomGenerator(INumericRandomGenerator<T> numericRandomGenerator)
+        public RandomGenerator(NumericRandomGenerator numericRandomGenerator)
         {
             _numericRandomGenerator = numericRandomGenerator;
         }
 
-        private NumericWrapper<T> Next()
+        public Point GetNextPoint()
         {
-            var result = _numericRandomGenerator.Next();
+            var x = _numericRandomGenerator.Next();
+            var y = _numericRandomGenerator.Next();
 
-            return result;
-        }
-
-        public Point<T> GetNextPoint()
-        {
-            var x = Next();
-            var y = Next();
-
-            var point = new Point<T>(x, y);
+            var point = new Point(x, y);
 
             return point;
         }
 
-        public EllipticCurve<T> GetNextEllipticCurve(Point<T> point)
+        public EllipticCurve GetNextEllipticCurve(Point point)
         {
-            var a = Next();
+            var a = _numericRandomGenerator.Next();
             var b = point.Y * point.Y - point.X * point.X * point.X - a * point.X;
 
-            var ellipticCurve = new EllipticCurve<T>(a, b);
+            var ellipticCurve = new EllipticCurve(a, b);
 
             return ellipticCurve;
         }

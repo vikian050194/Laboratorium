@@ -1,7 +1,5 @@
 ﻿using System;
 using Laboratorium.Algorithms.Factorization.EllipticCurveMethod;
-using Laboratorium.Algorithms.Factorization.GreatestCommonDivisor;
-using Laboratorium.Types.Common;
 
 namespace Sandbox.CSharp
 {
@@ -9,12 +7,8 @@ namespace Sandbox.CSharp
     {
         static void Main(string[] args)
         {
-            //var ecm = new EllipticCurveMethod();
-            //ecm.Execute(new SingleGCD(), 5429, 3, 100);
-            var a = new NumericWrapper<int>(5);
-            var b = new NumericWrapper<int>(3);
-            var c = a * b;
-            var v = c.Value;
+            var ecm = new EllipticCurveMethod();
+            var d = ecm.Execute(5429, 100, 100);
             //var executor = new Executor(new TestPathManager());
 
             //var script = "let x = 5";

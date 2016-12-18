@@ -1,35 +1,29 @@
-﻿using System;
+﻿using System.Numerics;
 using Laboratorium.Attributes;
-using Laboratorium.Types.Common;
 
 namespace Laboratorium.Algorithms.Factorization.GreatestCommonDivisor
 {
     [FunctionAlias("gcd")]
     [DefaultImplementation]
-    public class GreaterCommonDivisor<T> : IGreaterCommonDivisorAlgorithm<T> where T : IComparable<T>, IEquatable<T>
+    public class GreaterCommonDivisor
     {
-        public T Execute(T a, T b)
+        public BigInteger Execute(BigInteger a, BigInteger b)
         {
-            var wrapperA = new NumericWrapper<T>(a);
-            var wrapperB = new NumericWrapper<T>(b);
-
-            var zero = new NumericWrapper<T>(0);
-
-            while (wrapperA != zero && wrapperB != zero)
+            while (a != 0 && b != 0)
             {
-                if (wrapperA > wrapperB)
+                if (a > b)
                 {
-                    wrapperA %= wrapperB;
+                    a %= b;
                 }
                 else
                 {
-                    wrapperB %= wrapperA;
+                    b %= a;
                 }
             }
 
-            var result = wrapperA + wrapperB;
+            var result = a + b;
 
-            return result.Value;
+            return result;
         }
     }
 }

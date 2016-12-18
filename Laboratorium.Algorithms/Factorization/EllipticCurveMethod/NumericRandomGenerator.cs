@@ -1,23 +1,24 @@
 using System;
-using Laboratorium.Types.Common;
+using System.Numerics;
 
 namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
 {
-    internal class NumericRandomGenerator<T> : INumericRandomGenerator<T> where T : IEquatable<T>, IComparable<T>
+    internal class NumericRandomGenerator
     {
         private readonly Random _random;
-        private readonly string _module;
+        private readonly BigInteger _n;
 
-        public NumericRandomGenerator(T module)
+        public NumericRandomGenerator(BigInteger n)
         {
             _random = new Random();
-            _module = module.ToString();
+            _n = n;
         }
 
-        public NumericWrapper<T> Next()
+        public BigInteger Next()
         {
-            var value = _random.Next(1, int.MaxValue).ToString();
-            var result = new NumericWrapper<T>(value, _module);
+            var nextValue = _random.Next(1, int.MaxValue);
+
+            var result = new BigInteger(nextValue) % _n;
 
             return result;
         }
