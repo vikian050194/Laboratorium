@@ -1,11 +1,28 @@
-﻿namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
+﻿using System.Numerics;
+
+namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
 {
-    internal class RandomGenerator
+    internal class TestRandomGenerator : IRandomGenerator
+    {
+        public EllipticCurve GetNextEllipticCurve(Point point)
+        {
+            return new EllipticCurve(1, 1);
+        }
+
+        public Point GetNextPoint()
+        {
+            return new Point(0, 1);
+        }
+    }
+
+    internal class RandomGenerator : IRandomGenerator
     {
         private readonly NumericRandomGenerator _numericRandomGenerator;
+        private readonly BigInteger _n;
 
-        public RandomGenerator(NumericRandomGenerator numericRandomGenerator)
+        public RandomGenerator(BigInteger n, NumericRandomGenerator numericRandomGenerator)
         {
+            _n = n;
             _numericRandomGenerator = numericRandomGenerator;
         }
 
@@ -23,6 +40,7 @@
         {
             var a = _numericRandomGenerator.Next();
             var b = point.Y * point.Y - point.X * point.X * point.X - a * point.X;
+            b = new ZnCutter().Cut(b, _n);
 
             var ellipticCurve = new EllipticCurve(a, b);
 

@@ -2,69 +2,82 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using Laboratorium.Algorithms.Factorization.GreatestCommonDivisor;
 using Laboratorium.Resources.Properties;
-using Laboratorium.Types.Common;
 
 namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
 {
     public class EllipticCurveMethod
     {
-        public BigInteger Execute(BigInteger n, int b1, int round)
-        {
-            var b2 = b1 * 100;
+        private readonly BigInteger _n;
+        private readonly int _b;
+        private readonly int _round;
 
-            return Execute(n, b1, b2, round);
+        public EllipticCurveMethod(BigInteger n, int b, int round)
+        {
+            _n = n;
+            _b = b;
+            _round = round;
         }
 
-        public BigInteger Execute(BigInteger n, int b1, int b2, int round)
+        public BigInteger Execute()
         {
-            var randomGenerator = new RandomGenerator(new NumericRandomGenerator(n));
+            //IRandomGenerator randomGenerator = new RandomGenerator(_n, new NumericRandomGenerator(_n));
+            IRandomGenerator randomGenerator = new TestRandomGenerator();
+            var euclid = new AdvancedEuclid.AdvancedEuclid();
 
-            var degrees = GetDegrees(b1);
+            var degrees = GetDegrees();
 
-            for (var i = 1; i <= round; i++)
+            for (var i = 1; i <= _round; i++)
             {
                 var point = randomGenerator.GetNextPoint();
                 var ellipticCurve = randomGenerator.GetNextEllipticCurve(point);
 
-                var d = FirstCondition(n, ellipticCurve);
+                var d = FirstCondition(_n, ellipticCurve);
 
-                if (n == d)
+                if (_n == d)
                 {
                     continue;
                 }
 
-                if (d > 1 && d < n)
+                if (d > 1 && d < _n)
                 {
                     return d;
                 }
 
                 var suitablePrimeNumbers = degrees.Keys.OrderBy(k => k).ToList();
 
+                var accumulator = new Point();
+
                 foreach (var suitablePrimeNumber in suitablePrimeNumbers)
                 {
-                    var pointForIteration = point.Clone();
-
                     for (int r = 1; r <= degrees[suitablePrimeNumber]; r++)
                     {
-                        var max = r != degrees[suitablePrimeNumber]
-                            ? degrees[suitablePrimeNumber]
-                            : degrees[suitablePrimeNumber] + 1;
-                        for (int j = 1; j < max; j++)
-                        {
-                            pointForIteration = GetSumOfPoints(pointForIteration, point, ellipticCurve);
-                            if (pointForIteration.X != point.X)
-                            {
-                                d = pointForIteration.X - point.X;
-                                d = BigInteger.GreatestCommonDivisor(n, d);
+                        var max = degrees[suitablePrimeNumber];
 
-                                if (d > 1 && d < n)
+                        for (int j = 1; j <= max; j++)
+                        {
+                            if (!accumulator.IsZero)
+                            {
+                                var lambda = GetLambda(accumulator, point, ellipticCurve);
+
+                                var table = euclid.Execute(lambda.Denumerator, _n);
+
+                                d = table[table.Count - 2].R;
+
+                                if (d > 1 && d < _n)
                                 {
                                     return d;
                                 }
-                            }
 
+                                var l = lambda.Numerator * table[table.Count - 2].V;
+                                l = new ZnCutter().Cut(l, _n);
+
+                                accumulator = GetSumOfPoints(l, accumulator, point, ellipticCurve);
+                            }
+                            else
+                            {
+                                accumulator = point.Clone();
+                            }
                         }
                     }
                 }
@@ -73,19 +86,18 @@ namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
             return -1;
         }
 
-        private Point GetSumOfPoints(Point point1, Point point2, EllipticCurve ellipticCurve)
+        private Point GetSumOfPoints(BigInteger lambda, Point point1, Point point2, EllipticCurve ellipticCurve)
         {
-            var lambda = GetLambda(ellipticCurve, point1, point2);
-
             var x = lambda * lambda - point1.X - point2.X;
+            x = new ZnCutter().Cut(x, _n);
             var y = lambda * (point1.X - x) - point1.Y;
-
+            y = new ZnCutter().Cut(y, _n);
             var result = new Point(x, y);
 
             return result;
         }
 
-        private Dictionary<BigInteger, BigInteger> GetDegrees(int b)
+        private Dictionary<BigInteger, BigInteger> GetDegrees()
         {
             var primeNumbers = GetPrimeNumbers();
 
@@ -93,9 +105,9 @@ namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
 
             foreach (var primeNumber in primeNumbers)
             {
-                if (primeNumber < b)
+                if (primeNumber < _b)
                 {
-                    var k = BigInteger.Log(b, primeNumber);
+                    var k = BigInteger.Log(_b, primeNumber);
                     result[new BigInteger(primeNumber)] = new BigInteger(k);
                 }
                 else
@@ -121,7 +133,7 @@ namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
             return result;
         }
 
-        private BigInteger GetLambda(EllipticCurve ellipticCurve, Point point1, Point point2)
+        private Lambda GetLambda(Point point1, Point point2, EllipticCurve ellipticCurve)
         {
             var numerator = BigInteger.Zero;
             var denumarator = BigInteger.One;
@@ -129,15 +141,19 @@ namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
             if (point1.Equals(point2))
             {
                 numerator = 3 * BigInteger.Pow(point1.X, 2) + ellipticCurve.A;
+                numerator = new ZnCutter().Cut(numerator, _n);
                 denumarator = 2 * point1.Y;
+                denumarator = new ZnCutter().Cut(denumarator, _n);
             }
             else
             {
-                numerator = point2.Y + point1.Y;
-                denumarator = point2.X + point1.X;
+                numerator = point2.Y - point1.Y;
+                numerator = new ZnCutter().Cut(numerator, _n);
+                denumarator = point2.X - point1.X;
+                denumarator = new ZnCutter().Cut(denumarator, _n);
             }
 
-            var result = numerator / denumarator;
+            var result = new Lambda { Numerator = numerator, Denumerator = denumarator };
 
             return result;
         }
@@ -149,5 +165,12 @@ namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
 
             return d;
         }
+    }
+
+    internal class Lambda
+    {
+        public BigInteger Value { get; set; }
+        public BigInteger Numerator { get; set; }
+        public BigInteger Denumerator { get; set; }
     }
 }

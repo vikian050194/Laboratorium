@@ -42,13 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factorization\AdvancedEuclid\AdvancedEuclid.cs" />
+    <Compile Include="Factorization\AdvancedEuclid\IAdvancedEuclidAlgorithm.cs" />
     <Compile Include="Factorization\EllipticCurveMethod\EllipticCurve.cs" />
     <Compile Include="Factorization\EllipticCurveMethod\EllipticCurveMethod.cs" />
     <Compile Include="Factorization\EllipticCurveMethod\INumericRandomGenerator.cs" />
     <Compile Include="Factorization\EllipticCurveMethod\IRandomGenerator.cs" />
+    <Compile Include="Factorization\EllipticCurveMethod\IRandomGenerator1.cs" />
     <Compile Include="Factorization\EllipticCurveMethod\NumericRandomGenerator.cs" />
     <Compile Include="Factorization\EllipticCurveMethod\Point.cs" />
     <Compile Include="Factorization\EllipticCurveMethod\RandomGenerator.cs" />
+    <Compile Include="Factorization\EllipticCurveMethod\ZnCutter.cs" />
+    <Compile Include="Factorization\InverseElement\GreaterCommonDivisor.cs" />
+    <Compile Include="Factorization\InverseElement\IGreaterCommonDivisorAlgorithm.cs" />
     <Compile Include="Factorization\LeastCommonMultiple\SingleLCM.cs" />
     <Compile Include="Factorization\GreatestCommonDivisor\GreaterCommonDivisor.cs" />
     <Compile Include="Factorization\LeastCommonMultiple\ILCMAlgorithm.cs" />
