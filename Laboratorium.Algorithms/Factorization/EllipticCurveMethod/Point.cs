@@ -2,7 +2,7 @@
 
 namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
 {
-    internal class Point
+    public class Point
     {
         public bool IsZero { get; set; }
 

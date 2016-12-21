@@ -2,7 +2,7 @@
 
 namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
 {
-    class EllipticCurve
+    public class EllipticCurve
     {
         public EllipticCurve(BigInteger a, BigInteger b)
         {

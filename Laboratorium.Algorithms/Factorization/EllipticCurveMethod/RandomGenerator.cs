@@ -6,12 +6,12 @@ namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
     {
         public EllipticCurve GetNextEllipticCurve(Point point)
         {
-            return new EllipticCurve(1, 1);
+            return new EllipticCurve(5, 455834);
         }
 
         public Point GetNextPoint()
         {
-            return new Point(0, 1);
+            return new Point(1, 1);
         }
     }
 
