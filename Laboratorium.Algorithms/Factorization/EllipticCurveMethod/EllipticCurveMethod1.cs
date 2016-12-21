@@ -12,6 +12,7 @@ namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
             {
                 var point = new Point(1, 1);
                 var accumulator = point;
+
                 var a = i;
                 var b = -1 * a;
                 var ellipticCurve = new EllipticCurve(a, b);
