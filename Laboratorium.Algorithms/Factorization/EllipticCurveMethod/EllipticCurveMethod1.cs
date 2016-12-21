@@ -43,7 +43,6 @@ namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
                         }
 
                         var lambdaValue = GetLambdaValue(n, lambda, table);
-
                         accumulator = GetSumOfPoints(n, lambdaValue, accumulator, point);
                     }
 
