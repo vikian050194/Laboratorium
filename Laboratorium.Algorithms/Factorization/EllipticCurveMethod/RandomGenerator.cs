@@ -19,11 +19,11 @@ namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
     {
         private readonly NumericRandomGenerator _numericRandomGenerator;
         private readonly BigInteger _n;
-
-        public RandomGenerator(BigInteger n, NumericRandomGenerator numericRandomGenerator)
+        
+        public RandomGenerator(BigInteger n)
         {
             _n = n;
-            _numericRandomGenerator = numericRandomGenerator;
+            _numericRandomGenerator = new NumericRandomGenerator(n);
         }
 
         public Point GetNextPoint()

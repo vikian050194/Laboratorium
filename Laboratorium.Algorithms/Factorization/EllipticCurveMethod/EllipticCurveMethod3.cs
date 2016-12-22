@@ -3,23 +3,23 @@ using System.Numerics;
 
 namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
 {
-    public class EllipticCurveMethod1: EllipticCurveMethod
+    public class EllipticCurveMethod3 : EllipticCurveMethod
     {
-        //without random at all
-        public Tuple<BigInteger,BigInteger> Execute(BigInteger n, BigInteger k, BigInteger attempts)
+        public Tuple<BigInteger, BigInteger> Execute(BigInteger n, BigInteger k, BigInteger attempts)
         {
             var count = BigInteger.Zero;
 
+            IRandomGenerator randomGenerator = new RandomGenerator(n);
+
             var euclid = new AdvancedEuclid.AdvancedEuclid();
+            var list = new RandomSequenceGenarator().GetList(n, attempts);
 
-            for (var i = BigInteger.One; i <= attempts; i++)
+            for (var i = BigInteger.Zero; i < list.Count; i++)
             {
-                var point = new Point(1, 1);
-                var accumulator = point;
+                var point = randomGenerator.GetNextPoint();
+                var ellipticCurve = randomGenerator.GetNextEllipticCurve(point);
 
-                var a = i;
-                var b = -1 * a;
-                var ellipticCurve = new EllipticCurve(a, b);
+                var accumulator = point;
 
                 for (var j = new BigInteger(2); j <= k; j++)
                 {
@@ -46,7 +46,7 @@ namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
                         {
                             return new Tuple<BigInteger, BigInteger>(d, count);
                         }
-                        
+
                         var lambdaValue = GetLambdaValue(n, lambda, table);
                         accumulator = GetSumOfPoints(n, lambdaValue, accumulator, point);
 
@@ -57,7 +57,7 @@ namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
                 }
             }
 
-            return new Tuple<BigInteger, BigInteger>(BigInteger.MinusOne, count);
+            return new Tuple<BigInteger, BigInteger>(BigInteger.MinusOne, count); ;
         }
     }
 }
