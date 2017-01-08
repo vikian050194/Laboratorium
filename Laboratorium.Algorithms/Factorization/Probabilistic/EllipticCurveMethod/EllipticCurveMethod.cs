@@ -9,14 +9,14 @@
 //{
 //    public class EllipticCurveMethod<T> where T : IEquatable<T>, IComparable<T>
 //    {
-//        public T Execute(IGreaterCommonDivisorAlgorithm<T> greaterCommonDivisor, T n, T b1, T round)
+//        public T Execute(IEuclideanAlgorithm<T> greaterCommonDivisor, T n, T b1, T round)
 //        {
 //            var b2 = (new NumericWrapper<T>(b1) * new NumericWrapper<T>("100")).Value;
 
 //            return Execute(greaterCommonDivisor, n, b1, b2, round);
 //        }
 
-//        public T Execute(IGreaterCommonDivisorAlgorithm<T> greaterCommonDivisor, T n, T b1, T b2, T round)
+//        public T Execute(IEuclideanAlgorithm<T> greaterCommonDivisor, T n, T b1, T b2, T round)
 //        {
 //            var randomGenerator = new RandomGenerator<T>(n, new NumericRandomGenerator<T>(n));
 
@@ -141,7 +141,7 @@
 //            return result;
 //        }
 
-//        private int Condition1(int n, EllipticCurve<int> ellipticCurve, IGreaterCommonDivisorAlgorithm<int> greaterCommonDivisor)
+//        private int Condition1(int n, EllipticCurve<int> ellipticCurve, IEuclideanAlgorithm<int> greaterCommonDivisor)
 //        {
 //            var g = (int)(4 * Math.Pow(ellipticCurve.A, 3) + 27 * Math.Pow(ellipticCurve.B, 2));
 //            var d = greaterCommonDivisor.Execute(n, g);

@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 
-namespace Laboratorium.Algorithms.Factorization
+namespace Laboratorium.Algorithms.Factorization.Probabilistic.TestsOfSimplicity
 {
-    public abstract class ProbabilisticTestOfSimplicity
+    public abstract class TestOfSimplicityBase
     {
         protected BigInteger GetIterations(BigInteger n, BigInteger r)
         {

@@ -1,6 +1,6 @@
 namespace Laboratorium.Algorithms.Factorization
 {
-    internal enum Status
+    public enum Status
     {
         Prime = 1,
         Unknown = 0,

@@ -46,9 +46,6 @@
     </Compile>
     <Compile Include="Algebra\Matrix.cs" />
     <Compile Include="Algebra\Polynomial.cs" />
-    <Compile Include="Common\FooInt.cs" />
-    <Compile Include="Common\INumericTypeWrapper.cs" />
-    <Compile Include="Common\NumericWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

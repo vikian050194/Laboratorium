@@ -1,6 +1,6 @@
 using System;
 
-namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
+namespace Laboratorium.Algorithms.Factorization.Probabilistic.EllipticCurveMethod
 {
     internal interface IRandomGenerator<T> where T : IEquatable<T>, IComparable<T>
     {

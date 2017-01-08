@@ -1,7 +1,7 @@
 ﻿using System;
 using Laboratorium.Types.Common;
 
-namespace Laboratorium.Algorithms.Factorization.EllipticCurveMethod
+namespace Laboratorium.Algorithms.Factorization.Probabilistic.EllipticCurveMethod
 {
     class EllipticCurve<T>  where T: IEquatable<T>, IComparable<T>
     {

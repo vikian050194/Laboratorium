@@ -42,27 +42,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factorization\EllipticCurveMethod\EllipticCurve.cs" />
-    <Compile Include="Factorization\EllipticCurveMethod\EllipticCurveMethod.cs" />
-    <Compile Include="Factorization\EllipticCurveMethod\INumericRandomGenerator.cs" />
-    <Compile Include="Factorization\EllipticCurveMethod\IRandomGenerator.cs" />
-    <Compile Include="Factorization\EllipticCurveMethod\NumericRandomGenerator.cs" />
-    <Compile Include="Factorization\EllipticCurveMethod\Point.cs" />
-    <Compile Include="Factorization\EllipticCurveMethod\RandomGenerator.cs" />
-    <Compile Include="Factorization\LeastCommonMultiple\SingleLCM.cs" />
-    <Compile Include="Factorization\GreatestCommonDivisor\GreaterCommonDivisor.cs" />
-    <Compile Include="Factorization\LeastCommonMultiple\ILCMAlgorithm.cs" />
-    <Compile Include="Factorization\GreatestCommonDivisor\IGreaterCommonDivisorAlgorithm.cs" />
+    <Compile Include="Factorization\Common\EuclideanAlgorithm\EuclideanAlgorithm2.cs" />
+    <Compile Include="Factorization\Common\LeastCommonMultiple\LeastCommonMultipleAlgorithm2.cs" />
+    <Compile Include="Factorization\Common\LeastCommonMultiple\LeastCommonMultipleAlgorithm.cs" />
+    <Compile Include="Factorization\Common\EuclideanAlgorithm\EuclideanAlgorithm.cs" />
+    <Compile Include="Factorization\Common\LeastCommonMultiple\ILeastCommonMultipleAlgorithm.cs" />
+    <Compile Include="Factorization\Common\EuclideanAlgorithm\IEuclideanAlgorithm.cs" />
+    <Compile Include="Factorization\Common\GaussCriterion\GaussCriterion.cs" />
+    <Compile Include="Factorization\Probabilistic\TestsOfSimplicity\FermatTest.cs" />
+    <Compile Include="Factorization\Probabilistic\TestsOfSimplicity\RabinMillerTest.cs" />
+    <Compile Include="Factorization\Probabilistic\TestsOfSimplicity\SolovayStrassenTest.cs" />
+    <Compile Include="Factorization\Probabilistic\TestsOfSimplicity\TestOfSimplicityBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Laboratorium.Attributes\Laboratorium.Attributes.csproj">
       <Project>{5542FBEF-8DEF-4A0A-92BE-1370DFA59312}</Project>
       <Name>Laboratorium.Attributes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Laboratorium.Resources\Laboratorium.Resources.csproj">
-      <Project>{2290a342-98da-49d0-bb17-1ce170e96f7a}</Project>
-      <Name>Laboratorium.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Laboratorium.Types\Laboratorium.Types.csproj">
       <Project>{049ccf24-0abf-4778-8d02-d21f8c885f7a}</Project>
@@ -71,6 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Factorization\Determinate\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

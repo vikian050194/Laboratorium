@@ -59,10 +59,6 @@
       <Project>{5542FBEF-8DEF-4A0A-92BE-1370DFA59312}</Project>
       <Name>Laboratorium.Attributes</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Laboratorium.Resources\Laboratorium.Resources.csproj">
-      <Project>{2290a342-98da-49d0-bb17-1ce170e96f7a}</Project>
-      <Name>Laboratorium.Resources</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
