@@ -36,8 +36,6 @@ namespace Laboratorium.Controllers
             var executor = new Executor(new RealPathManager());
 
             var packet = _mapper.Map<PacketViewModel, Packet>(packetViewModel);
-            packet.User = "foo@bar.com";
-            //packet.User = User.Identity.Name;
 
             packet = executor.Execute(packet);
 

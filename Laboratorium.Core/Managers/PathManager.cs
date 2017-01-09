@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using Laboratorium.Resources.Properties;
 
 namespace Laboratorium.Core.Managers
 {
@@ -14,7 +13,7 @@ namespace Laboratorium.Core.Managers
         protected PathManager()
         {
             AssembliesDirectory = GetAssembliesDirectory();
-            PathToAssembly = Path.Combine(AssembliesDirectory, Settings.Default.MainAssemblyName);
+            PathToAssembly = Path.Combine(AssembliesDirectory, "Laboratorium.Algorithms.dll");
         }
 
         private string GetAssembliesDirectory()

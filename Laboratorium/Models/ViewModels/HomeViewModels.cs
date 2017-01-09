@@ -12,12 +12,8 @@ namespace Laboratorium.Models.ViewModels
             Input = new List<string>();
         }
 
-        [Display(Name = "Скрипт")]
         public string Script { get; set; }
 
-        //[Required]
-        [Display(Name = "Имя скрипта")]
-        public string ScriptName { get; set; }
         public List<string> Result { get; set; }
         public List<string> Errors { get; set; }
         public List<string> Input { get; set; }

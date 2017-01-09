@@ -32,7 +32,7 @@ namespace Laboratorium.Core
 
             script.Append(packet.Script);
 
-            fileManager.SaveScript(script.ToString(), packet.User, _pathManager.AssembliesDirectory);
+            fileManager.SaveScript(script.ToString(), "foobar", _pathManager.AssembliesDirectory);
             var path = fileManager.GetLastPath();
 
             var processInfo = GetProcessInfo(path);
