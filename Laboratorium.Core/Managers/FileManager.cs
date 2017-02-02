@@ -4,18 +4,20 @@ namespace Laboratorium.Core.Managers
 {
     public class FileManager
     {
-        private string _path;
+        private string _lastFile;
 
-        public void SaveScript(string script, string user, string path)
+        public void SaveScript(string script, string path)
         {
-            _path = Path.Combine(path, user + ".fsx");
-
-            File.WriteAllText(_path, script);
+            //var file = Path.GetTempFileName();
+            //file = Path.ChangeExtension(file, "fsx");
+            //_lastFile = file;
+            var file = path;
+            File.WriteAllText(file, script);
         }
 
-        public string GetLastPath()
+        public string GetLastFile()
         {
-            return _path;
+            return _lastFile;
         }
     }
 }

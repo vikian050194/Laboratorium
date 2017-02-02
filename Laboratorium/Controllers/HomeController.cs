@@ -27,22 +27,22 @@ namespace Laboratorium.Controllers
         [HttpGet]
         public ActionResult PackageForm()
         {
-            return PartialView(new PacketViewModel());
+            return PartialView(new Packet());
         }
 
         [HttpPost]
-        public ActionResult PackageForm(PacketViewModel packetViewModel)
+        public ActionResult PackageForm(Packet packet)
         {
             var executor = new Executor(new RealPathManager());
 
-            var packet = _mapper.Map<PacketViewModel, Packet>(packetViewModel);
+            //var packet = _mapper.Map<PacketViewModel, Packet>(packetViewModel);
 
             packet = executor.Execute(packet);
 
-            var newPacketViewModel = _mapper.Map<Packet, PacketViewModel>(packet);
-            newPacketViewModel.ShowEntireScript = packetViewModel.ShowEntireScript;
+            //var newPacketViewModel = _mapper.Map<Packet, PacketViewModel>(packet);
+            //newPacketViewModel.ShowEntireScript = packetViewModel.ShowEntireScript;
 
-            return PartialView(newPacketViewModel);
+            return PartialView(packet);
         }
 
         public ActionResult About()

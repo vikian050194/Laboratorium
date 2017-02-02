@@ -32,8 +32,8 @@ namespace Laboratorium.Core
 
             script.Append(packet.Script);
 
-            fileManager.SaveScript(script.ToString(), "foobar", _pathManager.AssembliesDirectory);
-            var path = fileManager.GetLastPath();
+            fileManager.SaveScript(script.ToString(), "C:\\test.fsx");//, "foobar", _pathManager.AssembliesDirectory);
+            var path = fileManager.GetLastFile();
 
             var processInfo = GetProcessInfo(path);
 
