@@ -1,4 +1,4 @@
-namespace Laboratorium.Algorithms.Factorization
+namespace Laboratorium.Attributes
 {
     public enum Status
     {

@@ -4,8 +4,7 @@ using Laboratorium.Attributes;
 
 namespace Laboratorium.Algorithms.Factorization.Common.EuclideanAlgorithm
 {
-    [FunctionAlias("gcdM")]
-    [DefaultImplementation]
+    [FunctionAlias("gcd2"), DefaultImplementation]
     public class EuclideanAlgorithm2 : IEuclideanAlgorithm2
     {
         public BigInteger Execute(params BigInteger[] numbers)

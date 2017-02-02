@@ -30,12 +30,10 @@ namespace Laboratorium.Core.AlgorithmsLibrary
 
             foreach (var type in types)
             {
-                if (IsInterface(type))
+                if (type.IsInterface)
                 {
                     includedFamilies.Add(type);
-
                     AddNewFamily(type, algorithmFamilies);
-
                     var argumentsTypes = GetArgumentsTypes(type);
 
                     foreach (var argumentsType in argumentsTypes)
@@ -51,10 +49,9 @@ namespace Laboratorium.Core.AlgorithmsLibrary
 
             foreach (var type in types)
             {
-                if (!IsInterface(type))
+                if (!type.IsInterface && !type.IsAbstract && !type.GetCustomAttributes<IgnoreAttribute>().Any())
                 {
                     var family = algorithmFamilies.Find(f => f.Namespace == type.Namespace);
-
                     AddAlgorithmInFamily(type, family);
                 }
             }
@@ -65,7 +62,6 @@ namespace Laboratorium.Core.AlgorithmsLibrary
         private MethodInfo GetMainMethod(Type type)
         {
             var result = type.GetMethods().First();
-
             return result;
         }
 
@@ -100,13 +96,6 @@ namespace Laboratorium.Core.AlgorithmsLibrary
             algorithmFamilies.Add(newFamily);
 
             return newFamily;
-        }
-
-        private bool IsInterface(Type type)
-        {
-            var result = type.IsInterface;
-
-            return result;
         }
 
         private void AddAdapterInFamily(Type type, AlgorithmFamily family)

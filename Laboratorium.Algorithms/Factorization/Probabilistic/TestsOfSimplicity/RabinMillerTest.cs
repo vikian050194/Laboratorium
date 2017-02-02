@@ -3,14 +3,8 @@ using Laboratorium.Attributes;
 
 namespace Laboratorium.Algorithms.Factorization.Probabilistic.TestsOfSimplicity
 {
-    public interface IRabinMillerTest
-    {
-        BigInteger Execute(BigInteger n, BigInteger rounds);
-    }
-
-    [FunctionAlias("rabinMillerTest")]
-    [DefaultImplementation]
-    public class RabinMillerTest : TestOfSimplicityBase, IRabinMillerTest
+    [FunctionAlias("rabinMillerTest"), DefaultImplementation]
+    public class RabinMillerTest : TestOfSimplicityBase, ITestOfSimplicity
     {
         public BigInteger Execute(BigInteger n, BigInteger rounds)
         {

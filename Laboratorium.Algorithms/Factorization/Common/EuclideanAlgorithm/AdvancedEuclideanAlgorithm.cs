@@ -10,8 +10,7 @@ namespace Laboratorium.Algorithms.Factorization.Common.EuclideanAlgorithm
         List<TableRow> Execute(BigInteger a, BigInteger b);
     }
 
-    [FunctionAlias("euclid")]
-    [DefaultImplementation]
+    [FunctionAlias("euclid"), DefaultImplementation]
     public class AdvancedEuclideanAlgorithm : IAdvancedEuclideanAlgorithm
     {
         public List<TableRow> Execute(BigInteger a, BigInteger b)

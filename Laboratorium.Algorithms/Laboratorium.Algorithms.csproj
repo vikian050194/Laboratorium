@@ -52,6 +52,7 @@
     <Compile Include="Factorization\Common\EuclideanAlgorithm\IEuclideanAlgorithm.cs" />
     <Compile Include="Factorization\Common\GaussCriterion\GaussCriterion.cs" />
     <Compile Include="Factorization\Probabilistic\TestsOfSimplicity\FermatTest.cs" />
+    <Compile Include="Factorization\Probabilistic\TestsOfSimplicity\ITestOfSimplicity.cs" />
     <Compile Include="Factorization\Probabilistic\TestsOfSimplicity\RabinMillerTest.cs" />
     <Compile Include="Factorization\Probabilistic\TestsOfSimplicity\SolovayStrassenTest.cs" />
     <Compile Include="Factorization\Probabilistic\TestsOfSimplicity\TestOfSimplicityBase.cs" />
@@ -66,9 +67,6 @@
       <Project>{049ccf24-0abf-4778-8d02-d21f8c885f7a}</Project>
       <Name>Laboratorium.Types</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Factorization\Determinate\" />

@@ -3,14 +3,8 @@ using Laboratorium.Attributes;
 
 namespace Laboratorium.Algorithms.Factorization.Probabilistic.TestsOfSimplicity
 {
-    public interface IFermatTest
-    {
-        BigInteger Execute(BigInteger n, BigInteger rounds);
-    }
-
     [FunctionAlias("fermatTest")]
-    [DefaultImplementation]
-    public class FermatTest : TestOfSimplicityBase, IFermatTest
+    public class FermatTest : TestOfSimplicityBase, ITestOfSimplicity
     {
         public BigInteger Execute(BigInteger n, BigInteger rounds)
         {

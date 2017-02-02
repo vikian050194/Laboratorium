@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Laboratorium.Attributes;
 
 namespace Laboratorium.Algorithms.Factorization.Common.GaussCriterion
 {
@@ -7,6 +8,7 @@ namespace Laboratorium.Algorithms.Factorization.Common.GaussCriterion
         BigInteger Execute(BigInteger a, BigInteger n);
     }
 
+    [FunctionAlias("gauss"), DefaultImplementation]
     class GaussCriterion : IGaussCriterion
     {
         public BigInteger Execute(BigInteger a, BigInteger n)

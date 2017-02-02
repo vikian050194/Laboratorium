@@ -5,8 +5,7 @@ using Laboratorium.Attributes;
 
 namespace Laboratorium.Algorithms.Factorization.Common.LeastCommonMultiple
 {
-    [FunctionAlias("lcmN")]
-    [DefaultImplementation]
+    [FunctionAlias("lcm2"), DefaultImplementation]
     public class LeastCommonMultipleAlgorithm2 : ILeastCommonMultipleAlgorithm2
     {
         public BigInteger Execute(IEuclideanAlgorithm euclideanAlgorithm, params BigInteger[] numbers)

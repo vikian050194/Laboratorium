@@ -4,14 +4,8 @@ using Laboratorium.Attributes;
 
 namespace Laboratorium.Algorithms.Factorization.Probabilistic.TestsOfSimplicity
 {
-    public interface ISolovayStrassenTest
-    {
-        BigInteger Execute(BigInteger n, BigInteger rounds);
-    }
-
     [FunctionAlias("solovayStrassenTest")]
-    [DefaultImplementation]
-    public class SolovayStrassenTest : TestOfSimplicityBase, ISolovayStrassenTest
+    public class SolovayStrassenTest : TestOfSimplicityBase, ITestOfSimplicity
     {
         public BigInteger Execute(BigInteger n, BigInteger rounds)
         {
