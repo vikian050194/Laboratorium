@@ -3,6 +3,11 @@ using Laboratorium.Attributes;
 
 namespace Laboratorium.Algorithms.Factorization.Common.EuclideanAlgorithm
 {
+    public interface IEuclideanAlgorithm
+    {
+        BigInteger Execute(BigInteger a, BigInteger b);
+    }
+
     [FunctionAlias("gcd"), DefaultImplementation]
     public class EuclideanAlgorithm : IEuclideanAlgorithm
     {

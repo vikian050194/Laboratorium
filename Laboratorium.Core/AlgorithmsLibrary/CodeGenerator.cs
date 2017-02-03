@@ -87,15 +87,24 @@ namespace Laboratorium.Core.AlgorithmsLibrary
         {
             var familyNamespace = type.Namespace;
 
-            var levels = type.Namespace.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            AlgorithmFamily family;
 
-            var familyName = levels.Last();
+            if (!algorithmFamilies.Exists(f => f.Namespace == familyNamespace))
+            {
+                var levels = type.Namespace.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-            var newFamily = new AlgorithmFamily(familyName, familyNamespace);
+                var familyName = levels.Last();
 
-            algorithmFamilies.Add(newFamily);
+                family = new AlgorithmFamily(familyName, familyNamespace);
 
-            return newFamily;
+                algorithmFamilies.Add(family);
+            }
+            else
+            {
+                family = algorithmFamilies.Find(f => f.Namespace == familyNamespace);
+            }
+
+            return family;
         }
 
         private void AddAdapterInFamily(Type type, AlgorithmFamily family)

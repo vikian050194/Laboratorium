@@ -43,13 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Factorization\Common\EuclideanAlgorithm\AdvancedEuclideanAlgorithm.cs" />
-    <Compile Include="Factorization\Common\EuclideanAlgorithm\EuclideanAlgorithm2.cs" />
     <Compile Include="Factorization\Common\EuclideanAlgorithm\TableRow.cs" />
-    <Compile Include="Factorization\Common\LeastCommonMultiple\LeastCommonMultipleAlgorithm2.cs" />
     <Compile Include="Factorization\Common\LeastCommonMultiple\LeastCommonMultipleAlgorithm.cs" />
     <Compile Include="Factorization\Common\EuclideanAlgorithm\EuclideanAlgorithm.cs" />
-    <Compile Include="Factorization\Common\LeastCommonMultiple\ILeastCommonMultipleAlgorithm.cs" />
-    <Compile Include="Factorization\Common\EuclideanAlgorithm\IEuclideanAlgorithm.cs" />
     <Compile Include="Factorization\Common\GaussCriterion\GaussCriterion.cs" />
     <Compile Include="Factorization\Probabilistic\TestsOfSimplicity\FermatTest.cs" />
     <Compile Include="Factorization\Probabilistic\TestsOfSimplicity\ITestOfSimplicity.cs" />

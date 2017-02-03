@@ -4,6 +4,11 @@ using Laboratorium.Attributes;
 
 namespace Laboratorium.Algorithms.Factorization.Common.LeastCommonMultiple
 {
+    public interface ILeastCommonMultipleAlgorithm
+    {
+        BigInteger Execute(IEuclideanAlgorithm euclideanAlgorithm, BigInteger a, BigInteger b);
+    }
+
     [FunctionAlias("lcm"), DefaultImplementation]
     public class LeastCommonMultipleAlgorithm : ILeastCommonMultipleAlgorithm
     {

@@ -9,8 +9,12 @@ namespace Laboratorium.Algorithms.Factorization.Common.GaussCriterion
     }
 
     [FunctionAlias("gauss"), DefaultImplementation]
-    class GaussCriterion : IGaussCriterion
+    public class GaussCriterion : IGaussCriterion
     {
+        public GaussCriterion()
+        {
+            
+        }
         public BigInteger Execute(BigInteger a, BigInteger n)
         {
             var max = (n - 1) / 2;

@@ -74,7 +74,7 @@ namespace Laboratorium.Core
             {
                 "--nologo",
                 "--exec",
-                $"--use:\"{path}\""
+                $@"--use:""{path}"""
             };
         }
 

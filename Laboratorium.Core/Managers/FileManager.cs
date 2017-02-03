@@ -8,10 +8,10 @@ namespace Laboratorium.Core.Managers
 
         public void SaveScript(string script, string path)
         {
-            //var file = Path.GetTempFileName();
-            //file = Path.ChangeExtension(file, "fsx");
-            //_lastFile = file;
-            var file = path;
+            var file = Path.GetTempFileName();
+            file = Path.ChangeExtension(file, "fsx");
+            _lastFile = file;
+            //var file = path;
             File.WriteAllText(file, script);
         }
 

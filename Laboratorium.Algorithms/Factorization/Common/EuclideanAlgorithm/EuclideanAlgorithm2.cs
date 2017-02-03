@@ -4,6 +4,11 @@ using Laboratorium.Attributes;
 
 namespace Laboratorium.Algorithms.Factorization.Common.EuclideanAlgorithm
 {
+    public interface IEuclideanAlgorithm2
+    {
+        BigInteger Execute(params BigInteger[] numbers);
+    }
+
     [FunctionAlias("gcd2"), DefaultImplementation]
     public class EuclideanAlgorithm2 : IEuclideanAlgorithm2
     {
