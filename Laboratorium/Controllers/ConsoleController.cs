@@ -6,12 +6,12 @@ using Laboratorium.Data;
 
 namespace Laboratorium.Controllers
 {
-    public class HomeController : Controller
+    public class ConsoleController : Controller
     {
         private readonly DataMapper _mapper;
         private readonly IUnitOfWork _uow;
 
-        public HomeController(IUnitOfWork uow)
+        public ConsoleController(IUnitOfWork uow)
         {
             _uow = uow;
 
@@ -19,19 +19,19 @@ namespace Laboratorium.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult SimpleConsoleIndex()
         {
             return View();
         }
 
         [HttpGet]
-        public ActionResult PackageForm()
+        public ActionResult SimpleConsole()
         {
             return PartialView(new Packet());
         }
 
         [HttpPost]
-        public ActionResult PackageForm(Packet packet)
+        public ActionResult SimpleConsole(Packet packet)
         {
             var executor = new Executor(new RealPathManager());
             packet = executor.Execute(packet, false);
@@ -39,18 +39,25 @@ namespace Laboratorium.Controllers
             return PartialView(packet);
         }
 
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult ComplexConsoleIndex()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        [HttpGet]
+        public ActionResult ComplexConsole()
         {
-            ViewBag.Message = "Your contact page.";
+            return PartialView(new Packet());
+        }
 
-            return View();
+        [HttpPost]
+        public ActionResult ComplexConsole(Packet packet)
+        {
+            var executor = new Executor(new RealPathManager());
+            packet = executor.Execute(packet, true);
+
+            return PartialView(packet);
         }
     }
 }

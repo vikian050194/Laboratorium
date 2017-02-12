@@ -20,12 +20,9 @@ namespace Laboratorium.Core.AlgorithmsLibrary
         public List<AlgorithmFamily> GetAlgorithmFamilies()
         {
             var algorithmFamilies = new List<AlgorithmFamily>();
-
             var assembly = _assemblyManager.GetMainAssembly();
-
             var includedFamilies = new List<Type>();
             var necessaryFamilies = new List<Type>();
-
             var types = assembly.GetTypes();
 
             foreach (var type in types)
@@ -49,7 +46,7 @@ namespace Laboratorium.Core.AlgorithmsLibrary
 
             foreach (var type in types)
             {
-                if (!type.IsInterface && !type.IsAbstract && !type.GetCustomAttributes<IgnoreAttribute>().Any())
+                if (!type.IsInterface && !type.IsAbstract)
                 {
                     var family = algorithmFamilies.Find(f => f.Namespace == type.Namespace);
                     AddAlgorithmInFamily(type, family);
@@ -69,7 +66,6 @@ namespace Laboratorium.Core.AlgorithmsLibrary
         {
             var method = GetMainMethod(type);
             var result = method.GetParameters().ToList();
-
             return result;
         }
 
@@ -86,17 +82,13 @@ namespace Laboratorium.Core.AlgorithmsLibrary
         private AlgorithmFamily AddNewFamily(Type type, List<AlgorithmFamily> algorithmFamilies)
         {
             var familyNamespace = type.Namespace;
-
             AlgorithmFamily family;
 
             if (!algorithmFamilies.Exists(f => f.Namespace == familyNamespace))
             {
                 var levels = type.Namespace.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-
                 var familyName = levels.Last();
-
                 family = new AlgorithmFamily(familyName, familyNamespace);
-
                 algorithmFamilies.Add(family);
             }
             else
@@ -115,10 +107,16 @@ namespace Laboratorium.Core.AlgorithmsLibrary
         private void AddAlgorithmInFamily(Type type, AlgorithmFamily family)
         {
             var function = new StringBuilder();
+            var aliasAttribute = type.GetCustomAttributes<FunctionAliasAttribute>().FirstOrDefault();
+            var ignoreAttribute = type.GetCustomAttributes<IgnoreAttribute>().FirstOrDefault();
 
-            var alias = type.GetCustomAttributes<FunctionAliasAttribute>().First().Alias;
+            if (aliasAttribute == null || ignoreAttribute != null)
+            {
+                return;
+            }
+
+            var alias = aliasAttribute.Alias;
             function.AppendFormat("let {0} ", alias);
-
             var method = GetMainMethod(type);
             var arguments = GetArgumentsNames(type);
 
@@ -140,23 +138,19 @@ namespace Laboratorium.Core.AlgorithmsLibrary
             }
 
             function.Append(")");
-
             var newFunction = new AlgorithmFamilyFunction(function.ToString(), "little bit later");
-
             family.Functions.Add(newFunction);
         }
 
         private bool IsNewAlgorithmFamily(Type type, List<AlgorithmFamily> algorithmFamilies)
         {
             var result = algorithmFamilies.All(af => af.Namespace != type.Namespace);
-
             return result;
         }
 
         private bool IsAlgorithmImplementation(Type type)
         {
             var result = type.IsClass;
-
             return result;
         }
     }

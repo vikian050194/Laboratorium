@@ -19,24 +19,21 @@ namespace Laboratorium.Core
             _pathManager = pathManager;
         }
 
-        public Packet Execute(Packet packet)
+        public Packet Execute(Packet packet, bool areCustomAlgorithmsRequired)
         {
             var fileManager = new FileManager();
             var script = new StringBuilder();
 
-            AddReference(script);
-
-            AddOpen(script);
-
-            AddFunctions(script);
+            if (areCustomAlgorithmsRequired)
+            {
+                AddReference(script);
+                AddOpen(script);
+                AddFunctions(script);
+            }
 
             script.Append(packet.Script);
-
-            fileManager.SaveScript(script.ToString(), "C:\\test.fsx");//, "foobar", _pathManager.AssembliesDirectory);
-            var path = fileManager.GetLastFile();
-
-            var processInfo = GetProcessInfo(path);
-
+            var file = fileManager.SaveScript(script.ToString());
+            var processInfo = GetProcessInfo(file);
             var process = Process.Start(processInfo);
 
             var writer = process.StandardInput;
@@ -47,16 +44,10 @@ namespace Laboratorium.Core
                 .ReadToEnd()
                 .Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries)
                 .ToList();
-
             packet.Errors = error
                 .ReadToEnd()
                 .Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries)
                 .ToList();
-
-            if (packet.Errors.Count == 0)
-            {
-                packet.Result = packet.Result.GetRange(2, packet.Result.Count - 3);
-            }
 
             writer.Close();
             reader.Close();
@@ -68,13 +59,13 @@ namespace Laboratorium.Core
             return packet;
         }
 
-        private List<string> GetArguments(string path)
+        private List<string> GetArguments(string file)
         {
             return new List<string>
             {
                 "--nologo",
                 "--exec",
-                $@"--use:""{path}"""
+                $@"--use:""{file}"""
             };
         }
 
@@ -106,9 +97,9 @@ namespace Laboratorium.Core
             script.AppendLine(line);
         }
 
-        private ProcessStartInfo GetProcessInfo(string path)
+        private ProcessStartInfo GetProcessInfo(string file)
         {
-            var argumentsList = GetArguments(path);
+            var argumentsList = GetArguments(file);
             var arguments = new StringBuilder();
 
             for (var i = 0; i < argumentsList.Count; i++)

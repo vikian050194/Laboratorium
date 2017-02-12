@@ -1,23 +1,17 @@
 ﻿using System.IO;
+using System.Net;
 
 namespace Laboratorium.Core.Managers
 {
     public class FileManager
     {
-        private string _lastFile;
-
-        public void SaveScript(string script, string path)
+        public string SaveScript(string script)
         {
             var file = Path.GetTempFileName();
             file = Path.ChangeExtension(file, "fsx");
-            _lastFile = file;
-            //var file = path;
             File.WriteAllText(file, script);
-        }
 
-        public string GetLastFile()
-        {
-            return _lastFile;
+            return file;
         }
     }
 }
