@@ -24,32 +24,13 @@ namespace Laboratorium.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult PackageForm()
-        {
-            return PartialView(new Packet());
-        }
-
-        [HttpPost]
-        public ActionResult PackageForm(Packet packet)
-        {
-            var executor = new Executor(new RealPathManager());
-            packet = executor.Execute(packet, false);
-
-            return PartialView(packet);
-        }
-
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

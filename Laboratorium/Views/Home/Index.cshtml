@@ -1,1 +1,46 @@
-﻿<h1>Привет</h1>
+﻿<div id="carousel-example-generic" class="carousel slide bottom" data-ride="carousel">
+    <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container">
+            <ol class="nav navbar-nav carousel-indicators" style="margin-left: auto; margin-right: auto;">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="dot active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1" class="dot"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2" class="dot"></li>
+            </ol>
+        </div>
+    </div>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <h1>
+                Сила декларативного программирования
+            </h1>
+            <h2>
+                Как именно решать задачу?
+            </h2>
+            <h2>
+                for(var i = 0; i < n; i++) { ... }
+            </h2>
+        </div>
+        <div class="item">
+            <h1>
+                Удобство императивного программирования
+            </h1>
+            <h1>
+                Как должен выглядить ответ?
+            </h1>
+            <h2>
+                let f1 n = [1..n] |> List.fold (fun a x -> a * x) 1
+            </h2>
+        </div>
+        <div class="item">
+            <h1>
+                Здесь и сейчас
+            </h1>
+            <h2>
+                Браузер - это всё, что Вам необходимо, как пользователю
+            </h2>
+        </div>
+    </div>
+</div>
+
+<link href="../../Content/home-index.css" rel="stylesheet">
+<script type="text/javascript" src="../../Scripts/home-index.js"></script>
