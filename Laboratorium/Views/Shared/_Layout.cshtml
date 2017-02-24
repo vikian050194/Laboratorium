@@ -10,19 +10,20 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryajax")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/common")
     @RenderSection("scripts", required: false)
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                @Html.ActionLink("Лабораториум", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+                @Html.ActionLink("Лабораториум", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Консоль<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li>@Html.ActionLink("Простая", "SimpleConsoleIndex", "Console")</li>
+                        <li>@Html.ActionLink("Базовая", "SimpleConsoleIndex", "Console")</li>
                         <li>@Html.ActionLink("Расширенная", "ComplexConsoleIndex", "Console")</li>
                     </ul>
                 </li>
@@ -40,8 +41,12 @@
             </ul>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-    </div>
+<div id="main-container" class="container body-content">
+    @RenderBody()
+</div>
+    @*<div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container" id="navbar-bottom" >
+        </div>
+    </div>*@
 </body>
 </html>

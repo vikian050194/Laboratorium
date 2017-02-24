@@ -1,8 +1,10 @@
 ﻿(function () {
     $(document).ready(function () {
         $('.carousel').carousel({
-            interval: 10000,
+            interval: 15000,
             pause: null
         });
+
+        moveElement('.carousel-indicators', '#dot-container');
     });
 }());
