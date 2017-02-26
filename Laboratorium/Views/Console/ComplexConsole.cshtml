@@ -4,62 +4,56 @@
 {
     InsertionMode = InsertionMode.Replace,
     HttpMethod = "POST",
-    UpdateTargetId = "interactionForm",
-    LoadingElementId = "progressbar"
-}, new { id = "interactionForm", @class = "form-horizontal", role = "form" }))
+    UpdateTargetId = "form",
+    OnBegin = "showDialog",
+    OnComplete = "hideDialog"
+}, new { id = "form", @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="container navbar navbar-fixed-bottom flexbox">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding-left: 0px; padding-right: 7.5px;">
-            <div class="panel panel-default formpanel">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Скрипт</h3>
-                </div>
-                <div class="panel-body">
-                    <div>
-                        @Html.TextAreaFor(m => m.Script, new { @class = "form-control" })
-                    </div>
-                    <hr/>
-                    <input type="submit" value="Выполнить" class="btn btn-primary" />
-                </div>
+    @Html.ValidationSummary("", new { @class = "text-danger"})
+    <div>
+        <ul class="nav nav-pills nav-justified" id="form-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#script" id="script-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Скрипт</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#result" role="tab" id="result-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Результат</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#error" role="tab" id="error-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Ошибки</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#module" role="tab" id="module-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Модули</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#file" role="tab" id="file-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Файл</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active in" role="tabpanel" id="script" aria-labelledby="home-tab">
+                @Html.TextAreaFor(m => m.Script, new { @class = "form-control", placeholder = "Alt+Enter - выполнить скрипт\r\nTab - 4 пробела" })
+                @*<input type="submit" value="Выполнить" class="btn btn-primary" />*@
             </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="padding-left: 7.5px; padding-right: 0px;">
-            <div class="panel panel-default formpanel" style="overflow: auto;">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Результаты</h3>
-                </div>
-                <div class="panel-body">
-                    <div id="progressbar" class="progress" style="display: none;">
-                        <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                            ожидайте
-                        </div>
-                    </div>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <label>Результат</label>
-                            @for (var i = 0; i < Model.Result.Count; i++)
-                            {
-                                <div name="Result[@i]">@Model.Result[i]</div>
-                            }
-                        </li>
-                        <li class="list-group-item">
-                            <label>Полный скрипт</label>
-                            @for (var i = 0; i < Model.Input.Count; i++)
-                            {
-                                <div name="Input[@i]">@Model.Input[i]</div>
-                            }
-                        </li>
-                        <li class="list-group-item">
-                            <label>Ошибки</label>
-                            @for (var i = 0; i < Model.Errors.Count; i++)
-                            {
-                                <div name="Errors[@i]">@Model.Errors[i]</div>
-                            }
-                        </li>
-                    </ul>
-                </div>
+            <div class="tab-pane fade" role="tabpanel" id="result" aria-labelledby="profile-tab">
+                @for (var i = 0; i < Model.Result.Count; i++)
+                {
+                    <div name="Result[@i]">@Model.Result[i]</div>
+                }
+            </div>
+            <div class="tab-pane fade" role="tabpanel" id="error" aria-labelledby="profile-tab">
+                @for (var i = 0; i < Model.Errors.Count; i++)
+                {
+                    <div name="Errors[@i]">@Model.Errors[i]</div>
+                }
+            </div>
+            <div class="tab-pane fade" role="tabpanel" id="module" aria-labelledby="profile-tab">
+
+            </div>
+            <div class="tab-pane fade" role="tabpanel" id="file" aria-labelledby="profile-tab">
+                @for (var i = 0; i < Model.File.Count; i++)
+                {
+                    <div name="File[@i]">@Model.File[i]</div>
+                }
             </div>
         </div>
     </div>

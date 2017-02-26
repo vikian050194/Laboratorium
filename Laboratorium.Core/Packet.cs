@@ -8,12 +8,12 @@ namespace Laboratorium.Core
         {
             Result = new List<string>();
             Errors = new List<string>();
-            Input = new List<string>();
+            File = new List<string>();
         }
 
         public string Script { get; set; }
         public List<string> Result { get; set; }
         public List<string> Errors { get; set; }
-        public List<string> Input { get; set; }
+        public List<string> File { get; set; }
     }
 }

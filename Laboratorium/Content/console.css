@@ -2,8 +2,14 @@
     width: 100%;
     height: 100%;
     max-width: none;
-    min-height: 720px;
+    max-height: none;
+    min-height: 869px;
     resize: none;
-    margin-bottom: 10px;
     margin-top: 10px;
 }
+
+/*#script {
+    background-color: pink;
+    display: flex;
+    flex-direction: column;
+}*/

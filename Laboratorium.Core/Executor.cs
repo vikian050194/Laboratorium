@@ -40,22 +40,15 @@ namespace Laboratorium.Core
             var reader = process.StandardOutput;
             var error = process.StandardError;
 
-            packet.Result = reader
-                .ReadToEnd()
-                .Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries)
-                .ToList();
-            packet.Errors = error
-                .ReadToEnd()
-                .Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries)
-                .ToList();
+
+            var outputManager = new OutputManager();
+            packet = outputManager.Process(script.ToString(), reader.ReadToEnd(), error.ReadToEnd());
 
             writer.Close();
             reader.Close();
             process.WaitForExit();
             process.Close();
-
-            packet.Input = script.ToString().Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries).ToList();
-
+        
             return packet;
         }
 
@@ -76,7 +69,7 @@ namespace Laboratorium.Core
 
             foreach (var function in functions)
             {
-                script.AppendLine(function);
+                script.AppendLine(function + ";;");
             }
         }
 
@@ -87,13 +80,13 @@ namespace Laboratorium.Core
 
             foreach (var line in opens)
             {
-                script.AppendLine(line);
+                script.AppendLine(line + ";;");
             }
         }
 
         private void AddReference(StringBuilder script)
         {
-            var line = $"#r @\"{_pathManager.PathToAssembly}\"";
+            var line = $"#r @\"{_pathManager.PathToAssembly}\";;";
             script.AppendLine(line);
         }
 

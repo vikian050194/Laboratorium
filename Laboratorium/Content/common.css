@@ -25,9 +25,9 @@ textarea {
 }
 
 #main-container{
-    /*top: 51px;
+    top: 51px;
+    bottom: 10px;
     overflow: auto;
     z-index: -1;
-    padding-top: 15px;
-    padding-bottom: 15px;*/
+    border: 0px;
 }

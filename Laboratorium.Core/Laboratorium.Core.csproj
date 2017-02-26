@@ -48,6 +48,7 @@
     <Compile Include="Managers\AssemblyManager.cs" />
     <Compile Include="AlgorithmsLibrary\CodeManager.cs" />
     <Compile Include="Managers\FileManager.cs" />
+    <Compile Include="Managers\OutputManager.cs" />
     <Compile Include="Managers\NameManager.cs" />
     <Compile Include="Executor.cs" />
     <Compile Include="Packet.cs" />

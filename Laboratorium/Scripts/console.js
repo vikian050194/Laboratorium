@@ -19,16 +19,29 @@ enableShortcuts();
 
 function showDialog() {
     $('.progress-bar').html('ожидайте');
-    $('#myModal').modal('show');
+    $('.progress-bar').removeClass('progress-bar-success progress-bar-danger').addClass('progress-bar-primary');
+    $('#script-execution-modal').modal('show');
 }
 
 function hideDialog() {
-    $('.progress-bar').html('готово');
+    var tabIndex;
+    var status;
+    var barClass;
+    $('.progress-bar').removeClass('progress-bar-primary');
+    if ($('#error').children().length === 0) {
+        tabIndex = 1;
+        status = 'готово';
+        barClass = 'progress-bar-success';
+    } else {
+        tabIndex = 2;
+        status = 'ошибка';
+        barClass = 'progress-bar-danger';
+    }
+    $('.progress-bar').html(status);
+    $('.progress-bar').addClass(barClass);
+    $('#form-tabs li:eq(' + tabIndex + ') a').tab('show');
+    enableShortcuts();
     setTimeout(function () {
-        var tabIndex = $('#error').children().length === 0 ? 1 : 2;
-        $('#form-tabs li:eq(' + tabIndex + ') a').tab('show');
-        $('#myModal').modal('hide');
-
-        enableShortcuts();
+        $('#script-execution-modal').modal('hide');
     }, 1000);
 }
