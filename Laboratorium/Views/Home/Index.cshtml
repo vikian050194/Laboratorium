@@ -1,26 +1,37 @@
 ﻿<div id="carousel-example-generic" class="carousel slide bottom" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="dot active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1" class="dot"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2" class="dot"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="3" class="dot"></li>
+    </ol>
     <div class="carousel-inner" role="listbox">
-        <ol class="nav navbar-nav carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="dot active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1" class="dot"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2" class="dot"></li>
-        </ol>
         <div class="item active">
+            <h3>
+                Математический факультет
+            </h3>
+            <h3>
+                Ярославский государственный университет
+            </h3>
+            <h3>
+                имени П. Г. Демидова
+            </h3>
+            <img src="../../Images/letter-l.png"/>
+            <h1>
+                Лабораториум
+            </h1>
+        </div>
+        <div class="item">
             <h1>
                 Здесь и сейчас
             </h1>
             <h2>
-                Браузер - это всё, что Вам необходимо, как пользователю
+                Не нужно ничего устанавливать
             </h2>
             <h2>
-                В Вашем распоряжении две консоли: базовая и расширенная
+                Браузер - это всё, что Вам необходимо
             </h2>
-            <h2>
-                @Html.ActionLink("Базовая", "SimpleConsoleIndex","Console") - позволяет программировать на языке FSharp
-            </h2>
-            <h2>
-                @Html.ActionLink("Расширенная", "ComplexConsoleIndex", "Console") - даёт возможность использовать множество алгоритмов, реализованных на CSharp
-            </h2>
+            <img src="../../Images/browser.jpg" />
         </div>
         <div class="item">
             <h1>
@@ -41,10 +52,18 @@
                 Как должен выглядить ответ?
             </h1>
             <h2>
-                let f1 n = [1..n] |> List.fold (fun a x -> a * x) 1
+                let f n = [1..n] |> List.fold (fun a x -> a * x) 1
             </h2>
         </div>
     </div>
+    @*<a href="#carousel-example-generic" class="left carousel-control" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+    <a href="#carousel-example-generic" class="right carousel-control" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>*@
 </div>
 <div id="dot-container">
 </div>

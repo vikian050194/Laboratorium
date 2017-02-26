@@ -4,7 +4,5 @@
             interval: 15000,
             pause: null
         });
-
-        moveElement('.carousel-indicators', '#dot-container');
     });
 }());

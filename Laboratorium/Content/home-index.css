@@ -9,5 +9,13 @@
 .carousel-indicators {
     margin-right: auto;
     margin-left: auto;
-    width: 50px;
+    width: 59px;
+    position: fixed !important;
+    left: calc(50% - 22px);
+    bottom: 0;
+}
+
+img {
+    margin-right: auto;
+    margin-left: auto;
 }

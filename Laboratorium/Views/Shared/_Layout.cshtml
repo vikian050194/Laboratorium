@@ -3,72 +3,40 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../../LetterL.png" />
+    <link rel="shortcut icon" href="../../Images/letter-l.png" />
     <title>Лабораториум</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryajax")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/common")
+    @*@Scripts.Render("~/bundles/common")*@
     @RenderSection("scripts", required: false)
 </head>
 <body>
-    <div id="script-execution-modal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="modal-title">Выполнение скрипта</h4>
-                </div>
-                <div class="modal-body">
-                    <div id="progressbar" class="progress">
-                        <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 @Html.ActionLink("Лабораториум", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Консоль<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li>@Html.ActionLink("Базовая", "SimpleConsoleIndex", "Console")</li>
-                        <li>@Html.ActionLink("Расширенная", "ComplexConsoleIndex", "Console")</li>
-                    </ul>
-                </li>
-                <li>@Html.ActionLink("Документация", "About", "Home")</li>
+                <li>@Html.ActionLink("Консоль", "Index", "Console")</li>
                 <li>@Html.ActionLink("О проекте", "About", "Home")</li>
                 <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
             </ul>
             @*@Html.Partial("_LoginPartial")*@
-            @*<ul class="nav navbar-nav navbar-right">
-                    <form class="navbar-form navbar-left">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Что ищем?">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Поиск</button>
-                    </form>
-                </ul>*@
+            <ul class="nav navbar-nav navbar-right">
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Что ищем?">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Поиск</button>
+                </form>
+            </ul>
         </div>
     </div>
-    <div id="main-container" class="container body-content navbar navbar-fixed-bottom">
+    <div id="main-container" class="container body-content">
         @RenderBody()
     </div>
-    @*<div class="navbar navbar-default navbar-fixed-bottom">
-            <div class="container" id="navbar-bottom" >
-            </div>
-        </div>*@
 </body>
 </html>
