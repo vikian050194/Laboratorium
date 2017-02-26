@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Laboratorium.Core.Managers;
 
 namespace Laboratorium.Core.AlgorithmsLibrary
 {

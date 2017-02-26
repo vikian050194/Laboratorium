@@ -5,6 +5,9 @@
     max-height: none;
     min-height: 869px;
     resize: none;
+}
+
+.tab-pane {
     margin-top: 10px;
 }
 

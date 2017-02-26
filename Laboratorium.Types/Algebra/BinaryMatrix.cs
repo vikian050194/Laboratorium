@@ -1,4 +1,4 @@
-﻿namespace Laboratorium.TypeLib.Algebra
+﻿namespace Laboratorium.Types.Algebra
 {
     public class BinaryMatrix
     {

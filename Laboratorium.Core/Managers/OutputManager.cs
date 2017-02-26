@@ -46,7 +46,7 @@ namespace Laboratorium.Core.Managers
             return packet;
         }
 
-        public List<string> Process(List<string> lines)
+        private List<string> Process(List<string> lines)
         {
             var result = new List<string>();
 
@@ -60,7 +60,7 @@ namespace Laboratorium.Core.Managers
             return result;
         }
 
-        public string Process(string line)
+        private string Process(string line)
         {
             var result = line;
 

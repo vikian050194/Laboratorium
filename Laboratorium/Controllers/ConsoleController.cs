@@ -10,12 +10,13 @@ namespace Laboratorium.Controllers
     {
         private readonly DataMapper _mapper;
         private readonly IUnitOfWork _uow;
+        private readonly Executor _executor;
 
         public ConsoleController(IUnitOfWork uow)
         {
             _uow = uow;
-
             _mapper = new DataMapper();
+            _executor = new Executor(new RealPathManager());
         }
 
         [HttpGet]
@@ -33,8 +34,7 @@ namespace Laboratorium.Controllers
         [HttpPost]
         public ActionResult SimpleConsole(Packet packet)
         {
-            var executor = new Executor(new RealPathManager());
-            packet = executor.Execute(packet, false);
+            packet = _executor.Execute(packet, false);
 
             return PartialView(packet);
         }
@@ -48,14 +48,14 @@ namespace Laboratorium.Controllers
         [HttpGet]
         public ActionResult ComplexConsole()
         {
-            return PartialView(new Packet());
+            var packet = _executor.GetNewEmptyPacket();
+            return PartialView(packet);
         }
 
         [HttpPost]
         public ActionResult ComplexConsole(Packet packet)
         {
-            var executor = new Executor(new RealPathManager());
-            packet = executor.Execute(packet, true);
+            packet = _executor.Execute(packet, true);
 
             return PartialView(packet);
         }

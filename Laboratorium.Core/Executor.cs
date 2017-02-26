@@ -19,16 +19,32 @@ namespace Laboratorium.Core
             _pathManager = pathManager;
         }
 
-        public Packet Execute(Packet packet, bool areCustomAlgorithmsRequired)
+        public Packet GetNewEmptyPacket()
         {
+            var result = new Packet();
+            var algorithmFamilies = _codeManager.GetAlgorithmFamilies();
+            foreach (var algorithmFamily in algorithmFamilies)
+            {
+                result.Modules.Add(new AlgorithmFamilySettingItem(algorithmFamily));
+            }
+
+            return result;
+        }
+
+        public Packet Execute(Packet packet, bool areModulesEnabled)
+        {
+            var modules = packet.Modules;
+
             var fileManager = new FileManager();
             var script = new StringBuilder();
 
-            if (areCustomAlgorithmsRequired)
+            if (areModulesEnabled)
             {
                 AddReference(script);
-                AddOpen(script);
-                AddFunctions(script);
+
+                var enabledModules = packet.Modules.Where(m => m.IsEnadled).Select(m => m.Name).ToList();
+                AddOpen(script, enabledModules);
+                AddFunctions(script, enabledModules);
             }
 
             script.Append(packet.Script);
@@ -40,15 +56,17 @@ namespace Laboratorium.Core
             var reader = process.StandardOutput;
             var error = process.StandardError;
 
-
-            var outputManager = new OutputManager();
-            packet = outputManager.Process(script.ToString(), reader.ReadToEnd(), error.ReadToEnd());
+            var output = reader.ReadToEnd();
+            var errors = error.ReadToEnd();
 
             writer.Close();
             reader.Close();
             process.WaitForExit();
             process.Close();
-        
+
+            var outputManager = new OutputManager();
+            packet = outputManager.Process(script.ToString(), output, errors);
+            packet.Modules = modules;
             return packet;
         }
 
@@ -62,10 +80,9 @@ namespace Laboratorium.Core
             };
         }
 
-        private void AddFunctions(StringBuilder script)
+        private void AddFunctions(StringBuilder script, List<string> modules)
         {
-            var algorithmFamilies = _codeManager.GetAlgorithmFamilies();
-            var functions = _codeManager.GetFunctions(algorithmFamilies);
+            var functions = _codeManager.GetFunctions(modules);
 
             foreach (var function in functions)
             {
@@ -73,10 +90,9 @@ namespace Laboratorium.Core
             }
         }
 
-        private void AddOpen(StringBuilder script)
+        private void AddOpen(StringBuilder script, List<string> modules)
         {
-            var algorithmFamilies = _codeManager.GetAlgorithmFamilies();
-            var opens = _codeManager.GetOpens(algorithmFamilies);
+            var opens = _codeManager.GetOpens(modules);
 
             foreach (var line in opens)
             {

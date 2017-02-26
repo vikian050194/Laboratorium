@@ -1,7 +1,21 @@
 ﻿using System.Collections.Generic;
 
-namespace Laboratorium.Core
+namespace Laboratorium.Core.AlgorithmsLibrary
 {
+    public class AlgorithmFamilySettingItem
+    {
+        public AlgorithmFamilySettingItem()
+        {
+            
+        }
+        public AlgorithmFamilySettingItem(string name)
+        {
+            Name = name;
+        }
+        public string Name { get; set; }
+        public bool IsEnadled { get; set; }
+    }
+
     internal class AlgorithmFamily
     {
         public AlgorithmFamily(string familyName, string familyNamespace)
