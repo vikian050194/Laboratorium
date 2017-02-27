@@ -39,7 +39,7 @@ namespace Laboratorium.Core.Managers
                 Errors = errors.Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries).ToList()
             };
 
-            //_rules.Add(new Rule { From = "--> Referenced", To = "", RuleAction = Action.RemoveLine });
+            _rules.Add(new Rule { From = "--> Referenced", To = "", RuleAction = Action.RemoveLine });
             _rules.Add(new Rule { From = "> ", To = "", RuleAction = Action.RemoveLine });
 
             packet.Result = Process(packet.Result);
