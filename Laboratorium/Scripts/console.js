@@ -24,16 +24,14 @@ function showDialog() {
 }
 
 function hideDialog() {
-    var tabIndex;
+    var tabIndex = 1;
     var status;
     var barClass;
     $('.progress-bar').removeClass('progress-bar-primary');
-    if ($('#error').children().length === 0) {
-        tabIndex = 1;
+    if ($('#errors').val() === 'False') {
         status = 'готово';
         barClass = 'progress-bar-success';
     } else {
-        tabIndex = 2;
         status = 'ошибка';
         barClass = 'progress-bar-danger';
     }

@@ -33,5 +33,20 @@ namespace Laboratorium.Controllers
         {
             return View();
         }
+
+        public ActionResult HowToUse()
+        {
+            return View();
+        }
+
+        public ActionResult Examples()
+        {
+            return View();
+        }
+
+        public ActionResult Books()
+        {
+            return View();
+        }
     }
 }

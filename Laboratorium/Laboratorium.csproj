@@ -314,6 +314,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Console\Console.cshtml" />
     <Content Include="Views\Console\Index.cshtml" />
+    <None Include="Views\Home\Books.cshtml" />
+    <None Include="Views\Home\Examples.cshtml" />
+    <None Include="Views\Home\HowToUse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
