@@ -1,4 +1,4 @@
-﻿.dot{
+﻿.dot {
     background-color: #245580 !important;
 }
 
@@ -19,3 +19,16 @@ img {
     margin-right: auto;
     margin-left: auto;
 }
+
+.carousel-control {
+    font-size: 50px;
+    color: #245580;
+    margin-top: calc(50% - 75px);
+    text-shadow: none;
+    opacity: 1;
+    background-image: none !important;
+}
+
+    .carousel-control:hover{
+        color: #245580;
+    }
