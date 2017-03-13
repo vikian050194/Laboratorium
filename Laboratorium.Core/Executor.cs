@@ -23,9 +23,10 @@ namespace Laboratorium.Core
         {
             var result = new Packet();
             var algorithmFamilies = _codeManager.GetAlgorithmFamilies();
+
             foreach (var algorithmFamily in algorithmFamilies)
             {
-                result.Modules.Add(new AlgorithmFamilySettingItem(algorithmFamily));
+                result.Modules.Add(new AlgorithmFamilySettingItem(algorithmFamily, _codeManager.GetFunctions(algorithmFamily)));
             }
 
             return result;

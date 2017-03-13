@@ -6,6 +6,7 @@ namespace Laboratorium.Core.AlgorithmsLibrary
     public interface ICodeManager
     {
         List<string> GetAlgorithmFamilies();
+        List<string> GetFunctions(string algorithmFamily);
         List<string> GetFunctions(List<string> algorithmFamilies);
         List<string> GetAdapters(List<string> algorithmFamilies);
         List<string> GetOpens(List<string> algorithmFamilies);
@@ -25,14 +26,19 @@ namespace Laboratorium.Core.AlgorithmsLibrary
             return _librarian.GetAlgorithmFamiliesNames();
         }
 
+        public List<string> GetFunctions(string algorithmFamily)
+        {
+            var functions = _librarian.GetFunctions(algorithmFamily);
+            return functions;
+        }
+
         public List<string> GetFunctions(List<string> algorithmFamilies)
         {
             var result = new List<string>();
 
             foreach (var algorithmFamily in algorithmFamilies)
             {
-                var functions = _librarian.GetFunctions(algorithmFamily);
-
+                var functions = GetFunctions(algorithmFamily);
                 result.AddRange(functions);
             }
 

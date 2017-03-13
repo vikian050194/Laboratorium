@@ -29,7 +29,7 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade active in container container-fixed" role="tabpanel" id="script" aria-labelledby="home-tab">
-                @Html.TextAreaFor(m => m.Script, new {@class = "form-control"})
+                @Html.TextAreaFor(m => m.Script, new { @class = "form-control" })
             </div>
             <div class="tab-pane fade container container-fixed" role="tabpanel" id="result" aria-labelledby="profile-tab">
 
@@ -51,10 +51,23 @@
             <div class="tab-pane fade container container-fixed" role="tabpanel" id="module" aria-labelledby="profile-tab">
                 @for (var i = 0; i < Model.Modules.Count; i++)
                 {
-                    <div>
-                        @Html.CheckBoxFor(m => m.Modules[i].IsEnadled)
-                        @Html.Hidden("Modules[" + i + "].Name", Model.Modules[i].Name)
-                        @Html.DisplayTextFor(m => m.Modules[i].Name)
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            @Html.CheckBoxFor(m => m.Modules[i].IsEnadled)
+                            @Html.Hidden("Modules[" + i + "].Name", Model.Modules[i].Name)
+                            @Html.DisplayTextFor(m => m.Modules[i].Name)
+                        </div>
+                        <div class="panel-body">
+                            <ol>
+                                @for (var j = 0; j < Model.Modules[i].Functions.Count; j++)
+                                {
+                                    <li>
+                                        @Model.Modules[i].Functions[j]
+                                    </li>
+                                    @Html.Hidden("Modules[" + i + "].Functions[" + j + "]", Model.Modules[i].Functions[j])
+                                }
+                            </ol>
+                        </div>
                     </div>
                 }
             </div>
