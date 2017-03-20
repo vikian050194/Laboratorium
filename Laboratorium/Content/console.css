@@ -11,3 +11,8 @@
     bottom: 10px;
     top: 108px;
 }
+
+#result,
+#module {
+    overflow: auto;
+}

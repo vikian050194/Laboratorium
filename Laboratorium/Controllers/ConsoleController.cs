@@ -34,7 +34,7 @@ namespace Laboratorium.Controllers
         [HttpPost]
         public ActionResult Console(Packet packet)
         {
-            packet = _executor.Execute(packet, true);
+            packet = _executor.Execute(packet);
             return PartialView(packet);
         }
     }

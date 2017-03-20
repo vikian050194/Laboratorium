@@ -32,17 +32,16 @@ namespace Laboratorium.Core
             return result;
         }
 
-        public Packet Execute(Packet packet, bool areModulesEnabled)
+        public Packet Execute(Packet packet)
         {
             var modules = packet.Modules;
 
             var fileManager = new FileManager();
             var script = new StringBuilder();
 
-            if (areModulesEnabled)
+            if (modules.Any(m => m.IsEnadled))
             {
                 AddReference(script);
-
                 var enabledModules = packet.Modules.Where(m => m.IsEnadled).Select(m => m.Name).ToList();
                 AddOpen(script, enabledModules);
                 AddFunctions(script, enabledModules);

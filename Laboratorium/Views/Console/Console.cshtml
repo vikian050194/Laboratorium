@@ -23,16 +23,12 @@
             <li role="presentation" class="">
                 <a href="#module" role="tab" id="module-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Модули</a>
             </li>
-            <li role="presentation" class="">
-                <a href="#file" role="tab" id="file-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Файл</a>
-            </li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade active in container container-fixed" role="tabpanel" id="script" aria-labelledby="home-tab">
                 @Html.TextAreaFor(m => m.Script, new { @class = "form-control" })
             </div>
             <div class="tab-pane fade container container-fixed" role="tabpanel" id="result" aria-labelledby="profile-tab">
-
                 @if (Model.Errors.Any())
                 {
                     for (var i = 0; i < Model.Errors.Count; i++)
@@ -69,12 +65,6 @@
                             </ol>
                         </div>
                     </div>
-                }
-            </div>
-            <div class="tab-pane fade container container-fixed" role="tabpanel" id="file" aria-labelledby="profile-tab">
-                @for (var i = 0; i < Model.File.Count; i++)
-                {
-                    <div name="File[@i]">@Model.File[i]</div>
                 }
             </div>
         </div>
