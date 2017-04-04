@@ -83,7 +83,7 @@ namespace Laboratorium.Core
         private void AddFunctions(StringBuilder script, List<string> modules)
         {
             var functions = _codeManager.GetFunctions(modules);
-
+            functions.Add("let bi (n:int) = (new BigInteger(n));;");
             foreach (var function in functions)
             {
                 script.AppendLine(function + ";;");
@@ -93,7 +93,7 @@ namespace Laboratorium.Core
         private void AddOpen(StringBuilder script, List<string> modules)
         {
             var opens = _codeManager.GetOpens(modules);
-
+            opens.Add("open System.Numerics;;");
             foreach (var line in opens)
             {
                 script.AppendLine(line + ";;");

@@ -28,21 +28,26 @@ namespace Laboratorium.Core.Managers
 
         public Packet Process(string script, string result, string errors)
         {
-            _rules.Add(new Rule { From = "System.Numerics.", To = "", RuleAction = Action.ReplaceWord });
-            _rules.Add(new Rule { From = "->\r\n", To = "-> ", RuleAction = Action.ReplaceWord });
-            _rules.Add(new Rule { From = ":\r\n", To = ": ", RuleAction = Action.ReplaceWord });
-
             var packet = new Packet
             {
-                File = script.Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries).ToList(),
-                Result = Process(result).Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries).ToList(),
-                Errors = errors.Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries).ToList()
+                IsError = errors.Length != 0
             };
 
-            _rules.Add(new Rule { From = "--> Referenced", To = "", RuleAction = Action.RemoveLine });
-            _rules.Add(new Rule { From = "> ", To = "", RuleAction = Action.RemoveLine });
+            if (packet.IsError)
+            {
+                packet.Result = errors.Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries).ToList();
+            }
+            else
+            {
+                _rules.Add(new Rule { From = "System.Numerics.", To = "", RuleAction = Action.ReplaceWord });
+                _rules.Add(new Rule { From = "->\r\n", To = "-> ", RuleAction = Action.ReplaceWord });
+                _rules.Add(new Rule { From = ":\r\n", To = ": ", RuleAction = Action.ReplaceWord });
+                packet.Result = Process(result).Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                _rules.Add(new Rule { From = "--> Referenced", To = "", RuleAction = Action.RemoveLine });
+                _rules.Add(new Rule { From = "> ", To = "", RuleAction = Action.RemoveLine });
+                packet.Result = Process(packet.Result);
+            }
 
-            packet.Result = Process(packet.Result);
             return packet;
         }
 
@@ -56,7 +61,6 @@ namespace Laboratorium.Core.Managers
             }
 
             result = result.Where(l => !string.IsNullOrEmpty(l)).ToList();
-
             return result;
         }
 
@@ -83,7 +87,6 @@ namespace Laboratorium.Core.Managers
                     {
                         return string.Empty;
                     }
-
                     return line;
                 default:
                     return string.Empty;

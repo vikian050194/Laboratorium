@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div>
-        @Html.Hidden("errors", Model.Errors.Any())
+        @Html.Hidden("errors", Model.IsError)
         <ul class="nav nav-pills nav-justified" id="form-tabs" role="tablist">
             <li role="presentation" class="active">
                 <a href="#script" id="script-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Скрипт</a>
@@ -27,21 +27,12 @@
         <div class="tab-content">
             <div class="tab-pane fade active in container container-fixed" role="tabpanel" id="script" aria-labelledby="home-tab">
                 @Html.TextAreaFor(m => m.Script, new { @class = "form-control" })
+                <input type="submit" value="Выполнить" class="btn btn-primary" />
             </div>
             <div class="tab-pane fade container container-fixed" role="tabpanel" id="result" aria-labelledby="profile-tab">
-                @if (Model.Errors.Any())
+                @foreach (var t in Model.Result)
                 {
-                    for (var i = 0; i < Model.Errors.Count; i++)
-                    {
-                        <div name="Errors[@i]">@Model.Errors[i]</div>
-                    }
-                }
-                else
-                {
-                    for (var i = 0; i < Model.Result.Count; i++)
-                    {
-                        <div name="Result[@i]">@Model.Result[i]</div>
-                    }
+                    <div>@t</div>
                 }
             </div>
             <div class="tab-pane fade container container-fixed" role="tabpanel" id="module" aria-labelledby="profile-tab">

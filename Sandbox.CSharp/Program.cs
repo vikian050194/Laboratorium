@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Numerics;
+using Laboratorium.Algorithms.Factorization.Probabilistic.TestsOfSimplicity;
 using Laboratorium.Core;
 using Laboratorium.Core.Managers;
 
@@ -8,8 +10,11 @@ namespace Sandbox.CSharp
     {
         static void Main(string[] args)
         {
-            var executor = new Executor(new TestPathManager());
-            var result = executor.Execute(new Packet() {Script = "let x = 2 * 16;;"});
+            //var executor = new Executor(new TestPathManager());
+            //var result = executor.Execute(new Packet() {Script = "let x = 2 * 16;;"});
+            var alg = new SolovayStrassenTest();
+            var result = alg.Execute(new BigInteger(31), new BigInteger(3));
+            Console.WriteLine(result);
             Console.ReadLine();
         }
     }

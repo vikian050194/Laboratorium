@@ -7,7 +7,7 @@
                 end = this.selectionEnd;
             this.value = val.substring(0, start) + '    ' + val.substring(end);
             this.selectionStart = this.selectionEnd = start + 4;
-            return false;
+            return;
         }
         if (e.altKey && keyCode === 13) {
             $('#form').submit();
@@ -28,12 +28,12 @@ function hideDialog() {
     var status;
     var barClass;
     $('.progress-bar').removeClass('progress-bar-primary');
-    if ($('#errors').val() === 'False') {
-        status = 'готово';
-        barClass = 'progress-bar-success';
-    } else {
+    if ($('#errors').val() == 'True') {
         status = 'ошибка';
         barClass = 'progress-bar-danger';
+    } else {
+        status = 'готово';
+        barClass = 'progress-bar-success';
     }
     $('.progress-bar').html(status);
     $('.progress-bar').addClass(barClass);
