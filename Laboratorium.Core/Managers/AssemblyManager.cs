@@ -4,20 +4,21 @@ using System.Reflection;
 
 namespace Laboratorium.Core.Managers
 {
-    internal interface IAssemblyManager
+    public interface IAssemblyManager
     {
         Assembly GetAssembly(string path);
         Assembly GetMainAssembly();
     }
 
-    internal class AssemblyManager : IAssemblyManager
+    public class AssemblyManager : IAssemblyManager
     {
         private readonly PathManager _pathManager;
 
-        public AssemblyManager()
+        public AssemblyManager(PathManager pathManager)
         {
-            _pathManager = new RealPathManager();
+            _pathManager = pathManager;
         }
+
         public Assembly GetAssembly(string path)
         {
             var appDomain = AppDomain.CreateDomain("domain");

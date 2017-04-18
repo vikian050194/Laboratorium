@@ -27,7 +27,7 @@
         <div class="tab-content">
             <div class="tab-pane fade active in container container-fixed" role="tabpanel" id="script" aria-labelledby="home-tab">
                 @Html.TextAreaFor(m => m.Script, new { @class = "form-control" })
-                <input type="submit" value="Выполнить" class="btn btn-primary" />
+                <input type="submit" value="Выполнить" class="btn btn-primary" title="Alt + Enter"/>
             </div>
             <div class="tab-pane fade container container-fixed" role="tabpanel" id="result" aria-labelledby="profile-tab">
                 @foreach (var t in Model.Result)
@@ -45,6 +45,8 @@
                             @Html.DisplayTextFor(m => m.Modules[i].Name)
                         </div>
                         <div class="panel-body">
+                            @Html.DisplayTextFor(m => m.Modules[i].Info)
+                            @Html.Hidden("Modules[" + i + "].Info", Model.Modules[i].Info)
                             <ol>
                                 @for (var j = 0; j < Model.Modules[i].Functions.Count; j++)
                                 {

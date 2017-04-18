@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Laboratorium.Core.Managers;
+using System.Linq;
 
 namespace Laboratorium.Core.AlgorithmsLibrary
 {
@@ -14,22 +14,25 @@ namespace Laboratorium.Core.AlgorithmsLibrary
 
     public class CodeManager : ICodeManager
     {
-        private readonly Librarian _librarian;
+        private readonly CodeGenerator _codeGenerator;
 
         public CodeManager()
         {
-            _librarian = new Librarian();
-        }
-
-        public List<string> GetAlgorithmFamilies()
-        {
-            return _librarian.GetAlgorithmFamiliesNames();
+            _codeGenerator = new CodeGenerator();
         }
 
         public List<string> GetFunctions(string algorithmFamily)
         {
-            var functions = _librarian.GetFunctions(algorithmFamily);
-            return functions;
+            var family = _codeGenerator.GetAlgorithmFamilies().Find(af => af.Name == algorithmFamily);
+
+            var result = family.Functions.Select(f => f.DefaultFunction).ToList();
+
+            return result;
+        }
+
+        public List<string> GetAlgorithmFamilies()
+        {
+            return _codeGenerator.GetAlgorithmFamilies().Select(f => f.Name).ToList();
         }
 
         public List<string> GetFunctions(List<string> algorithmFamilies)
@@ -48,8 +51,12 @@ namespace Laboratorium.Core.AlgorithmsLibrary
         public List<string> GetAdapters(List<string> algorithmFamilies)
         {
             var result = new List<string>();
-
             return result;
+        }
+
+        private string GetOpen(string algorithmFamily)
+        {
+            return _codeGenerator.GetAlgorithmFamilies().Find(af => af.Name == algorithmFamily).Open;
         }
 
         public List<string> GetOpens(List<string> algorithmFamilies)
@@ -58,8 +65,7 @@ namespace Laboratorium.Core.AlgorithmsLibrary
 
             foreach (var algorithmFamily in algorithmFamilies)
             {
-                var open = _librarian.GetOpen(algorithmFamily);
-
+                var open = GetOpen(algorithmFamily);
                 result.Add(open);
             }
 

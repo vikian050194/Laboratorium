@@ -14,7 +14,7 @@ namespace Laboratorium.Core.AlgorithmsLibrary
 
         public CodeGenerator()
         {
-            _assemblyManager = new AssemblyManager();
+            _assemblyManager = new AssemblyManager(new RealPathManager());
         }
 
         public List<AlgorithmFamily> GetAlgorithmFamilies()
@@ -86,9 +86,7 @@ namespace Laboratorium.Core.AlgorithmsLibrary
 
             if (!algorithmFamilies.Exists(f => f.Namespace == familyNamespace))
             {
-                var levels = type.Namespace.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-                var familyName = levels.Last();
-                family = new AlgorithmFamily(familyName, familyNamespace);
+                family = new AlgorithmFamily(type.Name, familyNamespace);
                 algorithmFamilies.Add(family);
             }
             else

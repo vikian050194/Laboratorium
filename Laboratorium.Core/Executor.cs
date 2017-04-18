@@ -26,7 +26,8 @@ namespace Laboratorium.Core
 
             foreach (var algorithmFamily in algorithmFamilies)
             {
-                result.Modules.Add(new AlgorithmFamilySettingItem(algorithmFamily, _codeManager.GetFunctions(algorithmFamily)));
+                var info = Resources.Properties.Resources.ResourceManager.GetString(algorithmFamily) ?? string.Empty;
+                result.Modules.Add(new AlgorithmFamilySettingItem(algorithmFamily, info, _codeManager.GetFunctions(algorithmFamily)));
             }
 
             return result;

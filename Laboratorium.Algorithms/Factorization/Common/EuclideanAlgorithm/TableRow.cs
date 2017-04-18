@@ -1,5 +1,4 @@
 ﻿using System.Numerics;
-using Laboratorium.Attributes;
 
 namespace Laboratorium.Algorithms.Factorization.Common.EuclideanAlgorithm
 {

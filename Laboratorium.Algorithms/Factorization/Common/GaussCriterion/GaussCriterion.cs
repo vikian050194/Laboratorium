@@ -3,13 +3,13 @@ using Laboratorium.Attributes;
 
 namespace Laboratorium.Algorithms.Factorization.Common.GaussCriterion
 {
-    internal interface IGaussCriterion
+    internal interface IQuadraticResidue
     {
         BigInteger Execute(BigInteger a, BigInteger n);
     }
 
     [FunctionAlias("gauss"), DefaultImplementation]
-    public class GaussCriterion : IGaussCriterion
+    public class GaussCriterion : IQuadraticResidue
     {
         public GaussCriterion()
         {

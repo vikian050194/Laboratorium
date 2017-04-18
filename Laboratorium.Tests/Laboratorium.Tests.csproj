@@ -61,6 +61,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="General\AssemblyExplorer.cs" />
+    <Compile Include="General\BaseTest.cs" />
+    <Compile Include="General\BasicRequirementsTest.cs" />
     <Compile Include="FactorizationTest.cs" />
     <Compile Include="NameManagerTest.cs" />
     <Compile Include="ExecutorTest.cs" />
@@ -71,9 +74,17 @@
       <Project>{21456229-9644-44bd-8c8e-2eea1d714b07}</Project>
       <Name>Laboratorium.Algorithms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Laboratorium.Attributes\Laboratorium.Attributes.csproj">
+      <Project>{5542FBEF-8DEF-4A0A-92BE-1370DFA59312}</Project>
+      <Name>Laboratorium.Attributes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Laboratorium.Core\Laboratorium.Core.csproj">
       <Project>{4e3298de-7f7e-4754-8fdb-54119b0abc25}</Project>
       <Name>Laboratorium.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Laboratorium.Resources\Laboratorium.Resources.csproj">
+      <Project>{c397d91b-fad7-4fe1-8884-00d36afed60b}</Project>
+      <Name>Laboratorium.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Laboratorium.Types\Laboratorium.Types.csproj">
       <Project>{049ccf24-0abf-4778-8d02-d21f8c885f7a}</Project>
