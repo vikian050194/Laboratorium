@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Laboratorium.Core.AlgorithmsLibrary;
 
-namespace Laboratorium.Core
+namespace Laboratorium.Core.Containers
 {
 
 

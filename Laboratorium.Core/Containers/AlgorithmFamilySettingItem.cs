@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Laboratorium.Core.AlgorithmsLibrary
+namespace Laboratorium.Core.Containers
 {
     public class AlgorithmFamilySettingItem
     {

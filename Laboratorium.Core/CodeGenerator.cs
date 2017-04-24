@@ -4,9 +4,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Laboratorium.Attributes;
+using Laboratorium.Core.Containers;
 using Laboratorium.Core.Managers;
 
-namespace Laboratorium.Core.AlgorithmsLibrary
+namespace Laboratorium.Core
 {
     internal class CodeGenerator
     {

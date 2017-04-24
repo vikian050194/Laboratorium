@@ -41,18 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlgorithmsLibrary\AlgorithmFamily.cs" />
-    <Compile Include="AlgorithmsLibrary\AlgorithmFamilyFunction.cs" />
-    <Compile Include="AlgorithmsLibrary\AlgorithmFamilySettingItem.cs" />
-    <Compile Include="AlgorithmsLibrary\CodeGenerator.cs" />
+    <Compile Include="Containers\AlgorithmFamily.cs" />
+    <Compile Include="Containers\AlgorithmFamilyFunction.cs" />
+    <Compile Include="Containers\AlgorithmFamilySettingItem.cs" />
+    <Compile Include="CodeGenerator.cs" />
+    <Compile Include="Managers\Action.cs" />
     <Compile Include="Managers\AssemblyManager.cs" />
-    <Compile Include="AlgorithmsLibrary\CodeManager.cs" />
+    <Compile Include="Managers\CodeManager.cs" />
     <Compile Include="Managers\FileManager.cs" />
+    <Compile Include="Managers\IAssemblyManager.cs" />
+    <Compile Include="Managers\ICodeManager.cs" />
     <Compile Include="Managers\OutputManager.cs" />
     <Compile Include="Managers\NameManager.cs" />
     <Compile Include="Executor.cs" />
-    <Compile Include="Packet.cs" />
+    <Compile Include="Containers\Packet.cs" />
     <Compile Include="Managers\PathManager.cs" />
+    <Compile Include="Managers\RealPathManager.cs" />
+    <Compile Include="Managers\Rule.cs" />
+    <Compile Include="Managers\TestPathManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

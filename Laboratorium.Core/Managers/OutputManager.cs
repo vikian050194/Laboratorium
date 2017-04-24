@@ -1,22 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Laboratorium.Core.Containers;
 
 namespace Laboratorium.Core.Managers
 {
-    public enum Action
-    {
-        ReplaceWord,
-        RemoveLine
-    }
-
-    public class Rule
-    {
-        public Action RuleAction;
-        public string From;
-        public string To;
-    }
-
     public class OutputManager
     {
         private List<Rule> _rules;

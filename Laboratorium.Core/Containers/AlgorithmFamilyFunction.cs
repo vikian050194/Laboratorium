@@ -1,4 +1,4 @@
-﻿namespace Laboratorium.Core.AlgorithmsLibrary
+﻿namespace Laboratorium.Core.Containers
 {
     internal class AlgorithmFamilyFunction
     {

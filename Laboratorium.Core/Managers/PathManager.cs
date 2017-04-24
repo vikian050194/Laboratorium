@@ -24,20 +24,4 @@ namespace Laboratorium.Core.Managers
             return Path.GetDirectoryName(path);
         }
     }
-
-    public class RealPathManager : PathManager
-    {
-        public RealPathManager()
-        {
-            PathToFsi = AssembliesDirectory + @"\..\..\FSharp\Fsi.exe";
-        }
-    }
-
-    public class TestPathManager : PathManager
-    {
-        public TestPathManager()
-        {
-            PathToFsi = AssembliesDirectory + @"\..\..\..\FSharp\Fsi.exe";
-        }
-    }
 }

@@ -1,20 +1,16 @@
 ﻿using System.Web.Mvc;
 using Laboratorium.Core;
+using Laboratorium.Core.Containers;
 using Laboratorium.Core.Managers;
-using Laboratorium.Data;
 
 namespace Laboratorium.Controllers
 {
     public class ConsoleController : Controller
     {
-        private readonly DataMapper _mapper;
-        private readonly IUnitOfWork _uow;
         private readonly Executor _executor;
 
-        public ConsoleController(IUnitOfWork uow)
+        public ConsoleController()
         {
-            _uow = uow;
-            _mapper = new DataMapper();
             _executor = new Executor(new RealPathManager());
         }
 

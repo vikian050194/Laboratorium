@@ -2,6 +2,7 @@
 using System.Numerics;
 using Laboratorium.Algorithms.Factorization.Probabilistic.TestsOfSimplicity;
 using Laboratorium.Core;
+using Laboratorium.Core.Containers;
 using Laboratorium.Core.Managers;
 
 namespace Sandbox.CSharp

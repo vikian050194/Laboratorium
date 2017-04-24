@@ -1,6 +1,7 @@
 ﻿using Laboratorium.Models.ViewModels;
 using AutoMapper;
 using Laboratorium.Core;
+using Laboratorium.Core.Containers;
 
 namespace Laboratorium
 {
