@@ -1,6 +1,7 @@
 ﻿using Laboratorium.Models.ViewModels;
-using LaboratoriumCore;
 using AutoMapper;
+using Laboratorium.Core;
+using Laboratorium.Core.Containers;
 
 namespace Laboratorium
 {
@@ -13,12 +14,14 @@ namespace Laboratorium
 
         private void CreatePacketMap()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Packet, PacketViewModel>());
-            .CreateMap<Packet, PacketViewModel>();
-            Mapper.CreateMap<PacketViewModel, Packet>();
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Packet, PacketViewModel>();
+                cfg.CreateMap<PacketViewModel, Packet>();
+            });
         }
 
-        public TDestination GetWrapper<TSource, TDestination>(TSource source)
+        public TDestination Map<TSource, TDestination>(TSource source)
         {
             return Mapper.Map<TSource, TDestination>(source);
         }

@@ -41,15 +41,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExecutorHelper.cs" />
-    <Compile Include="IExecutorHelper.cs" />
-    <Compile Include="NameManager.cs" />
+    <Compile Include="Containers\AlgorithmFamily.cs" />
+    <Compile Include="Containers\AlgorithmFamilyFunction.cs" />
+    <Compile Include="Containers\AlgorithmFamilySettingItem.cs" />
+    <Compile Include="CodeGenerator.cs" />
+    <Compile Include="Managers\Action.cs" />
+    <Compile Include="Managers\AssemblyManager.cs" />
+    <Compile Include="Managers\CodeManager.cs" />
+    <Compile Include="Managers\FileManager.cs" />
+    <Compile Include="Managers\IAssemblyManager.cs" />
+    <Compile Include="Managers\ICodeManager.cs" />
+    <Compile Include="Managers\OutputManager.cs" />
+    <Compile Include="Managers\NameManager.cs" />
     <Compile Include="Executor.cs" />
-    <Compile Include="Packet.cs" />
+    <Compile Include="Containers\Packet.cs" />
+    <Compile Include="Managers\PathManager.cs" />
+    <Compile Include="Managers\RealPathManager.cs" />
+    <Compile Include="Managers\Rule.cs" />
+    <Compile Include="Managers\TestPathManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Laboratorium.Attributes\Laboratorium.Attributes.csproj">
+      <Project>{5542FBEF-8DEF-4A0A-92BE-1370DFA59312}</Project>
+      <Name>Laboratorium.Attributes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Laboratorium.Resources\Laboratorium.Resources.csproj">
+      <Project>{c397d91b-fad7-4fe1-8884-00d36afed60b}</Project>
+      <Name>Laboratorium.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

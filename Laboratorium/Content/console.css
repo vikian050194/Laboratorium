@@ -1,0 +1,23 @@
+﻿textarea {
+    width: 100%;
+    height: calc(100% - 44px) !important;
+    max-width: none;
+    max-height: none;
+    resize: none;
+    padding: 5px !important;
+    margin-bottom: 10px;
+}
+
+.tab-pane {
+    bottom: 10px;
+    top: 108px;
+}
+
+#result,
+#module {
+    overflow: auto;
+}
+
+input[type="submit"] {
+    float: right;
+}

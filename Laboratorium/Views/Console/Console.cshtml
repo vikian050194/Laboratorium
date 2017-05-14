@@ -1,0 +1,65 @@
+﻿@model Laboratorium.Core.Containers.Packet
+
+@using (Ajax.BeginForm("Console", "Console", null, new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "POST",
+    UpdateTargetId = "form",
+    OnBegin = "showDialog",
+    OnComplete = "hideDialog"
+}, new { id = "form", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div>
+        @Html.Hidden("errors", Model.IsError)
+        <ul class="nav nav-pills nav-justified" id="form-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#script" id="script-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Скрипт</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#result" role="tab" id="result-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Результат</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#module" role="tab" id="module-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Модули</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active in container container-fixed" role="tabpanel" id="script" aria-labelledby="home-tab">
+                @Html.TextAreaFor(m => m.Script, new { @class = "form-control" })
+                <input type="submit" value="Выполнить" class="btn btn-primary" title="Alt + Enter"/>
+            </div>
+            <div class="tab-pane fade container container-fixed" role="tabpanel" id="result" aria-labelledby="profile-tab">
+                @foreach (var t in Model.Result)
+                {
+                    <div>@t</div>
+                }
+            </div>
+            <div class="tab-pane fade container container-fixed" role="tabpanel" id="module" aria-labelledby="profile-tab">
+                @for (var i = 0; i < Model.Modules.Count; i++)
+                {
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            @Html.CheckBoxFor(m => m.Modules[i].IsEnadled)
+                            @Html.Hidden("Modules[" + i + "].Name", Model.Modules[i].Name)
+                            @Html.DisplayTextFor(m => m.Modules[i].Name)
+                        </div>
+                        <div class="panel-body">
+                            @Html.DisplayTextFor(m => m.Modules[i].Info)
+                            @Html.Hidden("Modules[" + i + "].Info", Model.Modules[i].Info)
+                            <ol>
+                                @for (var j = 0; j < Model.Modules[i].Functions.Count; j++)
+                                {
+                                    <li>
+                                        @Model.Modules[i].Functions[j]
+                                    </li>
+                                    @Html.Hidden("Modules[" + i + "].Functions[" + j + "]", Model.Modules[i].Functions[j])
+                                }
+                            </ol>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

@@ -1,6 +1,4 @@
 ﻿using System.Web.Mvc;
-using Laboratorium.Models.ViewModels;
-using Laboratorium.Core;
 
 namespace Laboratorium.Controllers
 {
@@ -11,45 +9,34 @@ namespace Laboratorium.Controllers
         {
             return View();
         }
-
-        [HttpGet]
-        public ActionResult PackageForm()
-        {
-            return PartialView(new PacketViewModel());
-        }
-
-        [HttpPost]
-        public ActionResult PackageForm(PacketViewModel packetViewModel)
-        {
-            var executor = new Executor(new ExecutorHelper());
-
-            var packet = new Packet
-            {
-                Errors = packetViewModel.Errors,
-                Results = packetViewModel.Result,
-                Query = packetViewModel.Script
-            };
-            packet = executor.Execute(packet);
-
-            packetViewModel.Script = packet.Query;
-            packetViewModel.Errors = packet.Errors;
-            packetViewModel.Result = packet.Results;
-            packetViewModel.Input = packet.Input;
-
-            return PartialView(packetViewModel);
-        }
-
+		
+		[HttpGet]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
+		[HttpGet]
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
+            return View();
+        }
+		
+		[HttpGet]
+        public ActionResult HowToUse()
+        {
+            return View();
+        }
+		
+		[HttpGet]
+        public ActionResult Examples()
+        {
+            return View();
+        }
+		
+		[HttpGet]
+        public ActionResult Books()
+        {
             return View();
         }
     }
