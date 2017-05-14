@@ -49,10 +49,11 @@ namespace Laboratorium.Core
             {
                 if (!type.IsInterface && !type.IsAbstract)
                 {
-                    var family = algorithmFamilies.Find(f => f.Namespace == type.Namespace);
-                    AddAlgorithmInFamily(type, family);
+                    AddAlgorithmInFamily(type, algorithmFamilies);
                 }
             }
+
+            algorithmFamilies.RemoveAll(f => !f.Functions.Any());
 
             return algorithmFamilies;
         }
@@ -103,17 +104,28 @@ namespace Laboratorium.Core
             //TODO
         }
 
-        private void AddAlgorithmInFamily(Type type, AlgorithmFamily family)
+        private void AddAlgorithmInFamily(Type type, List<AlgorithmFamily> algorithmFamilies)
         {
             var function = new StringBuilder();
             var aliasAttribute = type.GetCustomAttributes<FunctionAliasAttribute>().FirstOrDefault();
-            var ignoreAttribute = type.GetCustomAttributes<IgnoreAttribute>().FirstOrDefault();
 
-            if (aliasAttribute == null || ignoreAttribute != null)
+            if (aliasAttribute == null)
             {
                 return;
             }
 
+            var implementationOf = type.GetInterfaces().FirstOrDefault();
+            if (implementationOf == null)
+            {
+                return;
+            }
+
+            var family = algorithmFamilies.FirstOrDefault(f => f.Name == implementationOf.Name);
+            if (family == null)
+            {
+                return;
+            }
+            
             var alias = aliasAttribute.Alias;
             function.AppendFormat("let {0} ", alias);
             var method = GetMainMethod(type);

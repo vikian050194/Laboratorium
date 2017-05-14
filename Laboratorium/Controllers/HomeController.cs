@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Laboratorium.Core.Managers;
 
 namespace Laboratorium.Controllers
 {
@@ -9,35 +10,45 @@ namespace Laboratorium.Controllers
         {
             return View();
         }
-		
-		[HttpGet]
+
+        [HttpGet]
         public ActionResult About()
         {
             return View();
         }
 
-		[HttpGet]
+        [HttpGet]
         public ActionResult Contact()
         {
             return View();
         }
-		
-		[HttpGet]
+
+        [HttpGet]
         public ActionResult HowToUse()
         {
             return View();
         }
-		
-		[HttpGet]
+
+        [HttpGet]
         public ActionResult Examples()
         {
             return View();
         }
-		
-		[HttpGet]
+
+        [HttpGet]
         public ActionResult Books()
         {
             return View();
+        }
+
+        [HttpGet]
+        public FileResult DownloadDevGuide()
+        {
+            var pathManager = new RealPathManager();
+            var fileName = "Laboratorium.DevGuide.pdf";
+            var fileBytes = System.IO.File.ReadAllBytes(pathManager.AssembliesDirectory + @"..\..\Guides\" + fileName);
+
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
     }
 }

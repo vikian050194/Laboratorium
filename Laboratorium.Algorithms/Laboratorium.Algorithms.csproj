@@ -53,6 +53,7 @@
     <Compile Include="Factorization\Probabilistic\TestsOfSimplicity\SolovayStrassenTest.cs" />
     <Compile Include="Factorization\Probabilistic\TestsOfSimplicity\TestOfSimplicityBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test1.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Laboratorium.Attributes\Laboratorium.Attributes.csproj">

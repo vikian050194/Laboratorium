@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Laboratorium.Core.Containers;
 
 namespace Laboratorium.Core.Managers
 {
     public class CodeManager : ICodeManager
     {
-        private readonly CodeGenerator _codeGenerator;
-
+        private readonly List<AlgorithmFamily> _algorithmFamilies; 
+            
         public CodeManager()
         {
-            _codeGenerator = new CodeGenerator();
+            _algorithmFamilies = new CodeGenerator().GetAlgorithmFamilies();
         }
 
         public List<string> GetFunctions(string algorithmFamily)
         {
-            var family = _codeGenerator.GetAlgorithmFamilies().Find(af => af.Name == algorithmFamily);
+            var family = _algorithmFamilies.Find(af => af.Name == algorithmFamily);
 
             var result = family.Functions.Select(f => f.DefaultFunction).ToList();
 
@@ -23,7 +24,7 @@ namespace Laboratorium.Core.Managers
 
         public List<string> GetAlgorithmFamilies()
         {
-            return _codeGenerator.GetAlgorithmFamilies().Select(f => f.Name).ToList();
+            return _algorithmFamilies.Select(f => f.Name).ToList();
         }
 
         public List<string> GetFunctions(List<string> algorithmFamilies)
@@ -47,7 +48,7 @@ namespace Laboratorium.Core.Managers
 
         private string GetOpen(string algorithmFamily)
         {
-            return _codeGenerator.GetAlgorithmFamilies().Find(af => af.Name == algorithmFamily).Open;
+            return _algorithmFamilies.Find(af => af.Name == algorithmFamily).Open;
         }
 
         public List<string> GetOpens(List<string> algorithmFamilies)
