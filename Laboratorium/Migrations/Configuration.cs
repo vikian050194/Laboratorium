@@ -1,10 +1,13 @@
-using Laboratorium.Data.Context;
 using System.Data.Entity.Migrations;
+using System.Linq;
+using Laboratorium.DAL.Contexts;
+using Laboratorium.Helpers;
+using Laboratorium.Models.DataModels;
 
 namespace Laboratorium.Migrations
 {
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<LaboratoriumContext>
     {
         public Configuration()
         {
@@ -12,20 +15,11 @@ namespace Laboratorium.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(ApplicationDbContext context)
+        protected override void Seed(LaboratoriumContext context)
         {
-            //  This method will be called after migrating to the latest version.
+            var dataHelper = new DefaultDataHelper(context);
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            dataHelper.AddData();
         }
     }
 }

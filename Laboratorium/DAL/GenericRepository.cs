@@ -2,7 +2,7 @@
 using System.Data.Entity.Migrations;
 using System.Linq;
 
-namespace Laboratorium.Data
+namespace Laboratorium.DAL
 {
     public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
     {

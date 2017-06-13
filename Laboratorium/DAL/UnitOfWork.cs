@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Security.Claims;
-using Laboratorium.Data.Context;
+using Laboratorium.DAL.Contexts;
 using Laboratorium.Models.DataModels;
 
-namespace Laboratorium.Data
+namespace Laboratorium.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {

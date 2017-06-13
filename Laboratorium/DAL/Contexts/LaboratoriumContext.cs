@@ -1,12 +1,12 @@
 using System.Data.Entity;
 using Laboratorium.Models.DataModels;
 
-namespace Laboratorium.Data.Context
+namespace Laboratorium.DAL.Contexts
 {
     public class LaboratoriumContext : DbContext
     {
         public LaboratoriumContext()
-            : base("name=LaboratoriumDB")
+            : base("name=Laboratorium")
         { }
 
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }

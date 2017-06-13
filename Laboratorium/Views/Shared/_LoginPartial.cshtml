@@ -6,9 +6,12 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Аккаунт", actionName: "Index", controllerName: "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "glyphicon glyphicon-user" })
+            @Html.ActionLink("Учётная запись", "Index", "Manage")
+            @*<a href=>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            </a>*@
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Выход</a></li>
     </ul>
     }
 }

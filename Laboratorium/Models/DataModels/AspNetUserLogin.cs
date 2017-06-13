@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Laboratorium.Models.DataModels
 {
-    public partial class AspNetUserLogin
+    public class AspNetUserLogin
     {
         [Key]
         [Column(Order = 0)]

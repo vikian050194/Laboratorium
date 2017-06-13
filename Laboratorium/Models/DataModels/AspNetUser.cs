@@ -15,6 +15,18 @@ namespace Laboratorium.Models.DataModels
 
         public string Id { get; set; }
 
+        [MinLength(2)]
+        [StringLength(256)]
+        public string FirstName { get; set; }
+
+        [MinLength(2)]
+        [StringLength(256)]
+        public string LastName { get; set; }
+
+        [MinLength(2)]
+        [StringLength(256)]
+        public string Patronymic { get; set; }
+
         [MinLength(4)]
         [StringLength(256)]
         public string Email { get; set; }

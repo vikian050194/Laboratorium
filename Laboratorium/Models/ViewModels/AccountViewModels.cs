@@ -6,7 +6,7 @@ namespace Laboratorium.Models.ViewModels
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = @"Электронная почта")]
         public string Email { get; set; }
     }
 
@@ -29,11 +29,11 @@ namespace Laboratorium.Models.ViewModels
         public string Provider { get; set; }
 
         [Required]
-        [Display(Name = "Code")]
+        [Display(Name = @"Код")]
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Remember this browser?")]
+        [Display(Name = @"Запомнить этот браузер?")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -42,42 +42,55 @@ namespace Laboratorium.Models.ViewModels
     public class ForgotViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = @"Электронная почта")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
+        [Display(Name = @"Электронная почта")]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = @"Пароль")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = @"Запомнить меня?")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(256, ErrorMessage = @"{0} должно быть не меньше {2} символов.", MinimumLength = 2)]
+        [Display(Name = @"Имя")]
+        public string FirstName { get; set; }
+        [Required]
+        [StringLength(256, ErrorMessage = @"{0} должна быть не меньше {2} символов.", MinimumLength = 2)]
+        [Display(Name = @"Фамилия")]
+        public string LastName { get; set; }
+        [Required]
+        [StringLength(256, ErrorMessage = @"{0} должно быть не меньше {2} символов.", MinimumLength = 2)]
+        [Display(Name = @"Отчество")]
+        public string Patronymic { get; set; }
+
+        [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = @"Электронная почта")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = @"{0} должен быть не меньше {2} символов.", MinimumLength = 4)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = @"Пароль")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = @"Повторите пароль")]
+        [Compare("Password", ErrorMessage = @"Пароль и повторный пароль не совпадают.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -85,18 +98,18 @@ namespace Laboratorium.Models.ViewModels
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = @"Электронная почта")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = @"{0} должен быть не меньше {2} символов.", MinimumLength = 4)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = @"Пароль")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = @"Повторите пароль")]
+        [Compare("Password", ErrorMessage = @"Пароль и повторный пароль не совпадают.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -106,7 +119,7 @@ namespace Laboratorium.Models.ViewModels
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = @"Электронная почта")]
         public string Email { get; set; }
     }
 }

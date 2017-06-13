@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Laboratorium.Data.Context
+namespace Laboratorium.DAL.Contexts
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
@@ -20,7 +20,7 @@ namespace Laboratorium.Data.Context
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("LaboratoriumDB", throwIfV1Schema: false)
+            : base("Laboratorium", throwIfV1Schema: false)
         {
         }
 

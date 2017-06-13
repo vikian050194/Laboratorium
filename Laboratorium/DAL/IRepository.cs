@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Laboratorium.Data
+namespace Laboratorium.DAL
 {
     public interface IRepository<TEntity> where TEntity : class
     {

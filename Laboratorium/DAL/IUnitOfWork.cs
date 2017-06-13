@@ -2,7 +2,7 @@
 using System.Security.Claims;
 using Laboratorium.Models.DataModels;
 
-namespace Laboratorium.Data
+namespace Laboratorium.DAL
 {
     public interface IUnitOfWork : IDisposable
     {

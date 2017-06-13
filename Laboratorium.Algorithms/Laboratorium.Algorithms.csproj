@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factorization\Common\EuclideanAlgorithm\AdvancedEuclideanAlgorithm.cs" />
+    <Compile Include="Factorization\Common\AdvancedEuclideanAlgorithm\AdvancedEuclideanAlgorithm.cs" />
+    <Compile Include="Factorization\Common\AdvancedEuclideanAlgorithm\IAdvancedEuclideanAlgorithm.cs" />
+    <Compile Include="Factorization\Common\EuclideanAlgorithm\IEuclideanAlgorithm.cs" />
     <Compile Include="Factorization\Common\EuclideanAlgorithm\TableRow.cs" />
     <Compile Include="Factorization\Common\LeastCommonMultiple\LeastCommonMultipleAlgorithm.cs" />
     <Compile Include="Factorization\Common\EuclideanAlgorithm\EuclideanAlgorithm.cs" />

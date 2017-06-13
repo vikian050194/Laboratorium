@@ -1,12 +1,14 @@
-﻿using System.Linq;
+﻿using System.Data.Entity.Migrations;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Laboratorium.Data.Context;
+using Laboratorium.DAL.Contexts;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Laboratorium.Models;
+using Laboratorium.Models.DataModels;
 using Laboratorium.Models.ViewModels;
 
 namespace Laboratorium.Controllers
@@ -16,9 +18,11 @@ namespace Laboratorium.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly LaboratoriumContext _context;
 
         public AccountController()
         {
+            _context = new LaboratoriumContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -154,6 +158,14 @@ namespace Laboratorium.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var currentUser = _context.AspNetUsers.First(u => u.Id == user.Id);
+                    currentUser.FirstName = model.FirstName;
+                    currentUser.LastName = model.LastName;
+                    currentUser.Patronymic = model.Patronymic;
+                    currentUser.AspNetRoles.Add(_context.AspNetRoles.First(r=>r.Id == Role.User.ToString()));
+                    _context.AspNetUsers.AddOrUpdate(currentUser);
+                    _context.SaveChanges();
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

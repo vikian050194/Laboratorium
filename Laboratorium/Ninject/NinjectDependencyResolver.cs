@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Laboratorium.Data;
+using Laboratorium.DAL;
 using Ninject;
 using IDependencyResolver = System.Web.Mvc.IDependencyResolver;
 

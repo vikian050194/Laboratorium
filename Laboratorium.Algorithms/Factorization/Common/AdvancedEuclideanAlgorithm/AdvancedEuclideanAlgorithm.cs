@@ -1,15 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using Laboratorium.Algorithms.Factorization.Common.EuclideanAlgorithm;
 using Laboratorium.Attributes;
 
-namespace Laboratorium.Algorithms.Factorization.Common.EuclideanAlgorithm
+namespace Laboratorium.Algorithms.Factorization.Common.AdvancedEuclideanAlgorithm
 {
-    public interface IAdvancedEuclideanAlgorithm
-    {
-        List<TableRow> Execute(BigInteger a, BigInteger b);
-    }
-
     [FunctionAlias("euclid"), DefaultImplementation]
     public class AdvancedEuclideanAlgorithm : IAdvancedEuclideanAlgorithm
     {
