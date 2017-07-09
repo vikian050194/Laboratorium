@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Laboratorium.DAL;
 using Laboratorium.DAL.Contexts;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -18,7 +19,7 @@ namespace Laboratorium.Controllers
         private ApplicationUserManager _userManager;
         private readonly LaboratoriumContext _context;
 
-        public ManageController()
+        public ManageController(IUnitOfWork uow)
         {
             _context = new LaboratoriumContext();
         }
@@ -56,14 +57,7 @@ namespace Laboratorium.Controllers
         [HttpGet]
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? @"Ваш пароль был изменён"
-                : message == ManageMessageId.SetPasswordSuccess ? @"Ваш пароль был установлен"
-                : message == ManageMessageId.SetTwoFactorSuccess ? @"Ваша двухфакторная аутентификация была установлена"
-                : message == ManageMessageId.Error ? @"Произошла ошибка"
-                : message == ManageMessageId.AddPhoneSuccess ? @"Ваш номер телефона был добавлен"
-                : message == ManageMessageId.RemovePhoneSuccess ? @"Ваш номер телефона был удалён"
-                : "";
+            ViewBag.StatusMessage = GetMessageById(message);
 
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
@@ -74,7 +68,33 @@ namespace Laboratorium.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+
             return View(model);
+        }
+
+        private string GetMessageById(ManageMessageId? message)
+        {
+            switch (message)
+            {
+                case ManageMessageId.ChangePasswordSuccess:
+                    return @"Ваш пароль был изменён";
+                case ManageMessageId.SetPasswordSuccess:
+                    return @"Ваш пароль был установлен";
+                case ManageMessageId.SetTwoFactorSuccess:
+                    return @"Ваша двухфакторная аутентификация была установлена";
+                case ManageMessageId.Error:
+                    return @"Произошла ошибка";
+                case ManageMessageId.AddPhoneSuccess:
+                    return @"Ваш номер телефона был добавлен";
+                case ManageMessageId.RemovePhoneSuccess:
+                    return @"Ваш номер телефона был удалён";
+                case ManageMessageId.ChangeUserData:
+                    return @"Ваши данные были изменены";
+                case ManageMessageId.RemoveLoginSuccess:
+                    return @"Ваш логин был удалён";
+                default:
+                    return "";
+            }
         }
 
         [HttpPost]
@@ -330,7 +350,7 @@ namespace Laboratorium.Controllers
             _context.AspNetUsers.AddOrUpdate(user);
             _context.SaveChanges();
 
-            return RedirectToAction("Index", "Manage");
+            return RedirectToAction("Index", "Manage", new { Message = ManageMessageId.ChangeUserData });
         }
 
         protected override void Dispose(bool disposing)
@@ -391,6 +411,7 @@ namespace Laboratorium.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            ChangeUserData,
             Error
         }
     }

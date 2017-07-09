@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Data.Entity.Migrations;
 using System.Linq;
-using Laboratorium.DAL.Contexts;
+using Laboratorium.DAL;
 using Laboratorium.Models.DataModels;
 
 namespace Laboratorium.Helpers
 {
     public class DefaultDataHelper
     {
-        private readonly LaboratoriumContext _context;
+        private readonly IUnitOfWork _uow;
 
-        public DefaultDataHelper(LaboratoriumContext context)
+        public DefaultDataHelper(IUnitOfWork uow)
         {
-            _context = context;
+            _uow = uow;
         }
 
         public void AddData()
@@ -23,26 +22,26 @@ namespace Laboratorium.Helpers
 
         private void AddRoles()
         {
-            if (_context.AspNetRoles.Any())
+            if (_uow.AspNetRoleRepository.GetAll().Any())
             {
                 return;
             }
 
             foreach (var role in Enum.GetNames(typeof(Role)))
             {
-                _context.AspNetRoles.AddOrUpdate(r => r.Id, new AspNetRole
+                _uow.AspNetRoleRepository.Insert(new AspNetRole
                 {
                     Id = role,
                     Name = role
                 });
             }
 
-            _context.SaveChanges();
+            _uow.Save();
         }
 
         public void AddUsers()
         {
-            if (_context.AspNetUsers.Any())
+            if (_uow.AspNetUserRepository.GetAll().Any())
             {
                 return;
             }
@@ -59,10 +58,40 @@ namespace Laboratorium.Helpers
                 LastName = @"Виноградов",
                 Patronymic = @"Андреевич"
             };
-            admin.AspNetRoles.Add(_context.AspNetRoles.First(r=>r.Name == Role.Admin.ToString()));
-            _context.AspNetUsers.AddOrUpdate(admin);
+            admin.AspNetRoles.Add(_uow.AspNetRoleRepository.GetAll().First(r=>r.Name == Role.Admin.ToString()));
+            _uow.AspNetUserRepository.Insert(admin);
 
-            _context.SaveChanges();
+            var user1Id = "527dd0f0-d88e-4e55-974d-c0dce2370a7a";
+            var user1 = new AspNetUser
+            {
+                Id = user1Id,
+                Email = "user1@yar.ru",
+                PasswordHash = "AAY75JMaR7GPi4WcT0iVtH6NTG0clQCEDLEDIRDqxU8/33FXr7FIWgmFphQF9VkXtg==",
+                SecurityStamp = "5e7b4e3f-8ff0-4cc1-af31-297375eb9990",
+                UserName = "user1@yar.ru",
+                FirstName = @"User1",
+                LastName = @"User1",
+                Patronymic = @"User1"
+            };
+            user1.AspNetRoles.Add(_uow.AspNetRoleRepository.GetAll().First(r => r.Name == Role.User.ToString()));
+            _uow.AspNetUserRepository.Insert(user1);
+
+            var user2Id = "2136deaa-41bf-46bd-883b-071e743899be";
+            var user2 = new AspNetUser
+            {
+                Id = user2Id,
+                Email = "user2@yar.ru",
+                PasswordHash = "AM4cMPUrH40VO4L1XD1FGd+yQaHuRpUfg8aYl/Te2AOzypyx4jw8sZ+1DI7DZ5Z7cA==",
+                SecurityStamp = "bc921004-6ab1-42d2-aed3-4744cbe4213f",
+                UserName = "user2@yar.ru",
+                FirstName = @"User2",
+                LastName = @"User2",
+                Patronymic = @"User2"
+            };
+            user2.AspNetRoles.Add(_uow.AspNetRoleRepository.GetAll().First(r => r.Name == Role.User.ToString()));
+            _uow.AspNetUserRepository.Insert(user2);
+
+            _uow.Save();
         }
     }
 }
