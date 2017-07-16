@@ -1,5 +1,5 @@
 ﻿using System;
-using Laboratorium.DAL.Contexts;
+using Laboratorium.DAL;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;

@@ -1,9 +1,6 @@
 using System.Data.Entity.Migrations;
-using System.Linq;
 using Laboratorium.DAL;
-using Laboratorium.DAL.Contexts;
 using Laboratorium.Helpers;
-using Laboratorium.Models.DataModels;
 
 namespace Laboratorium.Migrations
 {
@@ -18,9 +15,7 @@ namespace Laboratorium.Migrations
 
         protected override void Seed(LaboratoriumContext context)
         {
-            var uow = new UnitOfWork(context);
-
-            var dataHelper = new DefaultDataHelper(uow);
+            var dataHelper = new DatabasePreparer(context);
 
             dataHelper.AddData();
         }

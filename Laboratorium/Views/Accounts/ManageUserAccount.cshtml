@@ -1,0 +1,21 @@
+﻿@model Laboratorium.Models.ViewModels.AccountsListItem
+
+<h2>Учётная запись</h2>
+<h4>
+    Изменить настройки учетной записи пользователя
+    @Html.DisplayFor(m => m.LastName)
+    @Html.DisplayFor(m => m.FirstName)
+    @Html.DisplayFor(m => m.Patronymic)
+</h4>
+<hr />
+
+<div>
+    <a type="button" class="text-center btn btn-default" href=@Url.Action("ChangeUserData", new { id = Model.Id })>
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        &nbsp;Изменить данные
+    </a>
+    <a type="button" class="text-center btn btn-default" href=@Url.Action("SetPassword", new { id = Model.Id })>
+        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        &nbsp;Установить пароль
+    </a>
+</div>

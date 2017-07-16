@@ -1,17 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using Laboratorium.DAL;
 using Laboratorium.Models.DataModels;
 
 namespace Laboratorium.Helpers
 {
-    public class DefaultDataHelper
+    public class DatabasePreparer
     {
-        private readonly IUnitOfWork _uow;
+        private readonly LaboratoriumContext _context;
 
-        public DefaultDataHelper(IUnitOfWork uow)
+        public DatabasePreparer(LaboratoriumContext context)
         {
-            _uow = uow;
+            _context = context;
         }
 
         public void AddData()
@@ -22,44 +24,34 @@ namespace Laboratorium.Helpers
 
         private void AddRoles()
         {
-            if (_uow.AspNetRoleRepository.GetAll().Any())
-            {
-                return;
-            }
-
             foreach (var role in Enum.GetNames(typeof(Role)))
             {
-                _uow.AspNetRoleRepository.Insert(new AspNetRole
+                _context.AspNetRoles.AddOrUpdate(new AspNetRole
                 {
                     Id = role,
                     Name = role
                 });
             }
 
-            _uow.Save();
+            _context.SaveChanges();
         }
 
         public void AddUsers()
         {
-            if (_uow.AspNetUserRepository.GetAll().Any())
-            {
-                return;
-            }
-
             var adminId = "bfa0792d-cb6f-42a4-924f-df941811e2c4";
             var admin = new AspNetUser
             {
                 Id = adminId,
                 Email = "admin@yar.ru",
-                PasswordHash = "AIV0o6aKwViOX4VK2cY1+jnBvJGRedB/wDc0BRXvUMjMxxztvKqnZHNUO1OEXqdosg==",
-                SecurityStamp = "cc66a735-b00b-4ce0-af9d-a64a3d7e37c4",
+                PasswordHash = "ANgXldJ7cBUpPOxTw//4XeysXHxhqYUGFC8vxaTzBzOQZJZ3RS6ae5gIIZPntWImlQ==",
+                SecurityStamp = "48f7dfc8-3657-4e2c-a729-2383f41ed49a",
                 UserName = "admin@yar.ru",
                 FirstName = @"Кирилл",
                 LastName = @"Виноградов",
                 Patronymic = @"Андреевич"
             };
-            admin.AspNetRoles.Add(_uow.AspNetRoleRepository.GetAll().First(r=>r.Name == Role.Admin.ToString()));
-            _uow.AspNetUserRepository.Insert(admin);
+            admin.AspNetRoles.Add(_context.AspNetRoles.First(r=>r.Id == Role.Admin.ToString()));
+            _context.AspNetUsers.AddOrUpdate(admin);
 
             var user1Id = "527dd0f0-d88e-4e55-974d-c0dce2370a7a";
             var user1 = new AspNetUser
@@ -73,8 +65,8 @@ namespace Laboratorium.Helpers
                 LastName = @"User1",
                 Patronymic = @"User1"
             };
-            user1.AspNetRoles.Add(_uow.AspNetRoleRepository.GetAll().First(r => r.Name == Role.User.ToString()));
-            _uow.AspNetUserRepository.Insert(user1);
+            user1.AspNetRoles.Add(_context.AspNetRoles.First(r => r.Id == Role.User.ToString()));
+            _context.AspNetUsers.AddOrUpdate(user1);
 
             var user2Id = "2136deaa-41bf-46bd-883b-071e743899be";
             var user2 = new AspNetUser
@@ -88,10 +80,10 @@ namespace Laboratorium.Helpers
                 LastName = @"User2",
                 Patronymic = @"User2"
             };
-            user2.AspNetRoles.Add(_uow.AspNetRoleRepository.GetAll().First(r => r.Name == Role.User.ToString()));
-            _uow.AspNetUserRepository.Insert(user2);
+            user2.AspNetRoles.Add(_context.AspNetRoles.First(r => r.Id == Role.User.ToString()));
+            _context.AspNetUsers.AddOrUpdate(user2);
 
-            _uow.Save();
+            _context.SaveChanges();
         }
     }
 }

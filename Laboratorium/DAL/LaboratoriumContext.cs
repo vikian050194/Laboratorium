@@ -1,18 +1,22 @@
 using System.Data.Entity;
+using Laboratorium.Migrations;
 using Laboratorium.Models.DataModels;
 
-namespace Laboratorium.DAL.Contexts
+namespace Laboratorium.DAL
 {
-    public class LaboratoriumContext : DbContext
+    public sealed class LaboratoriumContext : DbContext
     {
         public LaboratoriumContext()
-            : base("name=Laboratorium")
-        { }
+            : base("name=DefaultConnection")
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<LaboratoriumContext, Configuration>("DefaultConnection"));
+            Database.SetInitializer<LaboratoriumContext>(new DropCreateDatabaseIfModelChanges<LaboratoriumContext>());
+        }
 
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public DbSet<AspNetRole> AspNetRoles { get; set; }
+        public DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public DbSet<AspNetUser> AspNetUsers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

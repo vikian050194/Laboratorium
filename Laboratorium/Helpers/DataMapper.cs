@@ -1,15 +1,16 @@
-﻿using Laboratorium.Models.ViewModels;
-using AutoMapper;
-using Laboratorium.Core;
+﻿using AutoMapper;
 using Laboratorium.Core.Containers;
+using Laboratorium.Models.DataModels;
+using Laboratorium.Models.ViewModels;
 
-namespace Laboratorium
+namespace Laboratorium.Helpers
 {
     public class DataMapper
     {
         public DataMapper()
         {
             CreatePacketMap();
+            CreateUserMap();
         }
 
         private void CreatePacketMap()
@@ -18,6 +19,14 @@ namespace Laboratorium
             {
                 cfg.CreateMap<Packet, PacketViewModel>();
                 cfg.CreateMap<PacketViewModel, Packet>();
+            });
+        }
+
+        private void CreateUserMap()
+        {
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<AspNetUser, AccountsListItem>();
             });
         }
 

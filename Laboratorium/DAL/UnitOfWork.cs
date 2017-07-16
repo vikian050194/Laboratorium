@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Security.Claims;
-using Laboratorium.DAL.Contexts;
 using Laboratorium.Models.DataModels;
 
 namespace Laboratorium.DAL
