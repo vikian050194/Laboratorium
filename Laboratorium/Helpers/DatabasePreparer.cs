@@ -61,9 +61,9 @@ namespace Laboratorium.Helpers
                 PasswordHash = "AAY75JMaR7GPi4WcT0iVtH6NTG0clQCEDLEDIRDqxU8/33FXr7FIWgmFphQF9VkXtg==",
                 SecurityStamp = "5e7b4e3f-8ff0-4cc1-af31-297375eb9990",
                 UserName = "user1@yar.ru",
-                FirstName = @"User1",
-                LastName = @"User1",
-                Patronymic = @"User1"
+                FirstName = @"Олег",
+                LastName = @"Иванов",
+                Patronymic = @"Викторович"
             };
             user1.AspNetRoles.Add(_context.AspNetRoles.First(r => r.Id == Role.User.ToString()));
             _context.AspNetUsers.AddOrUpdate(user1);
@@ -76,9 +76,9 @@ namespace Laboratorium.Helpers
                 PasswordHash = "AM4cMPUrH40VO4L1XD1FGd+yQaHuRpUfg8aYl/Te2AOzypyx4jw8sZ+1DI7DZ5Z7cA==",
                 SecurityStamp = "bc921004-6ab1-42d2-aed3-4744cbe4213f",
                 UserName = "user2@yar.ru",
-                FirstName = @"User2",
-                LastName = @"User2",
-                Patronymic = @"User2"
+                FirstName = @"Андрей",
+                LastName = @"Груздов",
+                Patronymic = @"Сергеевич"
             };
             user2.AspNetRoles.Add(_context.AspNetRoles.First(r => r.Id == Role.User.ToString()));
             _context.AspNetUsers.AddOrUpdate(user2);

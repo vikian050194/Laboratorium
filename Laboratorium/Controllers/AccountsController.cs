@@ -30,11 +30,24 @@ namespace Laboratorium.Controllers
             foreach (var aspNetUser in users)
             {
                 var user = _dataMapper.Map<AspNetUser, AccountsListItem>(aspNetUser);
-                user.Role = aspNetUser.AspNetRoles.First().Name;
+                user.Role = GetRoleName(aspNetUser.AspNetRoles.First().Name);
                 accountsListItems.Add(user);
             }
 
             return View(accountsListItems);
+        }
+
+        private string GetRoleName(string id)
+        {
+            switch (id)
+            {
+                case "Admin":
+                    return @"Администратор";
+                case "User":
+                    return @"Пользователь";
+                default:
+                    return "Ошибка!";
+            }
         }
 
         [HttpGet]
