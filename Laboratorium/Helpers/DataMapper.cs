@@ -27,6 +27,7 @@ namespace Laboratorium.Helpers
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<AspNetUser, AccountsListItem>();
+                cfg.CreateMap<AspNetUser, SetAccountPassword>();
             });
         }
 

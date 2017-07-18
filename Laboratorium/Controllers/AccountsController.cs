@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
 using Laboratorium.DAL;
 using Laboratorium.Helpers;
 using Laboratorium.Models.DataModels;
 using Laboratorium.Models.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Laboratorium.Controllers
 {
@@ -14,6 +18,19 @@ namespace Laboratorium.Controllers
     {
         private readonly LaboratoriumContext _context;
         private readonly DataMapper _dataMapper;
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         public AccountsController()
         {
@@ -84,6 +101,42 @@ namespace Laboratorium.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("ManageUserAccount", "Accounts", new { id = model.Id });
+        }
+
+        [HttpGet]
+        public ActionResult SetPassword(string id)
+        {
+            var model = _dataMapper.Map<AspNetUser, SetAccountPassword>(_context.AspNetUsers.Find(id));
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SetPassword(SetAccountPassword model)
+        {
+            if (ModelState.IsValid)
+            {
+                var resetToken = await UserManager.GeneratePasswordResetTokenAsync(model.Id);
+                var result = await UserManager.ResetPasswordAsync(model.Id, resetToken, model.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ManageUserAccount", "Accounts", new { id = model.Id });
+                }
+
+                AddErrors(result);
+            }
+
+            return View(model);
+        }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
         }
     }
 }

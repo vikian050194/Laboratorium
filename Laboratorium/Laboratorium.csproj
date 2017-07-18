@@ -321,6 +321,7 @@
     <Content Include="Views\Accounts\ChangeUserData.cshtml" />
     <None Include="Views\Accounts\Index.cshtml" />
     <Content Include="Views\Accounts\ManageUserAccount.cshtml" />
+    <None Include="Views\Accounts\SetPassword.cshtml" />
     <None Include="Views\Home\Books.cshtml" />
     <None Include="Views\Home\Examples.cshtml" />
     <None Include="Views\Home\HowToUse.cshtml" />
