@@ -5,6 +5,7 @@ using Laboratorium.Core.Managers;
 
 namespace Laboratorium.Controllers
 {
+    [Authorize]
     public class ConsoleController : Controller
     {
         private readonly Executor _executor;

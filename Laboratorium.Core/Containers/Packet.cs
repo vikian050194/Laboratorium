@@ -13,6 +13,7 @@ namespace Laboratorium.Core.Containers
         }
 
         public string Script { get; set; }
+        public string Title { get; set; }
         public List<string> Result { get; set; }
         public bool IsError { get; set; }
         public List<AlgorithmFamilySettingItem> Modules { get; set; }
