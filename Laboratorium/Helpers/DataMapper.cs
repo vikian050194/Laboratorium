@@ -9,8 +9,21 @@ namespace Laboratorium.Helpers
     {
         public DataMapper()
         {
-            CreatePacketMap();
-            CreateUserMap();
+            CreateMap();
+            //CreatePacketMap();
+            //CreateUserMap();
+        }
+
+        private void CreateMap()
+        {
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Packet, PacketViewModel>();
+                cfg.CreateMap<PacketViewModel, Packet>();
+
+                cfg.CreateMap<AspNetUser, AccountsListItem>();
+                cfg.CreateMap<AspNetUser, SetAccountPassword>();
+            });
         }
 
         private void CreatePacketMap()

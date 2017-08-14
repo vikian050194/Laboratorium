@@ -1,4 +1,4 @@
-﻿@model Laboratorium.Core.Containers.Packet
+﻿@model Laboratorium.Models.ViewModels.PacketViewModel
 
 @using (Ajax.BeginForm("Console", "Console", null, new AjaxOptions
 {
@@ -28,23 +28,23 @@
             <div class="tab-pane fade active in container container-fixed" role="tabpanel" id="script" aria-labelledby="home-tab">
                 @Html.TextAreaFor(m => m.Script, new { @class = "form-control" })
                 @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = @"Название скрипта" })
-                <button type="button" class="btn btn-primary" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
-                    &nbsp;
-                    Сохранить
-                </button>
-                <button type="button" class="btn btn-primary" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span>
-                    &nbsp;
-                    Загрузить 
-                </button>
-                @*<input type="submit" value="Сохранить" class="btn btn-primary" title="Alt + Enter" />*@
-                <button type="submit" class="btn btn-primary" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                    &nbsp;
-                    Выполнить
-                </button>
-                @*<input type="submit" value="Выполнить" class="btn btn-primary" title="Alt + Enter"/>*@
+                <div class="btn-group-vertical" role="group" aria-label="...">
+                    <button name="Action" value="Execute" type="submit" class="btn btn-primary" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                        &nbsp;
+                        Выполнить
+                    </button>
+                    <button name="Action" value="SaveFile" type="submit" class="btn btn-primary" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                        &nbsp;
+                        Сохранить в файл
+                    </button>
+                    <button name="Action" value="LoadFile" type="submit" class="btn btn-primary" aria-label="Left Align">
+                        <span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span>
+                        &nbsp;
+                        Загрузить из файла
+                    </button>
+                </div>
             </div>
             <div class="tab-pane fade container container-fixed" role="tabpanel" id="result" aria-labelledby="profile-tab">
                 @foreach (var t in Model.Result)

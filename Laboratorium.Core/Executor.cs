@@ -21,7 +21,10 @@ namespace Laboratorium.Core
 
         public Packet GetNewEmptyPacket()
         {
-            var result = new Packet();
+            var result = new Packet
+            {
+                Title = @"Скрипт.fsx"
+            };
             var algorithmFamilies = _codeManager.GetAlgorithmFamilies();
 
             foreach (var algorithmFamily in algorithmFamilies)
