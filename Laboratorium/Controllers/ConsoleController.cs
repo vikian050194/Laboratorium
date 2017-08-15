@@ -47,9 +47,27 @@ namespace Laboratorium.Controllers
                         return PartialView(model);
                     }
                     break;
+                case PacketAction.SaveFile:
+                    return RedirectToAction("SaveFile", new { packet = packet });
+                case PacketAction.LoadFile:
+                    return RedirectToAction("LoadFile");
             }
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult SaveFile(Packet packet)
+        {
+            var pathManager = new RealPathManager();
+            var fileName = "Laboratorium.DevGuide.pdf";
+            var fileBytes = System.IO.File.ReadAllBytes(pathManager.AssembliesDirectory + @"..\..\Guides\" + fileName);
+
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        public ActionResult LoadFile()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
