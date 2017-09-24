@@ -1,26 +1,78 @@
-﻿@{
-    Html.RenderAction("Console");
-}
-<div id="script-execution-modal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+﻿@model Laboratorium.Models.ViewModels.PacketViewModel
+
+@using (Html.BeginForm("Index", "Console", FormMethod.Post, new { id = "form", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div>
+        @Html.Hidden("errors", Model.IsError)
+        <ul class="nav nav-pills nav-justified" id="form-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#script" id="script-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Скрипт</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#result" role="tab" id="result-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Результат</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#module" role="tab" id="module-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Модули</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade active in container container-fixed" role="tabpanel" id="script" aria-labelledby="home-tab">
+                @Html.TextAreaFor(m => m.Script, new { @class = "form-control" })
+                @*@Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = @"Название скрипта" })*@
+                <button name="PacketAction" value="Execute" type="submit" class="btn btn-primary" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                    &nbsp;
+                    Выполнить
                 </button>
-                <h4 class="modal-title">Выполнение скрипта</h4>
+                @*<div class="btn-group-vertical" role="group" aria-label="...">
+                       button name="Action" value="SaveFile" type="submit" class="btn btn-primary" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                            &nbsp;
+                            Сохранить в файл
+                        </button>
+                        <button name="Action" value="LoadFile" type="submit" class="btn btn-primary" aria-label="Left Align">
+                            <span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span>
+                            &nbsp;
+                            Загрузить из файла
+                        </button>
+                    </div>*@
             </div>
-            <div class="modal-body">
-                <div id="progressbar" class="progress">
-                    <div class="progress-bar progress-bar-primary progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+            <div class="tab-pane fade container container-fixed" role="tabpanel" id="result" aria-labelledby="profile-tab">
+                @foreach (var t in Model.Result)
+                {
+                    <div>@t</div>
+                }
+            </div>
+            <div class="tab-pane fade container container-fixed" role="tabpanel" id="module" aria-labelledby="profile-tab">
+                @for (var i = 0; i < Model.Modules.Count; i++)
+                {
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            @Html.CheckBoxFor(m => m.Modules[i].IsEnadled)
+                            @Html.Hidden("Modules[" + i + "].Name", Model.Modules[i].Name)
+                            @Html.DisplayTextFor(m => m.Modules[i].Name)
+                        </div>
+                        <div class="panel-body">
+                            @Html.DisplayTextFor(m => m.Modules[i].Info)
+                            @Html.Hidden("Modules[" + i + "].Info", Model.Modules[i].Info)
+                            <ol>
+                                @for (var j = 0; j < Model.Modules[i].Functions.Count; j++)
+                                {
+                                    <li>
+                                        @Model.Modules[i].Functions[j]
+                                    </li>
+                                    @Html.Hidden("Modules[" + i + "].Functions[" + j + "]", Model.Modules[i].Functions[j])
+                                }
+                            </ol>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                }
             </div>
         </div>
     </div>
-</div>
+}
+
 <link href="../../Content/console.css" rel="stylesheet">
 <script type="text/javascript" src="../../Scripts/console.js"></script>

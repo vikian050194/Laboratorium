@@ -11,7 +11,7 @@ namespace Laboratorium.Models.ViewModels
             Modules = new List<AlgorithmFamilySettingItem>();
         }
 
-        public PacketAction Action { get; set; }
+        public PacketAction PacketAction { get; set; }
         public string Script { get; set; }
         public string Title { get; set; }
         public List<string> Result { get; set; }

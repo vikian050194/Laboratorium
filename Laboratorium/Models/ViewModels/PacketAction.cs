@@ -3,7 +3,7 @@
     public enum PacketAction
     {
         Execute,
-        SaveFile,
-        LoadFile
+        SaveInDb,
+        LoadFromDb
     }
 }

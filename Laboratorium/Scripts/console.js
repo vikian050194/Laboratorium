@@ -16,30 +16,3 @@
 }
 
 enableShortcuts();
-
-function showDialog() {
-    $('.progress-bar').html('ожидайте');
-    $('.progress-bar').removeClass('progress-bar-success progress-bar-danger').addClass('progress-bar-primary');
-    $('#script-execution-modal').modal('show');
-}
-
-function hideDialog() {
-    var tabIndex = 1;
-    var status;
-    var barClass;
-    $('.progress-bar').removeClass('progress-bar-primary');
-    if ($('#errors').val() == 'True') {
-        status = 'ошибка';
-        barClass = 'progress-bar-danger';
-    } else {
-        status = 'готово';
-        barClass = 'progress-bar-success';
-    }
-    $('.progress-bar').html(status);
-    $('.progress-bar').addClass(barClass);
-    $('#form-tabs li:eq(' + tabIndex + ') a').tab('show');
-    enableShortcuts();
-    setTimeout(function () {
-        $('#script-execution-modal').modal('hide');
-    }, 1000);
-}

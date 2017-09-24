@@ -22,47 +22,23 @@ namespace Laboratorium.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult Console()
-        {
             var packet = _executor.GetNewEmptyPacket();
             var model = _dataMapper.Map<Packet, PacketViewModel>(packet);
-            return PartialView(model);
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult Console(PacketViewModel model)
+        public ActionResult Index(PacketViewModel model)
         {
             var packet = _dataMapper.Map<PacketViewModel, Packet>(model);
-
-            switch (model.Action)
-            {
-                case PacketAction.Execute:
-                    packet = _executor.Execute(packet);
-                    if (packet.IsError)
-                    {
-                        return PartialView(model);
-                    }
-                    break;
-                case PacketAction.SaveFile:
-                    return RedirectToAction("SaveFile", new { packet = packet });
-                case PacketAction.LoadFile:
-                    return RedirectToAction("LoadFile");
-            }
-
-            return RedirectToAction("Index");
+            packet = _executor.Execute(packet);
+            model = _dataMapper.Map<Packet, PacketViewModel>(packet);
+            return View(model);
         }
 
-        public ActionResult SaveFile(Packet packet)
+        public ActionResult SaveFile()
         {
-            var pathManager = new RealPathManager();
-            var fileName = "Laboratorium.DevGuide.pdf";
-            var fileBytes = System.IO.File.ReadAllBytes(pathManager.AssembliesDirectory + @"..\..\Guides\" + fileName);
-
-            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+            throw new System.NotImplementedException();
         }
 
         public ActionResult LoadFile()
