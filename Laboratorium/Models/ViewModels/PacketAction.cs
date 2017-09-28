@@ -4,6 +4,8 @@
     {
         Execute,
         SaveInDb,
-        LoadFromDb
+        LoadFromDb,
+        SaveInFile,
+        LoadFromFile
     }
 }

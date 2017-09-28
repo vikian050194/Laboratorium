@@ -30,18 +30,47 @@ namespace Laboratorium.Controllers
         [HttpPost]
         public ActionResult Index(PacketViewModel model)
         {
-            var packet = _dataMapper.Map<PacketViewModel, Packet>(model);
-            packet = _executor.Execute(packet);
-            model = _dataMapper.Map<Packet, PacketViewModel>(packet);
-            return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            switch (model.PacketAction)
+            {
+                case PacketAction.Execute:
+                    var packet = _dataMapper.Map<PacketViewModel, Packet>(model);
+                    packet = _executor.Execute(packet);
+                    model = _dataMapper.Map<Packet, PacketViewModel>(packet);
+                    return View(model);
+                case PacketAction.SaveInDb:
+                    return RedirectToAction("SaveInDb");
+                case PacketAction.LoadFromDb:
+                    return RedirectToAction("LoadFromDb");
+                case PacketAction.SaveInFile:
+                    return RedirectToAction("SaveInFile");
+                case PacketAction.LoadFromFile:
+                    return RedirectToAction("LoadFromFile");
+                default:
+                    return null;
+            }
         }
 
-        public ActionResult SaveFile()
+        public ActionResult SaveInDb()
         {
             throw new System.NotImplementedException();
         }
 
-        public ActionResult LoadFile()
+        public ActionResult LoadFromDb()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ActionResult SaveInFile()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public ActionResult LoadFromFile()
         {
             throw new System.NotImplementedException();
         }
