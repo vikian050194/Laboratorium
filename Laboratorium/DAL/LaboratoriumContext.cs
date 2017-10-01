@@ -9,14 +9,15 @@ namespace Laboratorium.DAL
         public LaboratoriumContext()
             : base("name=DefaultConnection")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<LaboratoriumContext, Configuration>("DefaultConnection"));
-            Database.SetInitializer<LaboratoriumContext>(new DropCreateDatabaseIfModelChanges<LaboratoriumContext>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<LaboratoriumContext, Configuration>("DefaultConnection"));
+            //Database.SetInitializer<LaboratoriumContext>(new DropCreateDatabaseIfModelChanges<LaboratoriumContext>());
         }
 
         public DbSet<AspNetRole> AspNetRoles { get; set; }
         public DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public DbSet<AspNetUser> AspNetUsers { get; set; }
+        public DbSet<Script> Scripts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

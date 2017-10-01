@@ -20,6 +20,7 @@ namespace Laboratorium.Helpers
         {
             AddRoles();
             AddUsers();
+            AddScripts();
         }
 
         private void AddRoles()
@@ -82,6 +83,36 @@ namespace Laboratorium.Helpers
             };
             user2.AspNetRoles.Add(_context.AspNetRoles.First(r => r.Id == Role.User.ToString()));
             _context.AspNetUsers.AddOrUpdate(user2);
+
+            _context.SaveChanges();
+        }
+
+        private void AddScripts()
+        {
+            var adminId  = "bfa0792d-cb6f-42a4-924f-df941811e2c4";
+
+            _context.Scripts.AddOrUpdate(new Script
+            {
+                Title = "Decart",
+                Code = "let decart a b = List.map (fun x -> List.map (fun y -> (x,y)) b) a |> List.concat",
+                IsPrivate = false,
+                AspNetUserId = adminId
+            });
+
+            _context.Scripts.AddOrUpdate(new Script
+            {
+                Title = "Decart",
+                Code = "let decart a b = List.map (fun x -> List.map (fun y -> (x,y)) b) a |> List.concat",
+                IsPrivate = false,
+                AspNetUserId = adminId
+            });
+
+            _context.Scripts.AddOrUpdate(new Script
+            {
+                Title = "Foo",
+                Code = "let foo n = [1..n]",
+                AspNetUserId = adminId
+            });
 
             _context.SaveChanges();
         }

@@ -2,8 +2,6 @@
 
 namespace Laboratorium.Core.Containers
 {
-
-
     public class Packet
     {
         public Packet()

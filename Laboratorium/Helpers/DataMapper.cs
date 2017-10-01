@@ -23,6 +23,9 @@ namespace Laboratorium.Helpers
 
                 cfg.CreateMap<AspNetUser, AccountsListItem>();
                 cfg.CreateMap<AspNetUser, SetAccountPassword>();
+
+                cfg.CreateMap<Script, ScriptViewModel>()
+                .ForMember(d => d.Author, opt => opt.MapFrom(src => src.AspNetUser.LastName));
             });
         }
 
