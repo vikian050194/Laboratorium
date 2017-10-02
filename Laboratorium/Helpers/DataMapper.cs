@@ -25,7 +25,8 @@ namespace Laboratorium.Helpers
                 cfg.CreateMap<AspNetUser, SetAccountPassword>();
 
                 cfg.CreateMap<Script, ScriptViewModel>()
-                .ForMember(d => d.Author, opt => opt.MapFrom(src => src.AspNetUser.LastName));
+                .ForMember(d => d.Author, opt => opt.MapFrom(src =>
+                    $"{src.AspNetUser.LastName} {src.AspNetUser.FirstName[0]}.{src.AspNetUser.Patronymic[0]}."));
             });
         }
 

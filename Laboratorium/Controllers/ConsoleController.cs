@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Laboratorium.Core;
@@ -80,7 +81,7 @@ namespace Laboratorium.Controllers
         [HttpGet]
         public ActionResult LoadFromDb()
         {
-            var scripts = _context.Scripts.Where(s => !s.IsPrivate).ToList();
+            var scripts = _context.Scripts.Where(s => !s.IsPrivate).Include(s => s.AspNetUser).ToList();
             var scriptsViewModel = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(scripts);
 
             return View(scriptsViewModel);

@@ -101,8 +101,13 @@ namespace Laboratorium.Helpers
 
             _context.Scripts.AddOrUpdate(new Script
             {
-                Title = "Decart",
-                Code = "let decart a b = List.map (fun x -> List.map (fun y -> (x,y)) b) a |> List.concat",
+                Title = "pow",
+                Code = "let pow a n =\n" +
+                       "    let rec loop result i =\n" + 
+                       "        if i > 0\n" +
+                       "        then loop (result * a)(i - 1)\n" +
+                       "        else result\n" +
+                       "    loop 1 n",
                 IsPrivate = false,
                 AspNetUserId = adminId
             });

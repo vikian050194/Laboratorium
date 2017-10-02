@@ -9,8 +9,10 @@ namespace Laboratorium.DAL
         public LaboratoriumContext()
             : base("name=DefaultConnection")
         {
+            //Database.SetInitializer(new DropCreateDatabaseAlways<LaboratoriumContext>());
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<LaboratoriumContext, Configuration>("DefaultConnection"));
-            //Database.SetInitializer<LaboratoriumContext>(new DropCreateDatabaseIfModelChanges<LaboratoriumContext>());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<LaboratoriumContext>());
+            //Database.SetInitializer(new CreateDatabaseIfNotExists<LaboratoriumContext>());
         }
 
         public DbSet<AspNetRole> AspNetRoles { get; set; }
