@@ -63,7 +63,7 @@ namespace Laboratorium.Controllers
                 case PacketAction.SaveInDb:
                     return RedirectToAction("SaveInDb");
                 case PacketAction.LoadFromDb:
-                    return RedirectToAction("LoadFromDb");
+                    return RedirectToAction("LoadFromDbIndex");
                 case PacketAction.SaveInFile:
                     return RedirectToAction("SaveInFile");
                 case PacketAction.LoadFromFile:
@@ -79,12 +79,32 @@ namespace Laboratorium.Controllers
         }
 
         [HttpGet]
-        public ActionResult LoadFromDb()
+        public ActionResult LoadFromDbIndex()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult LoadFromDbPartial()
         {
             var scripts = _context.Scripts.Where(s => !s.IsPrivate).Include(s => s.AspNetUser).ToList();
-            var scriptsViewModel = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(scripts);
 
-            return View(scriptsViewModel);
+            var model = new ScriptsViewModel
+            {
+                PageNumber = 1,
+                ScriptsList = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(scripts)
+            };
+
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        public ActionResult LoadFromDbPartial(ScriptsViewModel model)
+        {
+            var titlePattern = model.Search.TitleSearch ?? "";
+            var scripts = _context.Scripts.Where(s => !s.IsPrivate && s.Title.Contains(titlePattern)).Include(s => s.AspNetUser).ToList();
+            model.ScriptsList = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(scripts);
+            return PartialView(model);
         }
 
         public ActionResult SaveInFile()
