@@ -2,6 +2,20 @@
 
 namespace Laboratorium.Models.ViewModels
 {
+    public class PagingViewModel
+    {
+        public int CurrentPage { get; set; }
+        public List<int> Pages { get; set; }
+        public bool IsPreviousEnabled { get; set; }
+        public bool IsNextEnabled { get; set; }
+    }
+
+    public class SortingViewModel
+    {
+        public bool IsDescending { get; set; }
+        public string OrderBy { get; set; }
+    }
+
     public class ScriptViewModel
     {
         public int Id { get; set; }
@@ -10,28 +24,24 @@ namespace Laboratorium.Models.ViewModels
         public string Author { get; set; }
     }
 
-    public class ScriptsListSearch
+    public class ScriptsFilteringViewModel
     {
-        public string CodeSearch { get; set; }
-        public string TitleSearch { get; set; }
-        public string AuthorSearch { get; set; }
-    }
-
-    public class ScriptsListOrder
-    {
-        public bool CodeOrder { get; set; }
-        public bool TitleOrder { get; set; }
-        public bool AuthorOrder { get; set; }
+        public string Code { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
     }
 
     public class ScriptsViewModel
     {
-        public List<ScriptViewModel> ScriptsList { get; set; }
+        public ScriptsViewModel()
+        {
+            Filtering = new ScriptsFilteringViewModel();
+            Sorting = new SortingViewModel();
+            Paging = new PagingViewModel();
+        }
 
-        public ScriptsListOrder Order { get; set; }
-
-        public ScriptsListSearch Search { get; set; }
-
-        public int PageNumber { get; set; }
+        public ScriptsFilteringViewModel Filtering { get; set; }
+        public SortingViewModel Sorting { get; set; }
+        public PagingViewModel Paging { get; set; }
     }
 }

@@ -1,68 +1,21 @@
-﻿@model Laboratorium.Models.ViewModels.ScriptsViewModel
+﻿@model List<Laboratorium.Models.ViewModels.ScriptViewModel>
 
-@using (Ajax.BeginForm("LoadFromDbPartial", "Console", null, new AjaxOptions
+@foreach (var item in Model)
 {
-    InsertionMode = InsertionMode.Replace,
-    HttpMethod = "POST",
-    UpdateTargetId = "form",
-    OnBegin = "showDialog",
-    OnComplete = "hideDialog"
-}, new { id = "form", @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-
-    <h2>Скрипты</h2>
-    <hr />
-
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>
-                    @Html.Label("Название")
-                </th>
-                <th>
-                    @Html.Label("Скрипт")
-                </th>
-                <th>
-                    @Html.Label("Автор")
-                </th>
-                <th>
-
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    @Html.TextBoxFor(m => m.Search.TitleSearch, new { @class = "form-control" })
-                </td>
-                <td>
-                    @Html.TextBoxFor(m => m.Search.CodeSearch, new { @class = "form-control" })
-                </td>
-                <td>
-                    @Html.TextBoxFor(m => m.Search.AuthorSearch, new { @class = "form-control" })
-                </td>
-                <td></td>
-            </tr>
-            @foreach (var item in Model.ScriptsList)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Code)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Author)
-                    </td>
-                    <td>
-                        <a type="button" class="btn btn-default" href=@Url.Action("Index", "Console", new {id = item.Id})>
-                            <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            <a type="button" class="btn btn-default" href=@Url.Action("Index", "Console", new {id = item.Id})>
+                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+            </a>
+        </td>
+    </tr>
 }

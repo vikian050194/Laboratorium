@@ -79,21 +79,25 @@ namespace Laboratorium.Controllers
         }
 
         [HttpGet]
-        public ActionResult LoadFromDbIndex()
+        public ActionResult LoadFromDbIndex(int id = 1)
         {
-            return View();
+            var model = new ScriptsViewModel
+            {
+                Paging =
+                {
+                    Pages = new List<int> {1, 2, 3, 4,5},
+                    CurrentPage = 1
+                }
+            };
+
+            return View(model);
         }
 
         [HttpGet]
         public ActionResult LoadFromDbPartial()
         {
             var scripts = _context.Scripts.Where(s => !s.IsPrivate).Include(s => s.AspNetUser).ToList();
-
-            var model = new ScriptsViewModel
-            {
-                PageNumber = 1,
-                ScriptsList = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(scripts)
-            };
+            var model = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(scripts);
 
             return PartialView(model);
         }
@@ -101,10 +105,11 @@ namespace Laboratorium.Controllers
         [HttpPost]
         public ActionResult LoadFromDbPartial(ScriptsViewModel model)
         {
-            var titlePattern = model.Search.TitleSearch ?? "";
+            var titlePattern = model.Filtering.Title ?? "";
             var scripts = _context.Scripts.Where(s => !s.IsPrivate && s.Title.Contains(titlePattern)).Include(s => s.AspNetUser).ToList();
-            model.ScriptsList = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(scripts);
-            return PartialView(model);
+            var list = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(scripts);
+
+            return PartialView(list);
         }
 
         public ActionResult SaveInFile()

@@ -114,6 +114,22 @@ namespace Laboratorium.Helpers
 
             _context.Scripts.AddOrUpdate(new Script
             {
+                Title = "add",
+                Code = "let add a b = a + b",
+                IsPrivate = false,
+                AspNetUserId = adminId
+            });
+
+            _context.Scripts.AddOrUpdate(new Script
+            {
+                Title = "mul",
+                Code = "let mul a b = a * b",
+                IsPrivate = false,
+                AspNetUserId = adminId
+            });
+
+            _context.Scripts.AddOrUpdate(new Script
+            {
                 Title = "Foo",
                 Code = "let foo n = [1..n]",
                 AspNetUserId = adminId
