@@ -18,6 +18,8 @@ namespace Laboratorium.Controllers
         private readonly LaboratoriumContext _context;
         private readonly DataMapper _dataMapper;
         private readonly Executor _executor;
+        private const int _pageSize = 2;
+        private const int _pagesMaxToShow = 2;
 
         public ConsoleController()
         {
@@ -79,37 +81,64 @@ namespace Laboratorium.Controllers
         }
 
         [HttpGet]
-        public ActionResult LoadFromDbIndex(int id = 1)
+        public ActionResult LoadFromDbIndex()
         {
-            var model = new ScriptsViewModel
-            {
-                Paging =
-                {
-                    Pages = new List<int> {1, 2, 3, 4,5},
-                    CurrentPage = 1
-                }
-            };
+            var model = new ScriptsInViewModel();
 
-            return View(model);
-        }
-
-        [HttpGet]
-        public ActionResult LoadFromDbPartial()
-        {
-            var scripts = _context.Scripts.Where(s => !s.IsPrivate).Include(s => s.AspNetUser).ToList();
-            var model = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(scripts);
-
-            return PartialView(model);
+            return View("LoadFromDb", model);
         }
 
         [HttpPost]
-        public ActionResult LoadFromDbPartial(ScriptsViewModel model)
+        public ActionResult LoadFromDbPartial(ScriptsInViewModel inputModel)
         {
-            var titlePattern = model.Filtering.Title ?? "";
-            var scripts = _context.Scripts.Where(s => !s.IsPrivate && s.Title.Contains(titlePattern)).Include(s => s.AspNetUser).ToList();
-            var list = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(scripts);
+            var titlePattern = inputModel.Filtering.Title ?? "";
+            var codePattern = inputModel.Filtering.Code ?? "";
+            var authorPattern = inputModel.Filtering.Author ?? "";
 
-            return PartialView(list);
+            var scripts = _context
+                .Scripts
+                .Where(s =>
+                !s.IsPrivate &&
+                s.Title.Contains(titlePattern) &&
+                s.Code.Contains(codePattern) &&
+                s.AspNetUser.LastName.Contains(authorPattern))
+                .Include(s => s.AspNetUser);
+
+            switch (inputModel.Sorting.OrderBy)
+            {
+                case "Title":
+                    scripts = inputModel.Sorting.IsAscending ? scripts.OrderBy(s => s.Title) : scripts.OrderByDescending(s => s.Title);
+                    break;
+                case "Code":
+                    scripts = inputModel.Sorting.IsAscending ? scripts.OrderBy(s => s.Code) : scripts.OrderByDescending(s => s.Code);
+                    break;
+                case "Author":
+                    scripts = inputModel.Sorting.IsAscending ? scripts.OrderBy(s => s.AspNetUser.LastName) : scripts.OrderByDescending(s => s.AspNetUser.LastName);
+                    break;
+            }
+
+            var totalCount = scripts.Count();
+            var totalPages = totalCount / _pageSize;
+
+            //scripts.Skip((inputModel.CurrentPage - 1) * _pageSize)s
+            //.Take(_pageSize)
+            //.ToList();
+
+            var list = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(scripts.ToList());
+
+            var outputModel = new ScriptsOutViewModel
+            {
+                Rows = list,
+                Paging = new PagingViewModel
+                {
+                    CurrentPage = 1,
+                    IsNextEnabled = true,
+                    IsPreviousEnabled = false,
+                    Pages = new List<int> { 1, 2 }
+                }
+            };
+
+            return Json(outputModel);
         }
 
         public ActionResult SaveInFile()

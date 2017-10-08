@@ -491,8 +491,7 @@
     <None Include="Views\Accounts\Index.cshtml" />
     <Content Include="Views\Accounts\ManageUserAccount.cshtml" />
     <None Include="Views\Accounts\SetPassword.cshtml" />
-    <Content Include="Views\Console\LoadFromDbPartial.cshtml" />
-    <Content Include="Views\Console\LoadFromDbIndex.cshtml" />
+    <Content Include="Views\Console\LoadFromDb.cshtml" />
     <None Include="Views\Console\SaveInDb.cshtml" />
     <None Include="Views\Home\Books.cshtml" />
     <None Include="Views\Home\Examples.cshtml" />

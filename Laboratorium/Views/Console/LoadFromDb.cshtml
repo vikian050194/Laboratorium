@@ -1,4 +1,4 @@
-﻿@model Laboratorium.Models.ViewModels.ScriptsViewModel
+﻿@model Laboratorium.Models.ViewModels.ScriptsInViewModel
 
 <h2>Скрипты</h2>
 
@@ -7,19 +7,19 @@
         <tr>
             <th>
                 @Html.Label("Название")
-                <button class="btn btn-default sorting" type="button" >
+                <button class="btn btn-default sorting" type="button" orderby="Title">
                     <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
                 </button>
             </th>
             <th>
                 @Html.Label("Скрипт")
-                <button class="btn btn-default sorting" type="button" >
+                <button class="btn btn-default sorting" type="button" orderby="Code">
                     <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
                 </button>
             </th>
             <th>
                 @Html.Label("Автор")
-                <button class="btn btn-default sorting" type="button" >
+                <button class="btn btn-default sorting" type="button" orderby="Author">
                     <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
                 </button>
             </th>
@@ -43,14 +43,10 @@
         </tr>
     </thead>
     <tbody>
-
-        @{
-            Html.RenderAction("LoadFromDbPartial");
-        }
     </tbody>
 </table>
 <ul class="pagination">
-    <li class="@(Model.Paging.IsPreviousEnabled ? "" : "disabled")">
+    @*<li class="@(Model.Paging.IsPreviousEnabled ? "" : "disabled")">
         <a href="#" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
         </a>
@@ -67,7 +63,7 @@
         <a href="#" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
         </a>
-    </li>
+    </li>*@
 </ul>
 
 <link href="../../Content/loadFromDb.css" rel="stylesheet">

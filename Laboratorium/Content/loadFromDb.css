@@ -5,3 +5,7 @@
 .sorting {
     float: right;    
 }
+
+th {
+    width: 33.3%;
+}

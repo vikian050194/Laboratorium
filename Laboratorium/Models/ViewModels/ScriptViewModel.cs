@@ -12,7 +12,7 @@ namespace Laboratorium.Models.ViewModels
 
     public class SortingViewModel
     {
-        public bool IsDescending { get; set; }
+        public bool IsAscending { get; set; }
         public string OrderBy { get; set; }
     }
 
@@ -31,17 +31,27 @@ namespace Laboratorium.Models.ViewModels
         public string Author { get; set; }
     }
 
-    public class ScriptsViewModel
+    public class ScriptsInViewModel
     {
-        public ScriptsViewModel()
+        public ScriptsInViewModel()
         {
             Filtering = new ScriptsFilteringViewModel();
             Sorting = new SortingViewModel();
-            Paging = new PagingViewModel();
         }
 
         public ScriptsFilteringViewModel Filtering { get; set; }
         public SortingViewModel Sorting { get; set; }
+        public int CurrentPage { get; set; }
+    }
+
+    public class ScriptsOutViewModel
+    {
+        public ScriptsOutViewModel()
+        {
+            Paging = new PagingViewModel();
+        }
+
+        public List<ScriptViewModel> Rows { get; set; }
         public PagingViewModel Paging { get; set; }
     }
 }
