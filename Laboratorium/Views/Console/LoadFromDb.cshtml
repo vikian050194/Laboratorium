@@ -7,7 +7,7 @@
         <tr>
             <th>
                 @Html.Label("Название")
-                <button class="btn btn-default sorting" type="button" orderby="Title">
+                <button class="btn btn-default sorting active" type="button" orderby="Title">
                     <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
                 </button>
             </th>
@@ -46,24 +46,6 @@
     </tbody>
 </table>
 <ul class="pagination">
-    @*<li class="@(Model.Paging.IsPreviousEnabled ? "" : "disabled")">
-        <a href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-        </a>
-    </li>
-    @foreach (var item in Model.Paging.Pages)
-    {
-        <li class="@(Model.Paging.CurrentPage==item ? "active" : "")">
-            <a href="#">
-                @item
-            </a>
-        </li>
-    }
-    <li class="@(Model.Paging.IsNextEnabled ? "" : "disabled")">
-        <a href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-        </a>
-    </li>*@
 </ul>
 
 <link href="../../Content/loadFromDb.css" rel="stylesheet">

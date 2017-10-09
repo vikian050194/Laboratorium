@@ -42,6 +42,7 @@ namespace Laboratorium.Models.ViewModels
         public ScriptsFilteringViewModel Filtering { get; set; }
         public SortingViewModel Sorting { get; set; }
         public int CurrentPage { get; set; }
+        public bool IsFilterChanged { get; set; }
     }
 
     public class ScriptsOutViewModel

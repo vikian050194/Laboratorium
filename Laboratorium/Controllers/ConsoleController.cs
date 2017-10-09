@@ -18,7 +18,7 @@ namespace Laboratorium.Controllers
         private readonly LaboratoriumContext _context;
         private readonly DataMapper _dataMapper;
         private readonly Executor _executor;
-        private const int _pageSize = 2;
+        private const int _pageSize = 1;
         private const int _pagesMaxToShow = 2;
 
         public ConsoleController()
@@ -117,24 +117,35 @@ namespace Laboratorium.Controllers
                     break;
             }
 
+            var currentPage = inputModel.IsFilterChanged ? 1 : inputModel.CurrentPage;
+
             var totalCount = scripts.Count();
-            var totalPages = totalCount / _pageSize;
+            var totalPages = totalCount / _pageSize + (totalCount % _pageSize == 0 ? 0 : 1);
+            var totalPagesSets = totalPages / _pagesMaxToShow + (totalPages % _pagesMaxToShow == 0 ? 0 : 1);
+            var currentPagesSetIndex = (currentPage - 1) / _pagesMaxToShow;
+            var isNextEnabled = currentPagesSetIndex != totalPagesSets;
+            var isPreviousEnabled = currentPagesSetIndex != 1;
+            var currentPagesSet = new List<int>();
 
-            //scripts.Skip((inputModel.CurrentPage - 1) * _pageSize)s
-            //.Take(_pageSize)
-            //.ToList();
+            for (var i = 1; i <= _pagesMaxToShow && i <= totalPages; i++)
+            {
+                currentPagesSet.Add(currentPagesSetIndex + i);
+            }
 
-            var list = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(scripts.ToList());
+            var page = scripts.Skip((currentPage - 1)*_pageSize)
+                .Take(_pageSize);
+
+            var list = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(page.ToList());
 
             var outputModel = new ScriptsOutViewModel
             {
                 Rows = list,
                 Paging = new PagingViewModel
                 {
-                    CurrentPage = 1,
-                    IsNextEnabled = true,
-                    IsPreviousEnabled = false,
-                    Pages = new List<int> { 1, 2 }
+                    CurrentPage = currentPage,
+                    IsNextEnabled = isNextEnabled,
+                    IsPreviousEnabled = isPreviousEnabled,
+                    Pages = currentPagesSet
                 }
             };
 

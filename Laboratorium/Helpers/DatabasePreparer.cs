@@ -132,7 +132,8 @@ namespace Laboratorium.Helpers
             {
                 Title = "Foo",
                 Code = "let foo n = [1..n]",
-                AspNetUserId = adminId
+                AspNetUserId = adminId,
+                IsPrivate = false
             });
 
             _context.SaveChanges();

@@ -4,6 +4,7 @@
     var isAscending = true;
     var orderBy = 'Title';
     var page = 1;
+    var isFilterChanged = false;
 
     function getData() {
         var filteringCode = $('#Filtering_Code').val();
@@ -16,7 +17,8 @@
             'Filtering.Code': filteringCode,
             'Filtering.Title': filteringTitle,
             'Filtering.Author': filteringAuthor,
-            'Paging.CurrentPage': page
+            'CurrentPage': page,
+            'IsFilterChanged': isFilterChanged
         };
 
         return body;
@@ -68,6 +70,8 @@
             success: function (result) {
                 updateTable(result);
                 updatePaging(result);
+                isFilterChanged = false;
+                subscribe();
             }
         });
     }
@@ -85,12 +89,24 @@
         reload();
     }
 
-    function subscribe() {
-        $('input[name*="Filtering"]').keyup(reload);
-        $('button[orderby]').click(changeOrder);
+    function changeFilter() {
+        isFilterChanged = true;
+
+
     }
 
-    subscribe();
+    function changePage() {
+        var value = $(this).text();
+        page = parseInt(value);
+
+        reload();
+    }
+
+    function subscribe() {
+        $('input[name*="Filtering"]').keyup(changeFilter);
+        $('button[orderby]').click(changeOrder);
+        $('ul[class="pagination"] > li > a').click(changePage);
+    }
 
     reload();
 });
