@@ -2,20 +2,6 @@
 
 namespace Laboratorium.Models.ViewModels
 {
-    public class PagingViewModel
-    {
-        public int CurrentPage { get; set; }
-        public List<int> Pages { get; set; }
-        public bool IsPreviousEnabled { get; set; }
-        public bool IsNextEnabled { get; set; }
-    }
-
-    public class SortingViewModel
-    {
-        public bool IsAscending { get; set; }
-        public string OrderBy { get; set; }
-    }
-
     public class ScriptViewModel
     {
         public int Id { get; set; }
@@ -36,11 +22,11 @@ namespace Laboratorium.Models.ViewModels
         public ScriptsInViewModel()
         {
             Filtering = new ScriptsFilteringViewModel();
-            Sorting = new SortingViewModel();
+            Sorting = new Sorting();
         }
 
         public ScriptsFilteringViewModel Filtering { get; set; }
-        public SortingViewModel Sorting { get; set; }
+        public Sorting Sorting { get; set; }
         public int CurrentPage { get; set; }
         public bool IsFilterChanged { get; set; }
     }
@@ -49,10 +35,10 @@ namespace Laboratorium.Models.ViewModels
     {
         public ScriptsOutViewModel()
         {
-            Paging = new PagingViewModel();
+            Paging = new Paging();
         }
 
         public List<ScriptViewModel> Rows { get; set; }
-        public PagingViewModel Paging { get; set; }
+        public Paging Paging { get; set; }
     }
 }

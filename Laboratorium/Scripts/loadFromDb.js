@@ -37,9 +37,12 @@
     }
 
     function updatePaging(data) {
+        var previous = data.Paging.Pages[0] - 1;
+        var next = data.Paging.Pages[data.Paging.Pages.length - 1] + 1;
+
         var listContent =
             '<li class="' + (data.Paging.IsPreviousEnabled === true ? '' : 'disabled') + '">' +
-            '<a href="#" aria-label="Previous">' +
+            '<a href="#" aria-label="Previous" page="' + previous + '">' +
             '<span aria-hidden="true">&laquo;</span>' +
             '</a></li>';
 
@@ -48,12 +51,12 @@
         for (var i = 0; i < pages.length; i++) {
             listContent +=
                 '<li class="' + (pages[i] === data.Paging.CurrentPage ? 'active' : '') + '">' +
-                '<a href="#">' + pages[i] + '</a></li>';
+                '<a href="#" page="' + pages[i] + '">' + pages[i] + '</a></li>';
         }
 
         listContent = listContent +
             '<li class="' + (data.Paging.IsNextEnabled === true ? '' : 'disabled') + '">' +
-            '<a href="#" aria-label="Previous">' +
+            '<a href="#" aria-label="Next" page="' + next + '">' +
             '<span aria-hidden="true">&raquo;</span>' +
             '</a></li>';
 
@@ -71,7 +74,7 @@
                 updateTable(result);
                 updatePaging(result);
                 isFilterChanged = false;
-                subscribe();
+                $('ul[class="pagination"] > li > a').click(changePage);
             }
         });
     }
@@ -92,11 +95,11 @@
     function changeFilter() {
         isFilterChanged = true;
 
-
+        reload();
     }
 
     function changePage() {
-        var value = $(this).text();
+        var value = $(this).attr('page');
         page = parseInt(value);
 
         reload();
@@ -105,8 +108,8 @@
     function subscribe() {
         $('input[name*="Filtering"]').keyup(changeFilter);
         $('button[orderby]').click(changeOrder);
-        $('ul[class="pagination"] > li > a').click(changePage);
     }
 
     reload();
+    subscribe();
 });

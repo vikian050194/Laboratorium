@@ -18,8 +18,8 @@ namespace Laboratorium.Controllers
         private readonly LaboratoriumContext _context;
         private readonly DataMapper _dataMapper;
         private readonly Executor _executor;
-        private const int _pageSize = 1;
-        private const int _pagesMaxToShow = 2;
+        private const int _pageSize = 2;
+        private const int _pagesSetSize = 2;
 
         public ConsoleController()
         {
@@ -119,20 +119,10 @@ namespace Laboratorium.Controllers
 
             var currentPage = inputModel.IsFilterChanged ? 1 : inputModel.CurrentPage;
 
-            var totalCount = scripts.Count();
-            var totalPages = totalCount / _pageSize + (totalCount % _pageSize == 0 ? 0 : 1);
-            var totalPagesSets = totalPages / _pagesMaxToShow + (totalPages % _pagesMaxToShow == 0 ? 0 : 1);
-            var currentPagesSetIndex = (currentPage - 1) / _pagesMaxToShow;
-            var isNextEnabled = currentPagesSetIndex != totalPagesSets;
-            var isPreviousEnabled = currentPagesSetIndex != 1;
-            var currentPagesSet = new List<int>();
+            var paging = new PagingManager().GetPaging(scripts.Count(), currentPage, _pageSize, _pagesSetSize);
 
-            for (var i = 1; i <= _pagesMaxToShow && i <= totalPages; i++)
-            {
-                currentPagesSet.Add(currentPagesSetIndex + i);
-            }
-
-            var page = scripts.Skip((currentPage - 1)*_pageSize)
+            var page = scripts
+                .Skip((currentPage - 1) * _pageSize)
                 .Take(_pageSize);
 
             var list = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(page.ToList());
@@ -140,13 +130,7 @@ namespace Laboratorium.Controllers
             var outputModel = new ScriptsOutViewModel
             {
                 Rows = list,
-                Paging = new PagingViewModel
-                {
-                    CurrentPage = currentPage,
-                    IsNextEnabled = isNextEnabled,
-                    IsPreviousEnabled = isPreviousEnabled,
-                    Pages = currentPagesSet
-                }
+                Paging = paging
             };
 
             return Json(outputModel);

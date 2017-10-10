@@ -55,16 +55,19 @@
     <Compile Include="Managers\NameManager.cs" />
     <Compile Include="Executor.cs" />
     <Compile Include="Containers\Packet.cs" />
+    <Compile Include="Managers\PagingManager.cs" />
     <Compile Include="Managers\PathManager.cs" />
     <Compile Include="Managers\RealPathManager.cs" />
     <Compile Include="Managers\Rule.cs" />
     <Compile Include="Managers\TestPathManager.cs" />
+    <Compile Include="Paging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Sorting.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Laboratorium.Attributes\Laboratorium.Attributes.csproj">
