@@ -18,8 +18,8 @@ namespace Laboratorium.Controllers
         private readonly LaboratoriumContext _context;
         private readonly DataMapper _dataMapper;
         private readonly Executor _executor;
-        private const int _pageSize = 2;
-        private const int _pagesSetSize = 2;
+        private readonly int _pageSize = Properties.Settings.Default.PageSize;
+        private readonly int _pagesSetSize = Properties.Settings.Default.PagesSetSize;
 
         public ConsoleController()
         {

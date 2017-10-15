@@ -5,6 +5,10 @@
     var orderBy = 'Title';
     var page = 1;
     var isFilterChanged = false;
+    var isPreviousEnabled = false;
+    var previousPage = 0;
+    var isNextEnabled = false;
+    var nextPage = 0;
 
     function getData() {
         var filteringCode = $('#Filtering_Code').val();
@@ -37,12 +41,12 @@
     }
 
     function updatePaging(data) {
-        var previous = data.Paging.Pages[0] - 1;
-        var next = data.Paging.Pages[data.Paging.Pages.length - 1] + 1;
+        previousPage = data.Paging.Pages[0] - 1;
+        nextPage = data.Paging.Pages[data.Paging.Pages.length - 1] + 1;
 
         var listContent =
             '<li class="' + (data.Paging.IsPreviousEnabled === true ? '' : 'disabled') + '">' +
-            '<a href="#" aria-label="Previous" page="' + previous + '">' +
+            '<a href="#" aria-label="Previous" page="' + previousPage + '">' +
             '<span aria-hidden="true">&laquo;</span>' +
             '</a></li>';
 
@@ -56,7 +60,7 @@
 
         listContent = listContent +
             '<li class="' + (data.Paging.IsNextEnabled === true ? '' : 'disabled') + '">' +
-            '<a href="#" aria-label="Next" page="' + next + '">' +
+            '<a href="#" aria-label="Next" page="' + nextPage + '">' +
             '<span aria-hidden="true">&raquo;</span>' +
             '</a></li>';
 
@@ -101,6 +105,10 @@
     function changePage() {
         var value = $(this).attr('page');
         page = parseInt(value);
+
+        if (page === previousPage && !isPreviousEnabled || page === nextPage && !isNextEnabled) {
+            return;
+        }
 
         reload();
     }
