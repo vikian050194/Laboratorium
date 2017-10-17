@@ -118,6 +118,7 @@
     function subscribe() {
         $('input[name*="Filtering"]').keyup(changeFilter);
         $('button[orderby]').click(changeOrder);
+        $('select[name*="Filtering"]').change(reload);
     }
 
     reload();

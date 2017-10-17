@@ -45,7 +45,7 @@
                 @Html.TextBoxFor(m => m.Filtering.Patronymic, new { @class = "form-control", placeholder = "Искомое отчество..." })
             </th>
             <th>
-                @Html.DropDownListFor(m => m.Filtering.Role, new List<SelectListItem> { new SelectListItem { Selected = true, Text = @"Администратор", Value = "0" }, new SelectListItem { Text = @"Пользователь", Value = "1" } }, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Filtering.Role, new List<SelectListItem> { new SelectListItem { Selected = true, Text = @"Пользователь", Value = "0" }, new SelectListItem { Text = @"Администратор", Value = "1" } }, new { @class = "form-control" })
             </th>
             <th>
 

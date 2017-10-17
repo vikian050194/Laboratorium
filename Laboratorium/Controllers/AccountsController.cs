@@ -97,19 +97,6 @@ namespace Laboratorium.Controllers
             return Json(outputModel);
         }
 
-        private string GetRoleName(string id)
-        {
-            switch (id)
-            {
-                case "Admin":
-                    return @"Администратор";
-                case "User":
-                    return @"Пользователь";
-                default:
-                    return "Ошибка!";
-            }
-        }
-
         [HttpGet]
         public ActionResult ManageUserAccount(string id)
         {

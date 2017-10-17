@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using Laboratorium.Core.Containers;
 using Laboratorium.Models.DataModels;
 using Laboratorium.Models.ViewModels;
@@ -14,6 +15,19 @@ namespace Laboratorium.Helpers
             //CreateUserMap();
         }
 
+        private string GetRoleName(string id)
+        {
+            switch (id)
+            {
+                case "Admin":
+                    return @"Администратор";
+                case "User":
+                    return @"Пользователь";
+                default:
+                    return "Ошибка!";
+            }
+        }
+
         private void CreateMap()
         {
             Mapper.Initialize(cfg =>
@@ -21,7 +35,8 @@ namespace Laboratorium.Helpers
                 cfg.CreateMap<Packet, PacketViewModel>();
                 cfg.CreateMap<PacketViewModel, Packet>();
 
-                cfg.CreateMap<AspNetUser, AccountViewModel>();
+                cfg.CreateMap<AspNetUser, AccountViewModel>()
+                .ForMember(d => d.Role, opt => opt.MapFrom(src => GetRoleName(src.AspNetRoles.First().Id)));
                 cfg.CreateMap<AspNetUser, SetAccountPassword>();
 
                 cfg.CreateMap<Script, ScriptViewModel>()
