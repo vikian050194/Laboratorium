@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Laboratorium.Core.Managers;
 using Laboratorium.DAL;
 using Laboratorium.Helpers;
 using Laboratorium.Models.DataModels;
@@ -19,6 +20,8 @@ namespace Laboratorium.Controllers
         private readonly LaboratoriumContext _context;
         private readonly DataMapper _dataMapper;
         private ApplicationUserManager _userManager;
+        private readonly int _pageSize = Properties.Settings.Default.PageSize;
+        private readonly int _pagesSetSize = Properties.Settings.Default.PagesSetSize;
 
         public ApplicationUserManager UserManager
         {
@@ -41,17 +44,57 @@ namespace Laboratorium.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var accountsListItems = new List<AccountsListItem>();
-            var users = _context.AspNetUsers.OrderBy(u => u.LastName);
+            var model = new AccountsInViewModel();
 
-            foreach (var aspNetUser in users)
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Index(AccountsInViewModel inputModel)
+        {
+            var firstNamePattern = inputModel.Filtering.FirstName ?? "";
+            var lastNamePattern = inputModel.Filtering.LastName ?? "";
+            var patronymicPattern = inputModel.Filtering.Patronymic ?? "";
+            var rolePattern = inputModel.Filtering.Role.ToString();
+
+            var users = _context
+                .AspNetUsers
+                .Where(u =>
+                    u.FirstName.Contains(firstNamePattern) &&
+                    u.LastName.Contains(lastNamePattern) &&
+                    u.Patronymic.Contains(patronymicPattern) &&
+                    u.AspNetRoles.Any(r=>r.Id == rolePattern));
+
+            switch (inputModel.Sorting.OrderBy)
             {
-                var user = _dataMapper.Map<AspNetUser, AccountsListItem>(aspNetUser);
-                user.Role = GetRoleName(aspNetUser.AspNetRoles.First().Name);
-                accountsListItems.Add(user);
+                case "FirstName":
+                    users = inputModel.Sorting.IsAscending ? users.OrderBy(s => s.FirstName) : users.OrderByDescending(s => s.FirstName);
+                    break;
+                case "LastName":
+                    users = inputModel.Sorting.IsAscending ? users.OrderBy(s => s.LastName) : users.OrderByDescending(s => s.LastName);
+                    break;
+                case "Patronymic":
+                    users = inputModel.Sorting.IsAscending ? users.OrderBy(s => s.Patronymic) : users.OrderByDescending(s => s.Patronymic);
+                    break;
             }
 
-            return View(accountsListItems);
+            var currentPage = inputModel.IsFilterChanged ? 1 : inputModel.CurrentPage;
+
+            var paging = new PagingManager().GetPaging(users.Count(), currentPage, _pageSize, _pagesSetSize);
+
+            var page = users
+                .Skip((currentPage - 1) * _pageSize)
+                .Take(_pageSize);
+
+            var list = _dataMapper.Map<List<AspNetUser>, List<AccountViewModel>>(page.ToList());
+
+            var outputModel = new AccountsOutViewModel
+            {
+                Rows = list,
+                Paging = paging
+            };
+
+            return Json(outputModel);
         }
 
         private string GetRoleName(string id)
@@ -71,7 +114,7 @@ namespace Laboratorium.Controllers
         public ActionResult ManageUserAccount(string id)
         {
             var user = _context.AspNetUsers.Find(id);
-            var model = _dataMapper.Map<AspNetUser, AccountsListItem>(user);
+            var model = _dataMapper.Map<AspNetUser, AccountViewModel>(user);
 
             return View(model);
         }
@@ -80,13 +123,13 @@ namespace Laboratorium.Controllers
         public ActionResult ChangeUserData(string id)
         {
             var user = _context.AspNetUsers.Find(id);
-            var model = _dataMapper.Map<AspNetUser, AccountsListItem>(user);
+            var model = _dataMapper.Map<AspNetUser, AccountViewModel>(user);
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult ChangeUserData(AccountsListItem model)
+        public ActionResult ChangeUserData(AccountViewModel model)
         {
             if (!ModelState.IsValid)
             {

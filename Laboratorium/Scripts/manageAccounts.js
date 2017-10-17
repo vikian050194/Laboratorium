@@ -2,7 +2,7 @@
     $.ajaxSetup({ cache: false });
 
     var isAscending = true;
-    var orderBy = 'Title';
+    var orderBy = 'LastName';
     var page = 1;
     var isFilterChanged = false;
     var isPreviousEnabled = false;
@@ -11,16 +11,18 @@
     var nextPage = 0;
 
     function getData() {
-        var filteringCode = $('#Filtering_Code').val();
-        var filteringTitle = $('#Filtering_Title').val();
-        var filteringAuthor = $('#Filtering_Author').val();
+        var filteringFirstName = $('#Filtering_FirstName').val();
+        var filteringLastName = $('#Filtering_LastName').val();
+        var filteringPatronymic = $('#Filtering_Patronymic').val();
+        var filteringRole = $('#Filtering_Role').val();
 
         var body = {
             'Sorting.IsAscending': isAscending,
             'Sorting.OrderBy': orderBy,
-            'Filtering.Code': filteringCode,
-            'Filtering.Title': filteringTitle,
-            'Filtering.Author': filteringAuthor,
+            'Filtering.FirstName': filteringFirstName,
+            'Filtering.LastName': filteringLastName,
+            'Filtering.Patronymic': filteringPatronymic,
+            'Filtering.Role': filteringRole,
             'CurrentPage': page,
             'IsFilterChanged': isFilterChanged
         };
@@ -32,8 +34,8 @@
         var tableBodyContent = '';
 
         data.Rows.forEach(function (item) {
-            var button = '<a type="button" class="btn btn-default" href="Index/' + item.Id + '" > <span class="glyphicon glyphicon-play" aria-hidden="true"></span></a>';
-            var line = '<tr><td>' + item.Title + '</td><td>' + item.Code + '</td><td>' + item.Author + '</td><td>' + button + '</td>' + '</td></tr>'
+            var button = '<a type="button" class="btn btn-default" href="ManageUserAccount/' + item.Id + '" > <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>';
+            var line = '<tr><td>' + item.LastName + '</td><td>' + item.FirstName + '</td><td>' + item.Patronymic + '</td><td>' + item.Role + '</td><td>' + button + '</td>' + '</td></tr>';
             tableBodyContent += line;
         });
 
@@ -73,7 +75,7 @@
         $.ajax({
             type: "POST",
             data: data,
-            url: 'LoadFromDbPartial',
+            url: 'Index',
             success: function (result) {
                 updateTable(result);
                 updatePaging(result);

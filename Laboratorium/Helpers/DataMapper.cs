@@ -21,7 +21,7 @@ namespace Laboratorium.Helpers
                 cfg.CreateMap<Packet, PacketViewModel>();
                 cfg.CreateMap<PacketViewModel, Packet>();
 
-                cfg.CreateMap<AspNetUser, AccountsListItem>();
+                cfg.CreateMap<AspNetUser, AccountViewModel>();
                 cfg.CreateMap<AspNetUser, SetAccountPassword>();
 
                 cfg.CreateMap<Script, ScriptViewModel>()
@@ -44,7 +44,7 @@ namespace Laboratorium.Helpers
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<AspNetUser, AccountsListItem>();
+                cfg.CreateMap<AspNetUser, AccountViewModel>();
                 cfg.CreateMap<AspNetUser, SetAccountPassword>();
             });
         }

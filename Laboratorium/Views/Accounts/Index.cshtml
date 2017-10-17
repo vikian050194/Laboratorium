@@ -26,9 +26,9 @@
             </th>
             <th>
                 @Html.Label("Роль")
-                <button class="btn btn-default sorting" type="button" orderby="Role">
+                @*<button class="btn btn-default sorting" type="button" orderby="Role">
                     <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-                </button>
+                </button>*@
             </th>
             <th>
 
@@ -45,7 +45,7 @@
                 @Html.TextBoxFor(m => m.Filtering.Patronymic, new { @class = "form-control", placeholder = "Искомое отчество..." })
             </th>
             <th>
-                @Html.DropDownListFor(m => m.Filtering.Role, new List<SelectListItem> { new SelectListItem { Selected = true, Text = @"А", Value = 0 }, new SelectListItem { Text = @"Б", Value = 1 } }, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Filtering.Role, new List<SelectListItem> { new SelectListItem { Selected = true, Text = @"Администратор", Value = "0" }, new SelectListItem { Text = @"Пользователь", Value = "1" } }, new { @class = "form-control" })
             </th>
             <th>
 
@@ -58,25 +58,3 @@
 
 <link href="../../Content/manageAccounts.css" rel="stylesheet">
 <script type="text/javascript" src="../../Scripts/manageAccounts.js"></script>
-@*@foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Patronymic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
-            <td>
-                <a type="button" class="btn btn-default" href=@Url.Action("ManageUserAccount", new { id = item.Id })>
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                </a>
-            </td>
-        </tr>
-    }*@
