@@ -1,7 +1,8 @@
-﻿@model Laboratorium.Models.ViewModels.AccountViewModel
+﻿@using Laboratorium.Models.DataModels
+@model Laboratorium.Models.ViewModels.AccountViewModel
 
 <h2>Изменить данные</h2>
-<hr/>
+<hr />
 
 @using (Html.BeginForm("ChangeUserData", "Accounts", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -24,6 +25,16 @@
         @Html.LabelFor(m => m.Patronymic, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Patronymic, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Role, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Role,
+           new List<SelectListItem> {
+               new SelectListItem { Selected = (Model.Role == Role.User), Text = @"Пользователь", Value = "User" },
+               new SelectListItem { Selected = (Model.Role == Role.Admin), Text = @"Администратор", Value = "Admin" } },
+           new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">

@@ -31,11 +31,12 @@
     }
 
     function updateTable(data) {
+        var role = $('#Filtering_Role :selected').text();
         var tableBodyContent = '';
 
         data.Rows.forEach(function (item) {
             var button = '<a type="button" class="btn btn-default" href="ManageUserAccount/' + item.Id + '" > <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>';
-            var line = '<tr><td>' + item.LastName + '</td><td>' + item.FirstName + '</td><td>' + item.Patronymic + '</td><td>' + item.Role + '</td><td>' + button + '</td>' + '</td></tr>';
+            var line = '<tr><td>' + item.LastName + '</td><td>' + item.FirstName + '</td><td>' + item.Patronymic + '</td><td>' + role + '</td><td>' + button + '</td>' + '</td></tr>';
             tableBodyContent += line;
         });
 
@@ -75,7 +76,7 @@
         $.ajax({
             type: "POST",
             data: data,
-            url: 'Index',
+            url: 'AccountsListPartial',
             success: function (result) {
                 updateTable(result);
                 updatePaging(result);

@@ -7,10 +7,24 @@ namespace Laboratorium.Models.ViewModels
     public class AccountViewModel
     {
         public string Id { get; set; }
+        [Required]
+        [StringLength(256, ErrorMessage = @"{0} должно быть не меньше {2} символов.", MinimumLength = 2)]
+        [Display(Name = @"Имя")]
         public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(256, ErrorMessage = @"{0} должна быть не меньше {2} символов.", MinimumLength = 2)]
+        [Display(Name = @"Фамилия")]
         public string LastName { get; set; }
+
+        [Required]
+        [StringLength(256, ErrorMessage = @"{0} должно быть не меньше {2} символов.", MinimumLength = 2)]
+        [Display(Name = @"Отчество")]
         public string Patronymic { get; set; }
-        public string Role { get; set; }
+
+        [Required]
+        [Display(Name = @"Роль")]
+        public Role Role { get; set; }
     }
 
     public class AccountsFilteringViewModel

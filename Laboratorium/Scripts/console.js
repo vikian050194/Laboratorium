@@ -7,6 +7,7 @@
                 end = this.selectionEnd;
             this.value = val.substring(0, start) + '    ' + val.substring(end);
             this.selectionStart = this.selectionEnd = start + 4;
+            e.preventDefault();
             return;
         }
         if (e.altKey && keyCode === 13) {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -42,7 +43,7 @@ namespace Laboratorium.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult AccountsList()
         {
             var model = new AccountsInViewModel();
 
@@ -50,7 +51,7 @@ namespace Laboratorium.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(AccountsInViewModel inputModel)
+        public ActionResult AccountsListPartial(AccountsInViewModel inputModel)
         {
             var firstNamePattern = inputModel.Filtering.FirstName ?? "";
             var lastNamePattern = inputModel.Filtering.LastName ?? "";
@@ -63,7 +64,7 @@ namespace Laboratorium.Controllers
                     u.FirstName.Contains(firstNamePattern) &&
                     u.LastName.Contains(lastNamePattern) &&
                     u.Patronymic.Contains(patronymicPattern) &&
-                    u.AspNetRoles.Any(r=>r.Id == rolePattern));
+                    u.AspNetRoles.Any(r => r.Id == rolePattern));
 
             switch (inputModel.Sorting.OrderBy)
             {
@@ -127,6 +128,8 @@ namespace Laboratorium.Controllers
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
             user.Patronymic = model.Patronymic;
+            user.AspNetRoles.Clear();
+            user.AspNetRoles.Add(_context.AspNetRoles.Find(model.Role.ToString()));
             _context.AspNetUsers.AddOrUpdate(user);
             _context.SaveChanges();
 

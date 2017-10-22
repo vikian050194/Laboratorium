@@ -499,7 +499,7 @@
     <Content Include="Views\Console\Console.cshtml" />
     <Content Include="Views\Console\Index.cshtml" />
     <Content Include="Views\Accounts\ChangeUserData.cshtml" />
-    <None Include="Views\Accounts\Index.cshtml" />
+    <None Include="Views\Accounts\AccountsList.cshtml" />
     <Content Include="Views\Accounts\ManageUserAccount.cshtml" />
     <None Include="Views\Accounts\SetPassword.cshtml" />
     <Content Include="Views\Console\LoadFromDb.cshtml" />

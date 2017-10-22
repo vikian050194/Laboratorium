@@ -36,7 +36,7 @@ namespace Laboratorium.Helpers
                 cfg.CreateMap<PacketViewModel, Packet>();
 
                 cfg.CreateMap<AspNetUser, AccountViewModel>()
-                .ForMember(d => d.Role, opt => opt.MapFrom(src => GetRoleName(src.AspNetRoles.First().Id)));
+                .ForMember(d => d.Role, opt => opt.MapFrom(src => src.AspNetRoles.First().Id));
                 cfg.CreateMap<AspNetUser, SetAccountPassword>();
 
                 cfg.CreateMap<Script, ScriptViewModel>()
