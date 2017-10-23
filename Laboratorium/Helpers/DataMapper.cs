@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using AutoMapper;
+using Laboratorium.Controllers;
 using Laboratorium.Core.Containers;
 using Laboratorium.Models.DataModels;
 using Laboratorium.Models.ViewModels;
@@ -43,6 +45,9 @@ namespace Laboratorium.Helpers
                 .ForMember(d => d.Code, opt => opt.MapFrom(src => src.Code.Substring(0, src.Code.Length >= 80 ? 80 : src.Code.Length) + "..."))
                 .ForMember(d => d.Author, opt => opt.MapFrom(src =>
                     $"{src.AspNetUser.LastName} {src.AspNetUser.FirstName[0]}.{src.AspNetUser.Patronymic[0]}."));
+                cfg.CreateMap<Script, FullScriptViewModel>()
+                .ForMember(d => d.Code, opt => opt.MapFrom(src => src.Code.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)))
+                .ForMember(d => d.Author, opt => opt.MapFrom(src => $"{src.AspNetUser.LastName} {src.AspNetUser.FirstName} {src.AspNetUser.Patronymic}"));
             });
         }
 

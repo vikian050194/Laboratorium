@@ -33,7 +33,7 @@
 
         data.Rows.forEach(function (item) {
             var button = '<a type="button" class="btn btn-default" href="Index/' + item.Id + '" > <span class="glyphicon glyphicon-play" aria-hidden="true"></span></a>';
-            var line = '<tr><td>' + item.Title + '</td><td>' + item.Code + '</td><td>' + item.Author + '</td><td>' + button + '</td>' + '</td></tr>';
+            var line = '<tr><td>' + item.Title + '</td><td><a target="_blank" href="ShowFullScript/' + item.Id + '" >' + item.Code + '</a></td><td>' + item.Author + '</td><td>' + button + '</td>' + '</td></tr>';
             tableBodyContent += line;
         });
 

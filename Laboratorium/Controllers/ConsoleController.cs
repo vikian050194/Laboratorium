@@ -136,6 +136,15 @@ namespace Laboratorium.Controllers
             return Json(outputModel);
         }
 
+        [HttpGet]
+        public ActionResult ShowFullScript(int id)
+        {
+            var script = _context.Scripts.Include(s=>s.AspNetUser).First(s=>s.Id == id);
+            var model = _dataMapper.Map<Script, FullScriptViewModel>(script);
+
+            return View(model);
+        }
+
         public ActionResult SaveInFile()
         {
             throw new System.NotImplementedException();
