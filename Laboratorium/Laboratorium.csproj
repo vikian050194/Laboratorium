@@ -502,8 +502,7 @@
     <None Include="Views\Accounts\AccountsList.cshtml" />
     <Content Include="Views\Accounts\ManageUserAccount.cshtml" />
     <None Include="Views\Accounts\SetPassword.cshtml" />
-    <Content Include="Views\Console\LoadFromDb.cshtml" />
-    <None Include="Views\Console\SaveInDb.cshtml" />
+    <Content Include="Views\Console\LoadScript.cshtml" />
     <None Include="Views\Console\ShowFullScript.cshtml" />
     <None Include="Views\Home\Books.cshtml" />
     <None Include="Views\Home\Examples.cshtml" />

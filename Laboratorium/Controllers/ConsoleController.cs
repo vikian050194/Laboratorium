@@ -62,30 +62,21 @@ namespace Laboratorium.Controllers
                     packet = _executor.Execute(packet);
                     model = _dataMapper.Map<Packet, PacketViewModel>(packet);
                     return View(model);
-                case PacketAction.SaveInDb:
-                    return RedirectToAction("SaveInDb");
-                case PacketAction.LoadFromDb:
-                    return RedirectToAction("LoadFromDbIndex");
-                case PacketAction.SaveInFile:
-                    return RedirectToAction("SaveInFile");
-                case PacketAction.LoadFromFile:
-                    return RedirectToAction("LoadFromFile");
+                case PacketAction.Save:
+                    return RedirectToAction("LoadScript");
+                case PacketAction.Load:
+                    return RedirectToAction("LoadScript");
                 default:
                     return null;
             }
         }
 
-        public ActionResult SaveInDb()
-        {
-            return View();
-        }
-
         [HttpGet]
-        public ActionResult LoadFromDbIndex()
+        public ActionResult LoadScript()
         {
             var model = new ScriptsInViewModel();
 
-            return View("LoadFromDb", model);
+            return View(model);
         }
 
         [HttpPost]
@@ -139,7 +130,7 @@ namespace Laboratorium.Controllers
         [HttpGet]
         public ActionResult ShowFullScript(int id)
         {
-            var script = _context.Scripts.Include(s=>s.AspNetUser).First(s=>s.Id == id);
+            var script = _context.Scripts.Include(s => s.AspNetUser).First(s => s.Id == id);
             var model = _dataMapper.Map<Script, FullScriptViewModel>(script);
 
             return View(model);
