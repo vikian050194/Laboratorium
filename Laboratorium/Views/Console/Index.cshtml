@@ -3,7 +3,6 @@
 @using (Html.BeginForm("Index", "Console", FormMethod.Post, new { id = "form", @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken();
-    @Html.ValidationSummary("", new { @class = "text-danger" })
     <div>
         @Html.Hidden("errors", Model.IsError)
         <ul class="nav nav-pills nav-justified" id="form-tabs" role="tablist">
@@ -16,40 +15,16 @@
             <li role="presentation" class="">
                 <a href="#module" role="tab" id="module-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Модули</a>
             </li>
+            <li role="presentation" class="">
+                <a href="#settings" role="tab" id="module-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Настройки</a>
+            </li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade active in container container-fixed" role="tabpanel" id="script" aria-labelledby="home-tab">
-                @Html.TextAreaFor(m => m.Script, new { @class = "form-control" })
-
-                <div class="btn-group" role="group" aria-label="...">
-                    <button name="PacketAction" value="Execute" type="submit" class="btn btn-primary" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
-                        &nbsp;
-                        Выполнить
-                    </button>
-                    <button name="PacketAction" value="Save" type="submit" class="btn btn-primary" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
-                        &nbsp;
-                        Сохранить в БД
-                    </button>
-                    <button name="PacketAction" value="Load" type="submit" class="btn btn-primary" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span>
-                        &nbsp;
-                        Загрузить из БД
-                    </button>
-                    @*<button name="PacketAction" value="Save" type="submit" class="btn btn-primary" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
-                        &nbsp;
-                        Сохранить в файл
-                    </button>
-                    <button name="PacketAction" value="Load" type="submit" class="btn btn-primary" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span>
-                        &nbsp;
-                        Загрузить из файла
-                    </button>*@
-                </div>
+                @Html.TextAreaFor(m => m.Script, new {@class = "form-control"})
             </div>
             <div class="tab-pane fade container container-fixed" role="tabpanel" id="result" aria-labelledby="profile-tab">
+                @Html.ValidationSummary("", new { @class = "text-danger" })
                 @foreach (var t in Model.Result)
                 {
                     <div>@t</div>
@@ -80,7 +55,32 @@
                     </div>
                 }
             </div>
+            <div class="tab-pane fade container container-fixed" role="tabpanel" id="settings" aria-labelledby="profile-tab">
+                Settings
+            </div>
         </div>
+    </div>
+    <div class="btn-group" role="group">
+        <button name="PacketAction" value="Execute" type="submit" class="btn btn-primary" aria-label="Left Align">
+            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+            &nbsp;
+            Выполнить
+        </button>
+        <button name="PacketAction" value="Save" type="submit" class="btn btn-primary" aria-label="Left Align">
+            <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+            &nbsp;
+            Сохранить в БД
+        </button>
+        <button name="PacketAction" value="Load" type="submit" class="btn btn-primary" aria-label="Left Align">
+            <span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span>
+            &nbsp;
+            Загрузить из БД
+        </button>
+        <button name="PacketAction" value="Delete" type="submit" class="btn btn-primary" aria-label="Left Align">
+            <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>
+            &nbsp;
+            Удалить из БД
+        </button>
     </div>
 }
 

@@ -66,6 +66,8 @@ namespace Laboratorium.Controllers
                     return RedirectToAction("LoadScript");
                 case PacketAction.Load:
                     return RedirectToAction("LoadScript");
+                case PacketAction.Delete:
+                    return RedirectToAction("LoadScript");
                 default:
                     return null;
             }
