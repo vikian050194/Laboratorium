@@ -19,7 +19,7 @@ namespace Laboratorium.DAL
         public DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public DbSet<AspNetUser> AspNetUsers { get; set; }
-        public DbSet<Script> Scripts { get; set; }
+        public DbSet<PacketEntity> Packets { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

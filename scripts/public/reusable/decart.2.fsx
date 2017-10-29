@@ -1,0 +1,1 @@
+let decart a b = (a |> List.map (fun x -> x * x)) >> List.map (fun y -> y + 1))

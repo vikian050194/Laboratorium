@@ -58,19 +58,19 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             @Html.CheckBoxFor(m => m.Modules[i].IsEnadled)
-                            @Html.Hidden("Modules[" + i + "].Name", Model.Modules[i].Name)
+                            @Html.Hidden("Modules[" + i + "].Name", Model.ModuleItems[i].Name)
                             @Html.DisplayTextFor(m => m.Modules[i].Name)
                         </div>
                         <div class="panel-body">
                             @Html.DisplayTextFor(m => m.Modules[i].Info)
-                            @Html.Hidden("Modules[" + i + "].Info", Model.Modules[i].Info)
+                            @Html.Hidden("Modules[" + i + "].Info", Model.ModuleItems[i].Info)
                             <ol>
                                 @for (var j = 0; j < Model.Modules[i].Functions.Count; j++)
                                 {
                                     <li>
                                         @Model.Modules[i].Functions[j]
                                     </li>
-                                    @Html.Hidden("Modules[" + i + "].Functions[" + j + "]", Model.Modules[i].Functions[j])
+                                    @Html.Hidden("Modules[" + i + "].Functions[" + j + "]", Model.ModuleItems[i].Functions[j])
                                 }
                             </ol>
                         </div>

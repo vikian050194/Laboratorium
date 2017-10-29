@@ -43,8 +43,9 @@
   <ItemGroup>
     <Compile Include="Containers\AlgorithmFamily.cs" />
     <Compile Include="Containers\AlgorithmFamilyFunction.cs" />
-    <Compile Include="Containers\AlgorithmFamilySettingItem.cs" />
+    <Compile Include="Containers\ModuleItem.cs" />
     <Compile Include="CodeGenerator.cs" />
+    <Compile Include="Containers\PacketItem.cs" />
     <Compile Include="Managers\Action.cs" />
     <Compile Include="Managers\AssemblyManager.cs" />
     <Compile Include="Managers\CodeManager.cs" />

@@ -9,6 +9,7 @@ using Laboratorium.DAL;
 using Laboratorium.Helpers;
 using Laboratorium.Models.DataModels;
 using Laboratorium.Models.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace Laboratorium.Controllers
 {
@@ -36,11 +37,11 @@ namespace Laboratorium.Controllers
 
             if (id != 0)
             {
-                var script = _context.Scripts.Find(id);
+                var packetEntity = _context.Packets.Find(id);
 
-                if (script != null)
+                if (packetEntity != null)
                 {
-                    model.Script = script.Code;
+                    model  = _dataMapper.Map<PacketEntity, PacketViewModel>(packetEntity);
                 }
             }
 
@@ -63,37 +64,39 @@ namespace Laboratorium.Controllers
                     model = _dataMapper.Map<Packet, PacketViewModel>(packet);
                     return View(model);
                 case PacketAction.Save:
-                    return RedirectToAction("LoadScript");
+                    return RedirectToAction("LoadPacket");
                 case PacketAction.Load:
-                    return RedirectToAction("LoadScript");
+                    return RedirectToAction("LoadPacket");
                 case PacketAction.Delete:
-                    return RedirectToAction("LoadScript");
+                    return RedirectToAction("LoadPacket");
                 default:
                     return null;
             }
         }
 
         [HttpGet]
-        public ActionResult LoadScript()
+        public ActionResult LoadPacket()
         {
-            var model = new ScriptsInViewModel();
+            var model = new PacketsInViewModel();
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult LoadFromDbPartial(ScriptsInViewModel inputModel)
+        public ActionResult LoadFromDbPartial(PacketsInViewModel inputModel)
         {
             var titlePattern = inputModel.Filtering.Title ?? "";
-            var codePattern = inputModel.Filtering.Code ?? "";
+            var codePattern = inputModel.Filtering.Script ?? "";
             var authorPattern = inputModel.Filtering.Author ?? "";
-
+            var currentUserId = User.Identity.GetUserId();
             var scripts = _context
-                .Scripts
-                .Where(s =>
-                !s.IsPrivate &&
+                .Packets
+                .Where(s => 
+                (s.IsPublic && inputModel.Filtering.IsPublic ||
+                s.IsPublic == inputModel.Filtering.IsPublic && s.AspNetUserId == currentUserId) &&
+                s.IsReusable == inputModel.Filtering.IsReusable &&
                 s.Title.Contains(titlePattern) &&
-                s.Code.Contains(codePattern) &&
+                s.Script.Contains(codePattern) &&
                 s.AspNetUser.LastName.Contains(authorPattern))
                 .Include(s => s.AspNetUser);
 
@@ -102,8 +105,8 @@ namespace Laboratorium.Controllers
                 case "Title":
                     scripts = inputModel.Sorting.IsAscending ? scripts.OrderBy(s => s.Title) : scripts.OrderByDescending(s => s.Title);
                     break;
-                case "Code":
-                    scripts = inputModel.Sorting.IsAscending ? scripts.OrderBy(s => s.Code) : scripts.OrderByDescending(s => s.Code);
+                case "Script":
+                    scripts = inputModel.Sorting.IsAscending ? scripts.OrderBy(s => s.Script) : scripts.OrderByDescending(s => s.Script);
                     break;
                 case "Author":
                     scripts = inputModel.Sorting.IsAscending ? scripts.OrderBy(s => s.AspNetUser.LastName) : scripts.OrderByDescending(s => s.AspNetUser.LastName);
@@ -118,9 +121,9 @@ namespace Laboratorium.Controllers
                 .Skip((currentPage - 1) * _pageSize)
                 .Take(_pageSize);
 
-            var list = _dataMapper.Map<List<Script>, List<ScriptViewModel>>(page.ToList());
+            var list = _dataMapper.Map<List<PacketEntity>, List<PacketItem>>(page.ToList());
 
-            var outputModel = new ScriptsOutViewModel
+            var outputModel = new PacketsOutViewModel
             {
                 Rows = list,
                 Paging = paging
@@ -130,10 +133,10 @@ namespace Laboratorium.Controllers
         }
 
         [HttpGet]
-        public ActionResult ShowFullScript(int id)
+        public ActionResult ShowFullPacket(int id)
         {
-            var script = _context.Scripts.Include(s => s.AspNetUser).First(s => s.Id == id);
-            var model = _dataMapper.Map<Script, FullScriptViewModel>(script);
+            var packetEntity = _context.Packets.Include(s => s.AspNetUser).FirstOrDefault(s => s.Id == id);
+            var model = _dataMapper.Map<PacketEntity, FullPacketViewModel>(packetEntity);
 
             return View(model);
         }

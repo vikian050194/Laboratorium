@@ -1,0 +1,1 @@
+let decart a b = List.map (fun x -> List.map (fun y -> (x,y)) b) a |> List.concat

@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 namespace Laboratorium.Core.Containers
 {
-    public class AlgorithmFamilySettingItem
+    public class ModuleItem
     {
-        public AlgorithmFamilySettingItem()
+        public ModuleItem()
         {
             
         }
-        public AlgorithmFamilySettingItem(string name, string info, List<string> functions)
+        public ModuleItem(string name, string info, List<string> functions)
         {
             Name = name;
             Info = info;

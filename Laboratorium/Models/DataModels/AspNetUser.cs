@@ -11,7 +11,7 @@ namespace Laboratorium.Models.DataModels
             AspNetUserClaims = new HashSet<AspNetUserClaim>();
             AspNetUserLogins = new HashSet<AspNetUserLogin>();
             AspNetRoles = new HashSet<AspNetRole>();
-            Scripts = new HashSet<Script>();
+            Packets = new HashSet<PacketEntity>();
         }
 
         public string Id { get; set; }
@@ -60,6 +60,6 @@ namespace Laboratorium.Models.DataModels
 
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
 
-        public virtual ICollection<Script> Scripts { get; set; }
+        public virtual ICollection<PacketEntity> Packets { get; set; }
     }
 }

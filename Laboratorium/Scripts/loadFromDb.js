@@ -11,16 +11,20 @@
     var nextPage = 0;
 
     function getData() {
-        var filteringCode = $('#Filtering_Code').val();
+        var filteringScript = $('#Filtering_Script').val();
         var filteringTitle = $('#Filtering_Title').val();
         var filteringAuthor = $('#Filtering_Author').val();
+        var filteringIsPublic = $('#Filtering_IsPublic').val();
+        var filteringIsReusable = $('#Filtering_IsReusable').val();
 
         var body = {
             'Sorting.IsAscending': isAscending,
             'Sorting.OrderBy': orderBy,
-            'Filtering.Code': filteringCode,
+            'Filtering.Script': filteringScript,
             'Filtering.Title': filteringTitle,
             'Filtering.Author': filteringAuthor,
+            'Filtering.IsPublic': filteringIsPublic,
+            'Filtering.IsReusable': filteringIsReusable,
             'CurrentPage': page,
             'IsFilterChanged': isFilterChanged
         };
@@ -29,11 +33,13 @@
     }
 
     function updateTable(data) {
+        var isPublic = $('#Filtering_IsPublic :selected').text();
+        var isReusable = $('#Filtering_IsReusable :selected').text();
         var tableBodyContent = '';
 
         data.Rows.forEach(function (item) {
             var button = '<a type="button" class="btn btn-default" href="Index/' + item.Id + '" > <span class="glyphicon glyphicon-play" aria-hidden="true"></span></a>';
-            var line = '<tr><td>' + item.Title + '</td><td><a target="_blank" href="ShowFullScript/' + item.Id + '" >' + item.Code + '</a></td><td>' + item.Author + '</td><td>' + button + '</td>' + '</td></tr>';
+            var line = '<tr><td>' + item.Title + '</td><td><a target="_blank" href="ShowFullPacket/' + item.Id + '" >' + item.Script + '</a></td><td>' + item.Author + '</td><td>' + isPublic + '</td><td>' + isReusable + '</td><td>' + button + '</td>' + '</td></tr>';
             tableBodyContent += line;
         });
 
@@ -115,6 +121,7 @@
 
     function subscribe() {
         $('input[name*="Filtering"]').keyup(changeFilter);
+        $('select[name*="Filtering"]').change(changeFilter);
         $('button[orderby]').click(changeOrder);
     }
 

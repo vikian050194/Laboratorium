@@ -1,6 +1,6 @@
-﻿@model Laboratorium.Models.ViewModels.ScriptsInViewModel
+﻿@model Laboratorium.Models.ViewModels.PacketsInViewModel
 
-<h2>Скрипты</h2>
+<h2>Пакеты</h2>
 
 <table class="table table-hover table-bordered">
     <thead>
@@ -13,7 +13,7 @@
             </th>
             <th>
                 @Html.Label("Скрипт")
-                <button class="btn btn-default sorting" type="button" orderby="Code">
+                <button class="btn btn-default sorting" type="button" orderby="Script">
                     <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
                 </button>
             </th>
@@ -24,29 +24,39 @@
                 </button>
             </th>
             <th>
+                @Html.Label("Общедоступный")
+            </th>
+            <th>
+                @Html.Label("Встраиваемый")
+            </th>
+            <th>
 
             </th>
         </tr>
         <tr>
             <th>
-                @Html.TextBoxFor(m => m.Filtering.Title, new { @class = "form-control", placeholder="Искомое название..." })
+                @Html.TextBoxFor(m => m.Filtering.Title, new { @class = "form-control", placeholder = "Искомое название..." })
             </th>
             <th>
-                @Html.TextBoxFor(m => m.Filtering.Code, new { @class = "form-control", placeholder = "Искомый код..." })
+                @Html.TextBoxFor(m => m.Filtering.Script, new { @class = "form-control", placeholder = "Искомый код..." })
             </th>
             <th>
                 @Html.TextBoxFor(m => m.Filtering.Author, new { @class = "form-control", placeholder = "Искомый автор..." })
+            </th>
+            <th>
+                @Html.DropDownListFor(m => m.Filtering.IsPublic, new List<SelectListItem> { new SelectListItem { Selected = true, Text = @"Да", Value = "true" }, new SelectListItem { Text = @"Нет", Value = "false" } }, new { @class = "form-control" })
+            </th>
+            <th>
+                @Html.DropDownListFor(m => m.Filtering.IsReusable, new List<SelectListItem> { new SelectListItem { Selected = true, Text = @"Да", Value = "true" }, new SelectListItem { Text = @"Нет", Value = "false" } }, new { @class = "form-control" })
             </th>
             <th>
 
             </th>
         </tr>
     </thead>
-    <tbody>
-    </tbody>
+    <tbody></tbody>
 </table>
-<ul class="pagination">
-</ul>
+<ul class="pagination"></ul>
 
 <link href="../../Content/loadFromDb.css" rel="stylesheet">
 <script type="text/javascript" src="../../Scripts/loadFromDb.js"></script>

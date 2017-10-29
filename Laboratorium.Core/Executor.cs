@@ -23,14 +23,14 @@ namespace Laboratorium.Core
         {
             var result = new Packet
             {
-                Title = @"Скрипт.fsx"
+                Title = @"Пакет-" + DateTime.Now
             };
             var algorithmFamilies = _codeManager.GetAlgorithmFamilies();
 
             foreach (var algorithmFamily in algorithmFamilies)
             {
                 var info = Resources.Properties.Resources.ResourceManager.GetString(algorithmFamily) ?? string.Empty;
-                result.Modules.Add(new AlgorithmFamilySettingItem(algorithmFamily, info, _codeManager.GetFunctions(algorithmFamily)));
+                result.Modules.Add(new ModuleItem(algorithmFamily, info, _codeManager.GetFunctions(algorithmFamily)));
             }
 
             return result;

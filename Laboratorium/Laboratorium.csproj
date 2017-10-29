@@ -212,11 +212,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ConsoleController.cs" />
-    <Compile Include="Models\DataModels\Script.cs" />
+    <Compile Include="Models\DataModels\PacketEntity.cs" />
     <Compile Include="Models\ViewModels\AccountsViewModels.cs" />
     <Compile Include="Models\ViewModels\PacketAction.cs" />
     <Compile Include="Models\ViewModels\PacketViewModel.cs" />
-    <Compile Include="Models\ViewModels\ScriptViewModel.cs" />
+    <Compile Include="Models\ViewModels\PacketsInViewModel.cs" />
     <Compile Include="Models\ViewModels\UserDataViewModel.cs" />
     <Compile Include="Helpers\DataMapper.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
@@ -502,8 +502,8 @@
     <None Include="Views\Accounts\AccountsList.cshtml" />
     <Content Include="Views\Accounts\ManageUserAccount.cshtml" />
     <None Include="Views\Accounts\SetPassword.cshtml" />
-    <Content Include="Views\Console\LoadScript.cshtml" />
-    <None Include="Views\Console\ShowFullScript.cshtml" />
+    <Content Include="Views\Console\LoadPacket.cshtml" />
+    <None Include="Views\Console\ShowFullPacket.cshtml" />
     <None Include="Views\Home\Books.cshtml" />
     <None Include="Views\Home\Examples.cshtml" />
     <None Include="Views\Home\HowToUse.cshtml" />

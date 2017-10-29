@@ -37,17 +37,18 @@ namespace Laboratorium.Helpers
                 cfg.CreateMap<Packet, PacketViewModel>();
                 cfg.CreateMap<PacketViewModel, Packet>();
 
+                cfg.CreateMap<PacketEntity, PacketViewModel>();
+                cfg.CreateMap<PacketEntity, PacketItem>()
+                .ForMember(d => d.Script, opt => opt.MapFrom(src => src.Script.Substring(0, src.Script.Length >= 80 ? 80 : src.Script.Length) + "..."))
+                .ForMember(d => d.Author, opt => opt.MapFrom(src =>
+                    $"{src.AspNetUser.LastName} {src.AspNetUser.FirstName[0]}.{src.AspNetUser.Patronymic[0]}."));
+                cfg.CreateMap<PacketEntity, FullPacketViewModel>()
+                .ForMember(d => d.Script, opt => opt.MapFrom(src => src.Script.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)))
+                .ForMember(d => d.Author, opt => opt.MapFrom(src => $"{src.AspNetUser.LastName} {src.AspNetUser.FirstName} {src.AspNetUser.Patronymic}"));
+
                 cfg.CreateMap<AspNetUser, AccountViewModel>()
                 .ForMember(d => d.Role, opt => opt.MapFrom(src => src.AspNetRoles.First().Id));
                 cfg.CreateMap<AspNetUser, SetAccountPassword>();
-
-                cfg.CreateMap<Script, ScriptViewModel>()
-                .ForMember(d => d.Code, opt => opt.MapFrom(src => src.Code.Substring(0, src.Code.Length >= 80 ? 80 : src.Code.Length) + "..."))
-                .ForMember(d => d.Author, opt => opt.MapFrom(src =>
-                    $"{src.AspNetUser.LastName} {src.AspNetUser.FirstName[0]}.{src.AspNetUser.Patronymic[0]}."));
-                cfg.CreateMap<Script, FullScriptViewModel>()
-                .ForMember(d => d.Code, opt => opt.MapFrom(src => src.Code.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)))
-                .ForMember(d => d.Author, opt => opt.MapFrom(src => $"{src.AspNetUser.LastName} {src.AspNetUser.FirstName} {src.AspNetUser.Patronymic}"));
             });
         }
 

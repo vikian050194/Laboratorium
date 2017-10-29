@@ -1,0 +1,27 @@
+﻿@model Laboratorium.Models.ViewModels.FullPacketViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@Model.Title</title>
+    <link rel="shortcut icon" href="../../Images/letter-l.png" />
+</head>
+<body>
+    <div>
+        <h1>Название: @Model.Title</h1>
+        <h1>Автор: @Model.Author</h1>
+        <h1>Личный: @(Model.IsPrivate ? "Да" : "Нет")</h1>
+        <h1>Встраиваемый: @(Model.IsReusable ? "Да" : "Нет")</h1>
+        <hr/>
+        @foreach (var line in Model.Script)
+        {
+            <div>@line</div>
+        }
+    </div>
+</body>
+</html>
