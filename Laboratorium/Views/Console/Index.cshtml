@@ -6,10 +6,10 @@
     <div>
         @Html.HiddenFor(m => m.Id)
         <ul class="nav nav-pills nav-justified" id="form-tabs" role="tablist">
-            <li role="presentation" class="active">
+            <li role="presentation" class="">
                 <a href="#script" id="script-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Скрипт</a>
             </li>
-            <li role="presentation" class="">
+            <li role="presentation" class="active">
                 <a href="#result" role="tab" id="result-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Результат</a>
             </li>
             <li role="presentation" class="">
@@ -20,10 +20,10 @@
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane fade active in container container-fixed" role="tabpanel" id="script" aria-labelledby="home-tab">
+            <div class="tab-pane fade container container-fixed" role="tabpanel" id="script" aria-labelledby="home-tab">
                 @Html.TextAreaFor(m => m.Script, new {@class = "form-control"})
             </div>
-            <div class="tab-pane fade container container-fixed" role="tabpanel" id="result" aria-labelledby="profile-tab">
+            <div class="tab-pane fade active in container container-fixed" role="tabpanel" id="result" aria-labelledby="profile-tab">
                 @Html.ValidationSummary("", new { @class = "text-danger" })
                 @foreach (var t in Model.Result)
                 {

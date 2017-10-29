@@ -53,6 +53,7 @@ namespace Laboratorium.Controllers
         {
             if (!ModelState.IsValid)
             {
+                model.IsError = true;
                 return View(model);
             }
 

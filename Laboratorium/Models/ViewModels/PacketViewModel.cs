@@ -17,6 +17,7 @@ namespace Laboratorium.Models.ViewModels
 
         public int Id { get; set; }
 
+        [Required]
         [Display(Name = @"Название")]
         public string Title { get; set; }
         public string Script { get; set; }
