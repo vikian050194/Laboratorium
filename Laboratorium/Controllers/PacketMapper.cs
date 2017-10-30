@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Laboratorium.Core;
 using Laboratorium.Core.Containers;
@@ -19,13 +20,13 @@ namespace Laboratorium.Controllers
             _dataMapper = dataMapper;
         }
 
-        internal Packet Map(PacketEntity packetEntity)
+        internal Packet Map(PacketEntity packetEntity, List<PacketItem> packetsItems)
         {
             var emptyPacket = _executor.GetNewEmptyPacket();
 
             var result = _dataMapper.Map<PacketEntity, Packet>(packetEntity);
             result.Modules = emptyPacket.Modules;
-            result.Packets = emptyPacket.Packets;
+            result.Packets = packetsItems;
 
             var packets = packetEntity.Packets.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 

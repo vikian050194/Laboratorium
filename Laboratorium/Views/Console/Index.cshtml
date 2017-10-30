@@ -7,16 +7,19 @@
         @Html.HiddenFor(m => m.Id)
         <ul class="nav nav-pills nav-justified" id="form-tabs" role="tablist">
             <li role="presentation" class="">
-                <a href="#script" id="script-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Скрипт</a>
+                <a href="#script" id="script-tab" role="tab" data-toggle="tab" aria-expanded="true">Скрипт</a>
             </li>
             <li role="presentation" class="active">
-                <a href="#result" role="tab" id="result-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Результат</a>
+                <a href="#result" role="tab" id="result-tab" data-toggle="tab" aria-expanded="false">Результат</a>
             </li>
             <li role="presentation" class="">
-                <a href="#module" role="tab" id="module-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Модули</a>
+                <a href="#packets" role="tab" id="module-tab" data-toggle="tab"aria-expanded="false">Пакеты</a>
+            </li> 
+            <li role="presentation" class="">
+                <a href="#module" role="tab" id="module-tab" data-toggle="tab" aria-expanded="false">Модули</a>
             </li>
             <li role="presentation" class="">
-                <a href="#settings" role="tab" id="module-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">Настройки</a>
+                <a href="#settings" role="tab" id="module-tab" data-toggle="tab" aria-expanded="false">Настройки</a>
             </li>
         </ul>
         <div class="tab-content">
@@ -24,11 +27,67 @@
                 @Html.TextAreaFor(m => m.Script, new {@class = "form-control"})
             </div>
             <div class="tab-pane fade active in container container-fixed" role="tabpanel" id="result" aria-labelledby="profile-tab">
-                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @Html.ValidationSummary("", new {@class = "text-danger"})
                 @foreach (var t in Model.Result)
                 {
                     <div>@t</div>
                 }
+            </div>
+            <div class="tab-pane fade container container-fixed" role="tabpanel" id="packets" aria-labelledby="profile-tab">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th>
+                            
+                        </th>
+                        <th>
+                            @Html.Label("#")
+                        </th>
+                        <th class="th-packet">
+                            @Html.Label("Название")
+                        </th>
+                        <th class="th-packet">
+                            @Html.Label("Скрипт")
+                        </th>
+                        <th class="th-packet">
+                            @Html.Label("Автор")
+                        </th>
+                        <th class="th-packet">
+                            @Html.Label("Общедоступный")
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @for (var i = 0; i < Model.Packets.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.CheckBoxFor(m => m.Packets[i].IsEnadled)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m.Packets[i].Id)
+                                @Html.Hidden("Packets[" + i + "].Id", Model.Packets[i].Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m.Packets[i].Title)
+                                @Html.Hidden("Packets[" + i + "].Title", Model.Packets[i].Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m.Packets[i].Script)
+                                @Html.Hidden("Packets[" + i + "].Script", Model.Packets[i].Script)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m.Packets[i].Author)
+                                @Html.Hidden("Packets[" + i + "].Author", Model.Packets[i].Author)
+                            </td>
+                            <td>
+                                @(Model.Packets[i].IsPublic ? "Да" : "Нет")
+                                @Html.Hidden("Packets[" + i + "].IsPublic", Model.Packets[i].IsPublic)
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
             </div>
             <div class="tab-pane fade container container-fixed" role="tabpanel" id="module" aria-labelledby="profile-tab">
                 @for (var i = 0; i < Model.Modules.Count; i++)

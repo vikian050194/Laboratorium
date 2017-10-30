@@ -32,6 +32,21 @@ namespace Laboratorium.Controllers
             _context = new LaboratoriumContext();
         }
 
+        private List<PacketItem> GetPacketItems()
+        {
+            var currentUserId = User.Identity.GetUserId();
+            var packets = _context
+                .Packets
+                .Where(s =>
+                (s.IsPublic || s.AspNetUserId == currentUserId) &&
+                s.IsReusable)
+                .Include(s => s.AspNetUser);
+
+            var list = _dataMapper.Map<List<PacketEntity>, List<PacketItem>>(packets.ToList());
+
+            return list;
+        }
+
         [HttpGet]
         public ActionResult Index(int id = 0)
         {
@@ -40,6 +55,7 @@ namespace Laboratorium.Controllers
             if (id == 0)
             {
                 model = _dataMapper.Map<Packet, PacketViewModel>(_executor.GetNewEmptyPacket());
+                model.Packets = GetPacketItems();
             }
             else
             {
@@ -47,7 +63,7 @@ namespace Laboratorium.Controllers
 
                 if (packetEntity != null)
                 {
-                    var packet = _packetMapper.Map(packetEntity);
+                    var packet = _packetMapper.Map(packetEntity, GetPacketItems());
 
                     if (!packet.IsError)
                     {
