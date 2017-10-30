@@ -114,7 +114,9 @@ namespace Laboratorium.Helpers
                     Script = File.ReadAllText(file),
                     AspNetUserId = _usersIds[index],
                     IsPublic = file.Contains("public"),
-                    IsReusable = !file.Contains("notreusable")
+                    IsReusable = !file.Contains("notreusable"),
+                    Packets = string.Empty,
+                    Modules = string.Empty
                 };
 
                 _context.Packets.AddOrUpdate(newScript);

@@ -23,8 +23,9 @@ namespace Laboratorium.Core
         {
             var result = new Packet
             {
-                Title = @"Пакет-" + DateTime.Now
+                Title = @"Пакет_" + DateTime.Now
             };
+            result.Title = result.Title.Replace(" ", "_");
             var algorithmFamilies = _codeManager.GetAlgorithmFamilies();
 
             foreach (var algorithmFamily in algorithmFamilies)
@@ -36,22 +37,21 @@ namespace Laboratorium.Core
             return result;
         }
 
-        public Packet Execute(Packet packet)
+        public Packet Execute(Packet inputPacket)
         {
-            var modules = packet.Modules;
 
             var fileManager = new FileManager();
             var script = new StringBuilder();
 
-            if (modules.Any(m => m.IsEnadled))
+            if (inputPacket.Modules.Any(m => m.IsEnadled))
             {
                 AddReference(script);
-                var enabledModules = packet.Modules.Where(m => m.IsEnadled).Select(m => m.Name).ToList();
+                var enabledModules = inputPacket.Modules.Where(m => m.IsEnadled).Select(m => m.Name).ToList();
                 AddOpen(script, enabledModules);
                 AddFunctions(script, enabledModules);
             }
 
-            script.Append(packet.Script);
+            script.Append(inputPacket.Script);
             var file = fileManager.SaveScript(script.ToString());
             var processInfo = GetProcessInfo(file);
             var process = Process.Start(processInfo);
@@ -69,9 +69,16 @@ namespace Laboratorium.Core
             process.Close();
 
             var outputManager = new OutputManager();
-            packet = outputManager.Process(script.ToString(), output, errors);
-            packet.Modules = modules;
-            return packet;
+
+            var outputPacket = outputManager.Process(script.ToString(), output, errors);
+            outputPacket.Modules = inputPacket.Modules;
+            outputPacket.Packets = inputPacket.Packets;
+            outputPacket.IsPublic = inputPacket.IsPublic;
+            outputPacket.IsReusable = inputPacket.IsReusable;
+            outputPacket.Title = inputPacket.Title;
+            outputPacket.Script = inputPacket.Script;
+
+            return outputPacket;
         }
 
         private List<string> GetArguments(string file)

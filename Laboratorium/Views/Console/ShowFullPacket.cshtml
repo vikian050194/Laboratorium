@@ -13,11 +13,11 @@
 </head>
 <body>
     <div>
-        <h1>Название: @Model.Title</h1>
-        <h1>Автор: @Model.Author</h1>
-        <h1>Личный: @(Model.IsPrivate ? "Да" : "Нет")</h1>
-        <h1>Встраиваемый: @(Model.IsReusable ? "Да" : "Нет")</h1>
-        <hr/>
+        <h2>Название: @Model.Title</h2>
+        <h2>Автор: @Model.Author</h2>
+        <h2>Личный: @(Model.IsPrivate ? "Да" : "Нет")</h2>
+        <h2>Встраиваемый: @(Model.IsReusable ? "Да" : "Нет")</h2>
+        <h2>Скрипт:</h2>
         @foreach (var line in Model.Script)
         {
             <div>@line</div>

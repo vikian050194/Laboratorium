@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web.Mvc;
 using Laboratorium.Core;
@@ -19,6 +20,7 @@ namespace Laboratorium.Controllers
         private readonly LaboratoriumContext _context;
         private readonly DataMapper _dataMapper;
         private readonly Executor _executor;
+        private readonly PacketMapper _packetMapper;
         private readonly int _pageSize = Properties.Settings.Default.PageSize;
         private readonly int _pagesSetSize = Properties.Settings.Default.PagesSetSize;
 
@@ -26,22 +28,33 @@ namespace Laboratorium.Controllers
         {
             _dataMapper = new DataMapper();
             _executor = new Executor(new RealPathManager());
+            _packetMapper = new PacketMapper(_executor, _dataMapper);
             _context = new LaboratoriumContext();
         }
 
         [HttpGet]
         public ActionResult Index(int id = 0)
         {
-            var packet = _executor.GetNewEmptyPacket();
-            var model = _dataMapper.Map<Packet, PacketViewModel>(packet);
+            var model = new PacketViewModel();
 
-            if (id != 0)
+            if (id == 0)
+            {
+                model = _dataMapper.Map<Packet, PacketViewModel>(_executor.GetNewEmptyPacket());
+            }
+            else
             {
                 var packetEntity = _context.Packets.Find(id);
 
                 if (packetEntity != null)
                 {
-                    model  = _dataMapper.Map<PacketEntity, PacketViewModel>(packetEntity);
+                    var packet = _packetMapper.Map(packetEntity);
+
+                    if (!packet.IsError)
+                    {
+                        packet = _executor.Execute(packet);
+                    }
+
+                    model = _dataMapper.Map<Packet, PacketViewModel>(packet);
                 }
             }
 
@@ -59,13 +72,19 @@ namespace Laboratorium.Controllers
 
             switch (model.PacketAction)
             {
+                case PacketAction.New:
+                    return RedirectToAction("Index", new { id = 0 });
                 case PacketAction.Execute:
                     var packet = _dataMapper.Map<PacketViewModel, Packet>(model);
                     packet = _executor.Execute(packet);
                     model = _dataMapper.Map<Packet, PacketViewModel>(packet);
                     return View(model);
                 case PacketAction.Save:
-                    return RedirectToAction("LoadPacket");
+                    var packetEntity = _packetMapper.Map(model);
+                    packetEntity.AspNetUserId = User.Identity.GetUserId();
+                    _context.Packets.AddOrUpdate(packetEntity);
+                    _context.SaveChanges();
+                    return View(model);
                 case PacketAction.Load:
                     return RedirectToAction("LoadPacket");
                 case PacketAction.Delete:
@@ -92,12 +111,12 @@ namespace Laboratorium.Controllers
             var currentUserId = User.Identity.GetUserId();
             var scripts = _context
                 .Packets
-                .Where(s => 
+                .Where(s =>
                 (s.IsPublic && inputModel.Filtering.IsPublic ||
                 s.IsPublic == inputModel.Filtering.IsPublic && s.AspNetUserId == currentUserId) &&
                 s.IsReusable == inputModel.Filtering.IsReusable &&
                 s.Title.Contains(titlePattern) &&
-                s.Script.Contains(codePattern) &&
+                (s.Script ?? "").Contains(codePattern) &&
                 s.AspNetUser.LastName.Contains(authorPattern))
                 .Include(s => s.AspNetUser);
 
@@ -136,7 +155,13 @@ namespace Laboratorium.Controllers
         [HttpGet]
         public ActionResult ShowFullPacket(int id)
         {
-            var packetEntity = _context.Packets.Include(s => s.AspNetUser).FirstOrDefault(s => s.Id == id);
+            var currentUserId = User.Identity.GetUserId();
+            var packetEntity = _context.Packets.Include(s => s.AspNetUser).FirstOrDefault(s => s.Id == id && (s.AspNetUserId == currentUserId || s.IsPublic));
+            if (packetEntity == null)
+            {
+                return View("Error");
+            }
+
             var model = _dataMapper.Map<PacketEntity, FullPacketViewModel>(packetEntity);
 
             return View(model);

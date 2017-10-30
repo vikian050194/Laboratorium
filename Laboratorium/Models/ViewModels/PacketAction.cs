@@ -2,6 +2,7 @@
 {
     public enum PacketAction
     {
+        New,
         Execute,
         Save,
         Load,

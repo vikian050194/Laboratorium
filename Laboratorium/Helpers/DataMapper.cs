@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using AutoMapper;
-using Laboratorium.Controllers;
 using Laboratorium.Core.Containers;
 using Laboratorium.Models.DataModels;
 using Laboratorium.Models.ViewModels;
@@ -35,11 +34,16 @@ namespace Laboratorium.Helpers
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Packet, PacketViewModel>();
+
+                cfg.CreateMap<PacketViewModel, PacketEntity>();
                 cfg.CreateMap<PacketViewModel, Packet>();
 
                 cfg.CreateMap<PacketEntity, PacketViewModel>();
+                cfg.CreateMap<PacketEntity, Packet>()
+                .ForMember(s => s.Modules, opt => opt.Ignore())
+                .ForMember(s => s.Packets, opt => opt.Ignore());
                 cfg.CreateMap<PacketEntity, PacketItem>()
-                .ForMember(d => d.Script, opt => opt.MapFrom(src => src.Script.Substring(0, src.Script.Length >= 80 ? 80 : src.Script.Length) + "..."))
+                .ForMember(d => d.Script, opt => opt.MapFrom(src => src.Script == null ? "" : src.Script.Substring(0, src.Script.Length >= 80 ? 80 : src.Script.Length) + "..."))
                 .ForMember(d => d.Author, opt => opt.MapFrom(src =>
                     $"{src.AspNetUser.LastName} {src.AspNetUser.FirstName[0]}.{src.AspNetUser.Patronymic[0]}."));
                 cfg.CreateMap<PacketEntity, FullPacketViewModel>()

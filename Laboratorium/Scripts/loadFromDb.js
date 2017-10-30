@@ -38,8 +38,9 @@
         var tableBodyContent = '';
 
         data.Rows.forEach(function (item) {
-            var button = '<a type="button" class="btn btn-default" href="Index/' + item.Id + '" > <span class="glyphicon glyphicon-play" aria-hidden="true"></span></a>';
-            var line = '<tr><td>' + item.Title + '</td><td><a target="_blank" href="ShowFullPacket/' + item.Id + '" >' + item.Script + '</a></td><td>' + item.Author + '</td><td>' + isPublic + '</td><td>' + isReusable + '</td><td>' + button + '</td>' + '</td></tr>';
+            var buttonRun = '<a title="Открыть и выполнить" type="button" class="btn btn-default" href="Index/' + item.Id + '" > <span class="glyphicon glyphicon-play" aria-hidden="true"></span></a>';
+            var buttonShow = '<a  target="_blank" title="Просмотреть" type="button" class="btn btn-default" href="ShowFullPacket/' + item.Id + '" > <span class="glyphicon glyphicon-text-color" aria-hidden="true"></span></a>';
+            var line = '<tr><td>' + item.Title + '</td><td>' + item.Script + '</td><td>' + item.Author + '</td><td>' + isPublic + '</td><td>' + isReusable + '</td><td>' + buttonShow + '</td><td>' + buttonRun + '</td>' + '</td></tr>';
             tableBodyContent += line;
         });
 

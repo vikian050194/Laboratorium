@@ -8,5 +8,6 @@
         public string Author { get; set; }
         public bool IsPublic { get; set; }
         public bool IsReusable { get; set; }
+        public bool IsEnadled { get; set; }
     }
 }
