@@ -42,7 +42,7 @@ namespace Laboratorium.Models.ViewModels
         public string[] Script { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
-        public bool IsPrivate { get; set; }
+        public bool IsPublic { get; set; }
         public bool IsReusable { get; set; }
     }
 }

@@ -15,7 +15,7 @@
     <div>
         <h2>Название: @Model.Title</h2>
         <h2>Автор: @Model.Author</h2>
-        <h2>Личный: @(Model.IsPrivate ? "Да" : "Нет")</h2>
+        <h2>Общедоступный: @(Model.IsPublic ? "Да" : "Нет")</h2>
         <h2>Встраиваемый: @(Model.IsReusable ? "Да" : "Нет")</h2>
         <h2>Скрипт:</h2>
         @foreach (var line in Model.Script)
