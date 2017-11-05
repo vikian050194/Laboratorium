@@ -51,6 +51,12 @@ namespace Laboratorium.Core
                 AddFunctions(script, enabledModules);
             }
 
+            if (inputPacket.Packets.Any(m => m.IsEnadled))
+            {
+                var scripts = inputPacket.Packets.Where(m => m.IsEnadled).Select(m => m.Script).ToList();
+                AddScripts(script, scripts);
+            }
+
             script.Append(inputPacket.Script);
             var file = fileManager.SaveScript(script.ToString());
             var processInfo = GetProcessInfo(file);
@@ -79,6 +85,14 @@ namespace Laboratorium.Core
             outputPacket.Script = inputPacket.Script;
 
             return outputPacket;
+        }
+
+        private void AddScripts(StringBuilder script, List<string> referencedScripts)
+        {
+            foreach (var referencedScript in referencedScripts)
+            {
+                script.AppendLine(referencedScript + ";;");
+            }
         }
 
         private List<string> GetArguments(string file)

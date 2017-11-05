@@ -13,8 +13,8 @@
                 <a href="#result" role="tab" id="result-tab" data-toggle="tab" aria-expanded="false">Результат</a>
             </li>
             <li role="presentation" class="">
-                <a href="#packets" role="tab" id="module-tab" data-toggle="tab"aria-expanded="false">Пакеты</a>
-            </li> 
+                <a href="#packets" role="tab" id="module-tab" data-toggle="tab" aria-expanded="false">Пакеты</a>
+            </li>
             <li role="presentation" class="">
                 <a href="#module" role="tab" id="module-tab" data-toggle="tab" aria-expanded="false">Модули</a>
             </li>
@@ -24,10 +24,10 @@
         </ul>
         <div class="tab-content">
             <div class="tab-pane fade container container-fixed" role="tabpanel" id="script" aria-labelledby="home-tab">
-                @Html.TextAreaFor(m => m.Script, new {@class = "form-control"})
+                @Html.TextAreaFor(m => m.Script, new { @class = "form-control" })
             </div>
             <div class="tab-pane fade active in container container-fixed" role="tabpanel" id="result" aria-labelledby="profile-tab">
-                @Html.ValidationSummary("", new {@class = "text-danger"})
+                @Html.ValidationSummary("", new { @class = "text-danger" })
                 @foreach (var t in Model.Result)
                 {
                     <div>@t</div>
@@ -36,56 +36,56 @@
             <div class="tab-pane fade container container-fixed" role="tabpanel" id="packets" aria-labelledby="profile-tab">
                 <table class="table table-hover table-bordered">
                     <thead>
-                    <tr>
-                        <th>
-                            
-                        </th>
-                        <th>
-                            @Html.Label("#")
-                        </th>
-                        <th class="th-packet">
-                            @Html.Label("Название")
-                        </th>
-                        <th class="th-packet">
-                            @Html.Label("Скрипт")
-                        </th>
-                        <th class="th-packet">
-                            @Html.Label("Автор")
-                        </th>
-                        <th class="th-packet">
-                            @Html.Label("Общедоступный")
-                        </th>
-                    </tr>
+                        <tr>
+                            <th>
+
+                            </th>
+                            <th>
+                                @Html.Label("#")
+                            </th>
+                            <th class="th-packet">
+                                @Html.Label("Название")
+                            </th>
+                            <th class="th-packet">
+                                @Html.Label("Скрипт")
+                            </th>
+                            <th class="th-packet">
+                                @Html.Label("Автор")
+                            </th>
+                            <th class="th-packet">
+                                @Html.Label("Общедоступный")
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @for (var i = 0; i < Model.Packets.Count; i++)
-                    {
-                        <tr>
-                            <td>
-                                @Html.CheckBoxFor(m => m.Packets[i].IsEnadled)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => m.Packets[i].Id)
-                                @Html.Hidden("Packets[" + i + "].Id", Model.Packets[i].Id)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => m.Packets[i].Title)
-                                @Html.Hidden("Packets[" + i + "].Title", Model.Packets[i].Title)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => m.Packets[i].Script)
-                                @Html.Hidden("Packets[" + i + "].Script", Model.Packets[i].Script)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(m => m.Packets[i].Author)
-                                @Html.Hidden("Packets[" + i + "].Author", Model.Packets[i].Author)
-                            </td>
-                            <td>
-                                @(Model.Packets[i].IsPublic ? "Да" : "Нет")
-                                @Html.Hidden("Packets[" + i + "].IsPublic", Model.Packets[i].IsPublic)
-                            </td>
-                        </tr>
-                    }
+                        @for (var i = 0; i < Model.Packets.Count; i++)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.CheckBoxFor(m => m.Packets[i].IsEnadled)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => m.Packets[i].Id)
+                                    @Html.Hidden("Packets[" + i + "].Id", Model.Packets[i].Id)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => m.Packets[i].Title)
+                                    @Html.Hidden("Packets[" + i + "].Title", Model.Packets[i].Title)
+                                </td>
+                                <td>
+                                    @(string.Format("{0}", (Model.Packets[i].Script == null ? "" : Model.Packets[i].Script.Length >= 80 ? Model.Packets[i].Script.Substring(0, 80) + "..." : Model.Packets[i].Script)))
+                                    @Html.Hidden("Packets[" + i + "].Script", Model.Packets[i].Script)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(m => m.Packets[i].Author)
+                                    @Html.Hidden("Packets[" + i + "].Author", Model.Packets[i].Author)
+                                </td>
+                                <td>
+                                    @(Model.Packets[i].IsPublic ? "Да" : "Нет")
+                                    @Html.Hidden("Packets[" + i + "].IsPublic", Model.Packets[i].IsPublic)
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -122,7 +122,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.IsPublic, new {@class = "col-md-2 control-label"})
+                    @Html.LabelFor(m => m.IsPublic, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.DropDownListFor(m => m.IsPublic,
                             new List<SelectListItem>
@@ -130,7 +130,7 @@
                                 new SelectListItem {Selected = Model.IsPublic, Text = @"Да", Value = "true"},
                                 new SelectListItem {Selected = !Model.IsPublic, Text = @"Нет", Value = "false"}
                             },
-                            new {@class = "form-control"})
+                            new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
@@ -151,7 +151,7 @@
             <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
             &nbsp;
             Новый
-        </button> 
+        </button>
         <button name="PacketAction" value="Execute" type="submit" class="btn btn-primary" aria-label="Left Align">
             <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
             &nbsp;
@@ -160,17 +160,17 @@
         <button name="PacketAction" value="Save" type="submit" class="btn btn-primary" aria-label="Left Align">
             <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
             &nbsp;
-            Сохранить в БД
+            Сохранить
         </button>
         <button name="PacketAction" value="Load" type="submit" class="btn btn-primary" aria-label="Left Align">
             <span class="glyphicon glyphicon-floppy-open" aria-hidden="true"></span>
             &nbsp;
-            Загрузить из БД
+            Загрузить
         </button>
         <button name="PacketAction" value="Delete" type="submit" class="btn btn-primary" aria-label="Left Align">
             <span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>
             &nbsp;
-            Удалить из БД
+            Удалить
         </button>
     </div>
 }

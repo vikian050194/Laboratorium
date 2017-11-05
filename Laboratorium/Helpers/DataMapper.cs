@@ -43,7 +43,7 @@ namespace Laboratorium.Helpers
                 .ForMember(s => s.Modules, opt => opt.Ignore())
                 .ForMember(s => s.Packets, opt => opt.Ignore());
                 cfg.CreateMap<PacketEntity, PacketItem>()
-                .ForMember(d => d.Script, opt => opt.MapFrom(src => src.Script == null ? "" : src.Script.Substring(0, src.Script.Length >= 80 ? 80 : src.Script.Length) + "..."))
+                //.ForMember(d => d.Script, opt => opt.MapFrom(src => src.Script == null ? "" : src.Script.Substring(0, src.Script.Length >= 80 ? 80 : src.Script.Length) + "..."))
                 .ForMember(d => d.Author, opt => opt.MapFrom(src =>
                     $"{src.AspNetUser.LastName} {src.AspNetUser.FirstName[0]}.{src.AspNetUser.Patronymic[0]}."));
                 cfg.CreateMap<PacketEntity, FullPacketViewModel>()

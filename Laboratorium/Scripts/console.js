@@ -11,7 +11,7 @@
             return;
         }
         if (e.altKey && keyCode === 13) {
-            $('#form').submit();
+            $('button[value="Execute"]').click();
         }
     });
 }

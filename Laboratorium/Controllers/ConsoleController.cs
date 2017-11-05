@@ -96,14 +96,34 @@ namespace Laboratorium.Controllers
                     model = _dataMapper.Map<Packet, PacketViewModel>(packet);
                     return View(model);
                 case PacketAction.Save:
+                    if (string.IsNullOrEmpty(model.Title) || string.IsNullOrWhiteSpace(model.Title))
+                    {
+                        model.Result.Add("Необходимо указать название Вашего пакета");
+                        return View(model);
+                    }
+                    if (model.IsReusable && (model.Packets.Any(p => p.IsEnadled) || model.Modules.Any(m => m.IsEnadled)))
+                    {
+                        model.Result.Add("Переиспользуемый пакет на данный момент не может иметь зависимых пакетов или модулей");
+                        return View(model);
+                    }
+                    if (model.IsPublic && model.Packets.Any(p => p.IsEnadled) && model.Packets.Any(p => !p.IsPublic))
+                    {
+                        model.Result.Add("Общедоступный пакет не может иметь зависимых не общедоступных пакетов");
+                        return View(model);
+                    }
+
                     var packetEntity = _packetMapper.Map(model);
                     packetEntity.AspNetUserId = User.Identity.GetUserId();
                     _context.Packets.AddOrUpdate(packetEntity);
                     _context.SaveChanges();
+
+                    model.Result.Add(string.Format("Пакет \"{0}\" успешно сохранён", packetEntity.Title));
                     return View(model);
                 case PacketAction.Load:
                     return RedirectToAction("LoadPacket");
                 case PacketAction.Delete:
+                    _context.Packets.Remove(_context.Packets.Find(model.Id));
+                    _context.SaveChanges();
                     return RedirectToAction("LoadPacket");
                 default:
                     return null;

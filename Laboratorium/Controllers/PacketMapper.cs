@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using System.Collections.Generic;
 using System.Linq;
 using Laboratorium.Core;
@@ -36,7 +36,7 @@ namespace Laboratorium.Controllers
 
                 if (targetPacket == null)
                 {
-                    result.Result.Add($"Зависимый пакет(id={packetId}) не найден");
+                    result.Result.Add($"Р—Р°РІРёСЃРёРјС‹Р№ РїР°РєРµС‚(id={packetId}) РЅРµ РЅР°Р№РґРµРЅ. Р’РѕР·РјРѕР¶РЅРѕ, РѕРЅ Р±С‹Р» СѓРґР°Р»С‘РЅ.");
                     result.IsError = true;
                 }
                 else
@@ -53,7 +53,7 @@ namespace Laboratorium.Controllers
 
                 if (targetModule == null)
                 {
-                    result.Result.Add($"Зависимый модуль(name={moduleName}) не найден");
+                    result.Result.Add($"Р—Р°РІРёСЃРёРјС‹Р№ РјРѕРґСѓР»СЊ(name={moduleName}) РЅРµ РЅР°Р№РґРµРЅ");
                     result.IsError = true;
                 }
                 else
