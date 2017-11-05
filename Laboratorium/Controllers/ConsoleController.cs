@@ -117,8 +117,7 @@ namespace Laboratorium.Controllers
                     _context.Packets.AddOrUpdate(packetEntity);
                     _context.SaveChanges();
 
-                    model.Result.Add(string.Format("Пакет \"{0}\" успешно сохранён", packetEntity.Title));
-                    return View(model);
+                    return RedirectToAction("Index", new { id = packetEntity.Id });
                 case PacketAction.Load:
                     return RedirectToAction("LoadPacket");
                 case PacketAction.Delete:

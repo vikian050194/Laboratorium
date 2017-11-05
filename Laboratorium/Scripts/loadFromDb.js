@@ -40,7 +40,7 @@
         data.Rows.forEach(function (item) {
             var buttonRun = '<a title="Открыть и выполнить" type="button" class="btn btn-default" href="Index/' + item.Id + '" > <span class="glyphicon glyphicon-play" aria-hidden="true"></span></a>';
             var buttonShow = '<a  target="_blank" title="Просмотреть" type="button" class="btn btn-default" href="ShowFullPacket/' + item.Id + '" > <span class="glyphicon glyphicon-text-color" aria-hidden="true"></span></a>';
-            var script = item.Script.length < 80 ? item.Script : (item.Script.substring(0, 80) + '...');
+            var script = item.Script === null ? "" : item.Script.length < 80 ? item.Script : (item.Script.substring(0, 80) + '...');
             var line = '<tr><td>' + item.Id + '</td><td>' + item.Title + '</td><td>' + script + '</td><td>' + item.Author + '</td><td>' + isPublic + '</td><td>' + isReusable + '</td><td>' + buttonShow + '</td><td>' + buttonRun + '</td>' + '</td></tr>';
             tableBodyContent += line;
         });

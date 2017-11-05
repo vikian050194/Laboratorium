@@ -117,4 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Dustbin" xml:space="preserve">
+    <value>D:\dustbin</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>laboratorium</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>laboratorium</value>
+  </data>
 </root>

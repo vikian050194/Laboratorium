@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security;
 using System.Text;
 using Laboratorium.Core.Containers;
 using Laboratorium.Core.Managers;
@@ -145,6 +146,12 @@ namespace Laboratorium.Core
                 }
             }
 
+            var password = new SecureString();
+            foreach (var t in Properties.Resources.Password)
+            {
+                password.AppendChar(t);
+            }
+
             var result = new ProcessStartInfo
             {
                 FileName = _pathManager.PathToFsi,
@@ -153,7 +160,10 @@ namespace Laboratorium.Core
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                Arguments = arguments.ToString()
+                Arguments = arguments.ToString(),
+                UserName = Properties.Resources.Login,
+                Password = password,
+                Domain = "laboratorium"
             };
 
             return result;
