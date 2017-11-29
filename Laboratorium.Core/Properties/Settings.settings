@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Laboratorium.Core.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="CustomTempDirectory" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">D:\dustbin</Value>
+    </Setting>
+    <Setting Name="UseCustomTempDirectory" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Login" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">laboratorium</Value>
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">laboratorium</Value>
+    </Setting>
+    <Setting Name="InteractiveOptions" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">--nologo --exec --noframework</Value>
+    </Setting>
+    <Setting Name="ScriptValidation" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -32,14 +32,15 @@ namespace Laboratorium.Controllers
             _context = new LaboratoriumContext();
         }
 
-        private List<PacketItem> GetPacketItems()
+        private List<PacketItem> GetPacketItems(PacketEntity packet)
         {
             var currentUserId = User.Identity.GetUserId();
             var packets = _context
                 .Packets
                 .Where(s =>
                 (s.IsPublic || s.AspNetUserId == currentUserId) &&
-                s.IsReusable)
+                s.IsReusable &&
+                s.Id != packet.Id)
                 .Include(s => s.AspNetUser);
 
             var list = _dataMapper.Map<List<PacketEntity>, List<PacketItem>>(packets.ToList());
@@ -48,14 +49,14 @@ namespace Laboratorium.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(int id = 0, bool copy = false)
         {
             var model = new PacketViewModel();
 
             if (id == 0)
             {
                 model = _dataMapper.Map<Packet, PacketViewModel>(_executor.GetNewEmptyPacket());
-                model.Packets = GetPacketItems();
+                model.Packets = GetPacketItems(new PacketEntity());
             }
             else
             {
@@ -63,7 +64,20 @@ namespace Laboratorium.Controllers
 
                 if (packetEntity != null)
                 {
-                    var packet = _packetMapper.Map(packetEntity, GetPacketItems());
+                    if (copy)
+                    {
+                        packetEntity = _dataMapper.Map<PacketEntity, PacketEntity>(packetEntity);
+                        packetEntity.Title = $"Копия \"{packetEntity.Title}\"";
+                        packetEntity.Id = 0;
+                        packetEntity.AspNetUser = null;
+                        packetEntity.AspNetUserId = User.Identity.GetUserId();
+                        _context.Packets.Add(packetEntity);
+                        _context.SaveChanges();
+
+                        return RedirectToAction("Index", new { id = packetEntity.Id });
+                    }
+
+                    var packet = _packetMapper.Map(packetEntity, GetPacketItems(packetEntity));
 
                     if (!packet.IsError)
                     {
@@ -106,14 +120,29 @@ namespace Laboratorium.Controllers
                         model.Result.Add("Переиспользуемый пакет на данный момент не может иметь зависимых пакетов или модулей");
                         return View(model);
                     }
-                    if (model.IsPublic && model.Packets.Any(p => p.IsEnadled) && model.Packets.Any(p => !p.IsPublic))
+                    if (model.IsPublic && model.Packets.Any(p => p.IsEnadled && !p.IsPublic))
                     {
                         model.Result.Add("Общедоступный пакет не может иметь зависимых не общедоступных пакетов");
                         return View(model);
                     }
 
                     var packetEntity = _packetMapper.Map(model);
-                    packetEntity.AspNetUserId = User.Identity.GetUserId();
+
+                    if (packetEntity.Id > 0 && _context.Packets.Find(packetEntity.Id).AspNetUserId != User.Identity.GetUserId() && User.IsInRole("User"))
+                    {
+                        model.Result.Add("Вы не можете изменять чужой пакет. Пожалуйста, сделайте копию и сохраните её.");
+                        return View(model);
+                    }
+
+                    if (packetEntity.Id == 0)
+                    {
+                        packetEntity.AspNetUserId = User.Identity.GetUserId();
+                    }
+                    else
+                    {
+                        packetEntity.AspNetUserId = _context.Packets.Find(packetEntity.Id).AspNetUserId;
+                    }
+
                     _context.Packets.AddOrUpdate(packetEntity);
                     _context.SaveChanges();
 
@@ -121,9 +150,21 @@ namespace Laboratorium.Controllers
                 case PacketAction.Load:
                     return RedirectToAction("LoadPacket");
                 case PacketAction.Delete:
-                    _context.Packets.Remove(_context.Packets.Find(model.Id));
-                    _context.SaveChanges();
+                    var unnecessaryPacket = _context.Packets.Find(model.Id);
+
+                    if (unnecessaryPacket.AspNetUserId == User.Identity.GetUserId() || User.IsInRole("Admin"))
+                    {
+                        _context.Packets.Remove(unnecessaryPacket);
+                        _context.SaveChanges();
+                    }
+                    else
+                    {
+                        model.Result.Add("Вы не можете удалить чужой пакет.");
+                        return View(model);
+                    }
                     return RedirectToAction("LoadPacket");
+                case PacketAction.Copy:
+                    return RedirectToAction("Index", new { id = model.Id, copy = true });
                 default:
                     return null;
             }

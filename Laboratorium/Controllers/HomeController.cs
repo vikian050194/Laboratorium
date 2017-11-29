@@ -50,5 +50,11 @@ namespace Laboratorium.Controllers
 
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
+
+        [HttpGet]
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
 }

@@ -6,6 +6,7 @@
         Execute,
         Save,
         Load,
-        Delete
+        Delete,
+        Copy
     }
 }

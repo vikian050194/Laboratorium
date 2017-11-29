@@ -38,6 +38,7 @@ namespace Laboratorium.Helpers
                 cfg.CreateMap<PacketViewModel, PacketEntity>();
                 cfg.CreateMap<PacketViewModel, Packet>();
 
+                cfg.CreateMap<PacketEntity, PacketEntity>();
                 cfg.CreateMap<PacketEntity, PacketViewModel>();
                 cfg.CreateMap<PacketEntity, Packet>()
                 .ForMember(s => s.Modules, opt => opt.Ignore())

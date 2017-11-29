@@ -41,6 +41,20 @@ namespace Laboratorium.Core
         public Packet Execute(Packet inputPacket)
         {
 
+            if (Properties.Settings.Default.ScriptValidation)
+            {
+                var scriptValidator = new ScriptValidator();
+
+                var validationResult = scriptValidator.FindInvalidCode(inputPacket.Script);
+                if (validationResult.Any())
+                {
+                    inputPacket.Result = validationResult;
+                    inputPacket.IsError = true;
+
+                    return inputPacket;
+                }
+            }
+
             var fileManager = new FileManager();
             var script = new StringBuilder();
 
@@ -96,20 +110,20 @@ namespace Laboratorium.Core
             }
         }
 
-        private List<string> GetArguments(string file)
+        private string GetArguments(string file)
         {
-            return new List<string>
-            {
-                "--nologo",
-                "--exec",
-                $@"--use:""{file}"""
-            };
+            var options = Properties.Settings.Default.InteractiveOptions;
+
+            options += $@" --use:""{file}""";
+
+            return options;
         }
 
         private void AddFunctions(StringBuilder script, List<string> modules)
         {
             var functions = _codeManager.GetFunctions(modules);
             functions.Add("let bi (n:int) = (new BigInteger(n));;");
+
             foreach (var function in functions)
             {
                 script.AppendLine(function + ";;");
@@ -120,6 +134,7 @@ namespace Laboratorium.Core
         {
             var opens = _codeManager.GetOpens(modules);
             opens.Add("open System.Numerics;;");
+
             foreach (var line in opens)
             {
                 script.AppendLine(line + ";;");
@@ -134,25 +149,15 @@ namespace Laboratorium.Core
 
         private ProcessStartInfo GetProcessInfo(string file)
         {
-            var argumentsList = GetArguments(file);
-            var arguments = new StringBuilder();
-
-            for (var i = 0; i < argumentsList.Count; i++)
-            {
-                arguments.Append(argumentsList[i]);
-                if (i != argumentsList.Count)
-                {
-                    arguments.Append(" ");
-                }
-            }
+            var arguments = GetArguments(file);
 
             var password = new SecureString();
-            foreach (var t in Properties.Resources.Password)
+            foreach (var t in Properties.Settings.Default.Password)
             {
                 password.AppendChar(t);
             }
 
-            var result = new ProcessStartInfo
+            var processStartInfo = new ProcessStartInfo
             {
                 FileName = _pathManager.PathToFsi,
                 CreateNoWindow = true,
@@ -160,13 +165,17 @@ namespace Laboratorium.Core
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                Arguments = arguments.ToString(),
-                UserName = Properties.Resources.Login,
-                Password = password,
+                Arguments = arguments,
                 Domain = "laboratorium"
             };
 
-            return result;
+            if (Properties.Settings.Default.UseCustomTempDirectory)
+            {
+                processStartInfo.UserName = Properties.Settings.Default.Login;
+                processStartInfo.Password = password;
+            }
+
+            return processStartInfo;
         }
     }
 }

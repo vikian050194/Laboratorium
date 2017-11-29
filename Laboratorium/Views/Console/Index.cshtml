@@ -4,7 +4,7 @@
 {
     @Html.AntiForgeryToken();
     <div>
-        @Html.HiddenFor(m => m.Id)
+        @*@Html.HiddenFor(m => m.Id)*@
         <ul class="nav nav-pills nav-justified" id="form-tabs" role="tablist">
             <li role="presentation" class="">
                 <a href="#script" id="script-tab" role="tab" data-toggle="tab" aria-expanded="true">Скрипт</a>
@@ -151,6 +151,11 @@
             <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
             &nbsp;
             Новый
+        </button> 
+        <button name="PacketAction" value="Copy" type="submit" class="btn btn-primary" aria-label="Left Align">
+            <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+            &nbsp;
+            Копия
         </button>
         <button name="PacketAction" value="Execute" type="submit" class="btn btn-primary" aria-label="Left Align">
             <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>

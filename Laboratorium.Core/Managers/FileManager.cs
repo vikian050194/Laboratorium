@@ -7,11 +7,22 @@ namespace Laboratorium.Core.Managers
     {
         public string SaveScript(string script)
         {
-            var file = Path.GetRandomFileName();
+            var file = string.Empty;
+
+            if (Properties.Settings.Default.UseCustomTempDirectory)
+            {
+                file = Path.GetRandomFileName();
+                file = Path.Combine(Properties.Settings.Default.CustomTempDirectory, file);
+            }
+            else
+            {
+                file = Path.GetTempFileName();
+            }
+
             file = Path.ChangeExtension(file, "fsx");
             var indexOfDot = file.IndexOf(".");
             file = file.Insert(indexOfDot, DateTime.Now.Ticks.ToString());
-            file = Path.Combine(Properties.Resources.Dustbin, file);
+
             File.WriteAllText(file, script);
 
             return file;
