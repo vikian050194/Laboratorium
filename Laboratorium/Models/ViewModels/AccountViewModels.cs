@@ -65,15 +65,17 @@ namespace Laboratorium.Models.ViewModels
     public class RegisterViewModel
     {
         [Required]
-        [StringLength(256, ErrorMessage = @"{0} должно быть не меньше {2} символов.", MinimumLength = 2)]
+        [StringLength(256, ErrorMessage = @"{0} должно быть не менее {2} и не более {1} символов.", MinimumLength = 2)]
         [Display(Name = @"Имя")]
         public string FirstName { get; set; }
+
         [Required]
-        [StringLength(256, ErrorMessage = @"{0} должна быть не меньше {2} символов.", MinimumLength = 2)]
+        [StringLength(256, ErrorMessage = @"{0} должно быть не менее {2} и не более {1} символов.", MinimumLength = 2)]
         [Display(Name = @"Фамилия")]
         public string LastName { get; set; }
+
         [Required]
-        [StringLength(256, ErrorMessage = @"{0} должно быть не меньше {2} символов.", MinimumLength = 2)]
+        [StringLength(256, ErrorMessage = @"{0} должно быть не менее {2} и не более {1} символов.", MinimumLength = 2)]
         [Display(Name = @"Отчество")]
         public string Patronymic { get; set; }
 
@@ -83,12 +85,10 @@ namespace Laboratorium.Models.ViewModels
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = @"{0} должен быть не меньше {2} символов.", MinimumLength = 4)]
-        [DataType(DataType.Password)]
+        [StringLength(256, ErrorMessage = @"{0} должен быть не менее {2} и не более {1} символов.", MinimumLength = 4)]
         [Display(Name = @"Пароль")]
         public string Password { get; set; }
 
-        [DataType(DataType.Password)]
         [Display(Name = @"Повторите пароль")]
         [Compare("Password", ErrorMessage = @"Пароль и повторный пароль не совпадают.")]
         public string ConfirmPassword { get; set; }
@@ -102,7 +102,7 @@ namespace Laboratorium.Models.ViewModels
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = @"{0} должен быть не меньше {2} символов.", MinimumLength = 4)]
+        [StringLength(256, ErrorMessage = @"{0} должен быть не менее {2} и не более {1} символов.", MinimumLength = 4)]
         [DataType(DataType.Password)]
         [Display(Name = @"Пароль")]
         public string Password { get; set; }
