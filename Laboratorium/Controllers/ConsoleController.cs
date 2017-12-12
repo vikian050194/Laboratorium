@@ -60,7 +60,9 @@ namespace Laboratorium.Controllers
             }
             else
             {
-                var packetEntity = _context.Packets.Find(id);
+                var currentUserId = User.Identity.GetUserId();
+
+                var packetEntity = _context.Packets.FirstOrDefault(p => p.Id == id && (p.AspNetUserId == currentUserId || User.IsInRole("Admin")));
 
                 if (packetEntity != null)
                 {

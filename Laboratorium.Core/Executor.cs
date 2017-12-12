@@ -151,12 +151,6 @@ namespace Laboratorium.Core
         {
             var arguments = GetArguments(file);
 
-            var password = new SecureString();
-            foreach (var t in Properties.Settings.Default.Password)
-            {
-                password.AppendChar(t);
-            }
-
             var processStartInfo = new ProcessStartInfo
             {
                 FileName = _pathManager.PathToFsi,
@@ -168,12 +162,6 @@ namespace Laboratorium.Core
                 Arguments = arguments,
                 Domain = "laboratorium"
             };
-
-            if (Properties.Settings.Default.UseCustomTempDirectory)
-            {
-                processStartInfo.UserName = Properties.Settings.Default.Login;
-                processStartInfo.Password = password;
-            }
 
             return processStartInfo;
         }
