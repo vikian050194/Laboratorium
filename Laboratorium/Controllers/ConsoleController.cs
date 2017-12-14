@@ -61,8 +61,17 @@ namespace Laboratorium.Controllers
             else
             {
                 var currentUserId = User.Identity.GetUserId();
+                
+                var packetEntity = _context.Packets.FirstOrDefault(p => p.Id == id);
+                if (packetEntity == null)
+                {
+                    RedirectToAction("Error", "Home");
+                }
 
-                var packetEntity = _context.Packets.FirstOrDefault(p => p.Id == id && (p.AspNetUserId == currentUserId || User.IsInRole("Admin")));
+                if (User.IsInRole("User") && packetEntity.AspNetUserId != currentUserId)
+                {
+                    RedirectToAction("Error", "Home");
+                }
 
                 if (packetEntity != null)
                 {

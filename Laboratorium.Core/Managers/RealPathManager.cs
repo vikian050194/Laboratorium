@@ -4,7 +4,7 @@ namespace Laboratorium.Core.Managers
     {
         public RealPathManager()
         {
-            PathToFsi = AssembliesDirectory + @"\..\..\FSharp\Fsi.exe";
+            PathToFsi = AssembliesDirectory + @"\..\FSharp\Fsi.exe";
         }
     }
 }
