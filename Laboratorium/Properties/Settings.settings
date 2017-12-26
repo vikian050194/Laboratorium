@@ -8,5 +8,8 @@
     <Setting Name="PagesSetSize" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">10</Value>
     </Setting>
+    <Setting Name="Guide" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">..//Guides//Laboratorium.DevGuide.pdf</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

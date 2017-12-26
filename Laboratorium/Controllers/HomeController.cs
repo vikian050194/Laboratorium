@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.IO;
+using System.Web.Mvc;
 using Laboratorium.Core.Managers;
 
 namespace Laboratorium.Controllers
@@ -45,10 +46,10 @@ namespace Laboratorium.Controllers
         public FileResult DownloadDevGuide()
         {
             var pathManager = new RealPathManager();
-            var fileName = "Laboratorium.DevGuide.pdf";
-            var fileBytes = System.IO.File.ReadAllBytes(pathManager.AssembliesDirectory + @"..\..\Guides\" + fileName);
 
-            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+            var fileBytes = System.IO.File.ReadAllBytes(Path.Combine(pathManager.AssembliesDirectory, Properties.Settings.Default.Guide));
+
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, Path.GetFileName(Properties.Settings.Default.Guide));
         }
 
         [HttpGet]

@@ -288,6 +288,7 @@
     <Content Include="FSharp\FSharp.Core.optdata" />
     <Content Include="FSharp\FSharp.Core.sigdata" />
     <Content Include="Guides\Laboratorium.DevGuide.pdf" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Local IIS.pubxml" />
     <Content Include="Images\letter-l.png" />
